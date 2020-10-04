@@ -7,13 +7,12 @@
 
 import SwiftUI
 
-class AppState: ObservableObject {
+struct AppState {
     
-    @Published var count = 0
-    @Published var favoritePrimes: [Int] = []
-    @Published var loggedInUser: User?
-    @Published var activityFeed: [Activity] = []
-    
+   var count = 0
+   var favoritePrimes: [Int] = []
+   var loggedInUser: User?
+   var activityFeed: [Activity] = []
 }
 
 extension AppState {

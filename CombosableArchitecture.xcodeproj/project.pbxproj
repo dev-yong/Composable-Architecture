@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		FC32EA3B2529F9280033EF80 /* Store.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC32EA3A2529F9280033EF80 /* Store.swift */; };
 		FCB011932517A776000F7195 /* CombosableArchitectureApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCB011922517A776000F7195 /* CombosableArchitectureApp.swift */; };
 		FCB011972517A777000F7195 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FCB011962517A777000F7195 /* Assets.xcassets */; };
 		FCB0119A2517A777000F7195 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FCB011992517A777000F7195 /* Preview Assets.xcassets */; };
@@ -19,6 +20,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		FC32EA3A2529F9280033EF80 /* Store.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Store.swift; sourceTree = "<group>"; };
 		FCB0118F2517A776000F7195 /* CombosableArchitecture.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CombosableArchitecture.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FCB011922517A776000F7195 /* CombosableArchitectureApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CombosableArchitectureApp.swift; sourceTree = "<group>"; };
 		FCB011962517A777000F7195 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -63,6 +65,7 @@
 			isa = PBXGroup;
 			children = (
 				FCB011922517A776000F7195 /* CombosableArchitectureApp.swift */,
+				FC32EA3A2529F9280033EF80 /* Store.swift */,
 				FCB011B72517ABD3000F7195 /* AppState.swift */,
 				FCB011B42517AB20000F7195 /* ContentView.swift */,
 				FCB011A92517A7DB000F7195 /* CounterView.swift */,
@@ -156,6 +159,7 @@
 				FCB011B52517AB20000F7195 /* ContentView.swift in Sources */,
 				FCB011B82517ABD3000F7195 /* AppState.swift in Sources */,
 				FCB011932517A776000F7195 /* CombosableArchitectureApp.swift in Sources */,
+				FC32EA3B2529F9280033EF80 /* Store.swift in Sources */,
 				FCB011AA2517A7DB000F7195 /* CounterView.swift in Sources */,
 				FCB011BE25185BAE000F7195 /* IsPrimeModalView.swift in Sources */,
 				FCB011C5251860AA000F7195 /* FavoritePrimesView.swift in Sources */,
