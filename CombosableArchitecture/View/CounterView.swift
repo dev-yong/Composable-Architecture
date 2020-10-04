@@ -27,11 +27,15 @@ struct CounterView: View {
     var body: some View {
       VStack {
         HStack {
-            Button(action: { self.store.value.count -= 1 }) {
+            Button(action: {
+                self.store.value = counterReducer(state: self.store.value, action: .decrTapped)
+            }) {
             Text("-")
           }
             Text("\(self.store.value.count)")
-          Button(action: { self.store.value.count += 1 }) {
+          Button(action: {
+            self.store.value = counterReducer(state: self.store.value, action: .incrTapped)
+          }) {
             Text("+")
           }
         }
