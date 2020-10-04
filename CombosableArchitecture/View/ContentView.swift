@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct ContentView: View {
-    @ObservedObject var store: Store<AppState, CounterAction>
+    @ObservedObject var store: Store<AppState, AppAction>
 
     var body: some View {
         NavigationView {
@@ -19,7 +19,7 @@ struct ContentView: View {
                     Text("Counter demo")
                 }
                 NavigationLink(
-                    destination: FavoritePrimesView(state: FavoritePrimeState(state: self.store.value))
+                    destination: FavoritePrimesView(store: self.store)
                 ) {
                     Text("Favorite primes")
                 }
@@ -32,7 +32,7 @@ struct ContentView: View {
 struct ContentView_66_Previews: PreviewProvider {
     static var previews: some View {
         ContentView(
-            store: Store(initialValue: AppState(), reducer: counterReducer)
+            store: Store(initialValue: AppState(), reducer: appReducer)
         )
     }
 }

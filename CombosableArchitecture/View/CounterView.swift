@@ -16,7 +16,7 @@ struct PrimeAlert: Identifiable {
 struct CounterView: View {
     
     // MARK: AppState
-    @ObservedObject var store: Store<AppState, CounterAction>
+    @ObservedObject var store: Store<AppState, AppAction>
     
     // MARK: Local State
     @State var isPrimeModalShown = false
@@ -28,19 +28,19 @@ struct CounterView: View {
       VStack {
         HStack {
             Button(action: {
-                self.store.send(.decrTapped)
+                self.store.send(.counter(.decrTapped))
             }) {
-            Text("-")
-          }
+                Text("-")
+            }
             Text("\(self.store.value.count)")
-          Button(action: {
-            self.store.send(.incrTapped)
-          }) {
-            Text("+")
-          }
+            Button(action: {
+                self.store.send(.counter(.incrTapped))
+            }) {
+                Text("+")
+            }
         }
         Button(action: { self.isPrimeModalShown = true }) {
-          Text("Is this prime?")
+            Text("Is this prime?")
         }
         Button(action: self.nthPrimeButtonAction) {
             Text("What is the \(ordinal(self.store.value.count)) prime?")
@@ -80,7 +80,7 @@ struct CounterView: View {
 struct CounterView_Previews: PreviewProvider {
     static var previews: some View {
         CounterView(
-            store: Store(initialValue: AppState(), reducer: counterReducer)
+            store: Store(initialValue: AppState(), reducer: appReducer)
         )
     }
 }

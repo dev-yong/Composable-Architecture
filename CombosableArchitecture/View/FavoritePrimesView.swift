@@ -7,40 +7,18 @@
 
 import SwiftUI
 
-class FavoritePrimeState: ObservableObject {
-    
-    private var state: AppState
-    init(state: AppState) {
-        
-        self.state = state
-    }
-    
-    var favoritePrimes: [Int] {
-        get { self.state.favoritePrimes }
-        set { self.state.favoritePrimes = newValue }
-    }
-    var activityFeed: [Activity] {
-        get { self.state.activityFeed }
-        set { self.state.activityFeed = newValue }
-    }
-}
-
 struct FavoritePrimesView: View {
     
-    @ObservedObject var state: FavoritePrimeState
+    @ObservedObject var store: Store<AppState, AppAction>
     
     var body: some View {
         List {
-          ForEach(self.state.favoritePrimes, id: \.self) { prime in
+            ForEach(self.store.value.favoritePrimes, id: \.self) { prime in
             Text("\(prime)")
           }
           .onDelete { indexSet in
             
-            for index in indexSet {
-              let prime = self.state.favoritePrimes[index]
-              self.state.favoritePrimes.remove(at: index)
-              self.state.activityFeed.append(.init(timestamp: Date(), type: .removedFavoritePrime(prime)))
-            }
+            self.store.send(.favoritePrimes(.deleteFavoritePrimes(indexSet)))
           }
         }
           .navigationBarTitle(Text("Favorite Primes"))
@@ -50,7 +28,7 @@ struct FavoritePrimesView: View {
 struct FavoritePrimesView_Previews: PreviewProvider {
     static var previews: some View {
         FavoritePrimesView(
-            state: FavoritePrimeState(state: AppState())
+            store: Store(initialValue: AppState(), reducer: appReducer)
         )
     }
 }

@@ -9,6 +9,9 @@
 /* Begin PBXBuildFile section */
 		FC32EA3B2529F9280033EF80 /* Store.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC32EA3A2529F9280033EF80 /* Store.swift */; };
 		FC32EA3F2529FF390033EF80 /* CounterAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC32EA3E2529FF390033EF80 /* CounterAction.swift */; };
+		FC32EA48252A07250033EF80 /* AppAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC32EA47252A07250033EF80 /* AppAction.swift */; };
+		FC32EA4B252A07480033EF80 /* PrimeModalAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC32EA4A252A07480033EF80 /* PrimeModalAction.swift */; };
+		FC32EA4F252A08990033EF80 /* FavoritePrimesAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC32EA4E252A08990033EF80 /* FavoritePrimesAction.swift */; };
 		FCB011932517A776000F7195 /* CombosableArchitectureApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCB011922517A776000F7195 /* CombosableArchitectureApp.swift */; };
 		FCB011972517A777000F7195 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FCB011962517A777000F7195 /* Assets.xcassets */; };
 		FCB0119A2517A777000F7195 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FCB011992517A777000F7195 /* Preview Assets.xcassets */; };
@@ -23,6 +26,9 @@
 /* Begin PBXFileReference section */
 		FC32EA3A2529F9280033EF80 /* Store.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Store.swift; sourceTree = "<group>"; };
 		FC32EA3E2529FF390033EF80 /* CounterAction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CounterAction.swift; sourceTree = "<group>"; };
+		FC32EA47252A07250033EF80 /* AppAction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppAction.swift; sourceTree = "<group>"; };
+		FC32EA4A252A07480033EF80 /* PrimeModalAction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrimeModalAction.swift; sourceTree = "<group>"; };
+		FC32EA4E252A08990033EF80 /* FavoritePrimesAction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritePrimesAction.swift; sourceTree = "<group>"; };
 		FCB0118F2517A776000F7195 /* CombosableArchitecture.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CombosableArchitecture.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FCB011922517A776000F7195 /* CombosableArchitectureApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CombosableArchitectureApp.swift; sourceTree = "<group>"; };
 		FCB011962517A777000F7195 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -50,7 +56,10 @@
 		FC32EA3D2529FF2F0033EF80 /* Action */ = {
 			isa = PBXGroup;
 			children = (
+				FC32EA47252A07250033EF80 /* AppAction.swift */,
 				FC32EA3E2529FF390033EF80 /* CounterAction.swift */,
+				FC32EA4A252A07480033EF80 /* PrimeModalAction.swift */,
+				FC32EA4E252A08990033EF80 /* FavoritePrimesAction.swift */,
 			);
 			path = Action;
 			sourceTree = "<group>";
@@ -194,10 +203,13 @@
 				FCB011B52517AB20000F7195 /* ContentView.swift in Sources */,
 				FCB011B82517ABD3000F7195 /* AppState.swift in Sources */,
 				FCB011932517A776000F7195 /* CombosableArchitectureApp.swift in Sources */,
+				FC32EA4F252A08990033EF80 /* FavoritePrimesAction.swift in Sources */,
 				FC32EA3F2529FF390033EF80 /* CounterAction.swift in Sources */,
+				FC32EA4B252A07480033EF80 /* PrimeModalAction.swift in Sources */,
 				FC32EA3B2529F9280033EF80 /* Store.swift in Sources */,
 				FCB011AA2517A7DB000F7195 /* CounterView.swift in Sources */,
 				FCB011BE25185BAE000F7195 /* IsPrimeModalView.swift in Sources */,
+				FC32EA48252A07250033EF80 /* AppAction.swift in Sources */,
 				FCB011C5251860AA000F7195 /* FavoritePrimesView.swift in Sources */,
 				FCB011C125185DCC000F7195 /* WolframAlphaHelper.swift in Sources */,
 			);
