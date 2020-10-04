@@ -12,7 +12,7 @@ struct CombosableArchitectureApp: App {
     var body: some Scene {
         WindowGroup {
             ContentView(
-                store: Store<AppState>(initialValue: AppState())
+                store: Store(initialValue: AppState(), reducer: counterReducer)
             )
         }
     }
