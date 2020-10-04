@@ -16,7 +16,7 @@ struct PrimeAlert: Identifiable {
 struct CounterView: View {
     
     // MARK: AppState
-    @ObservedObject var state: AppState
+    @ObservedObject var store: Store<AppState>
     
     // MARK: Local State
     @State var isPrimeModalShown = false
@@ -27,11 +27,11 @@ struct CounterView: View {
     var body: some View {
       VStack {
         HStack {
-          Button(action: { self.state.count -= 1 }) {
+            Button(action: { self.store.value.count -= 1 }) {
             Text("-")
           }
-          Text("\(self.state.count)")
-          Button(action: { self.state.count += 1 }) {
+            Text("\(self.store.value.count)")
+          Button(action: { self.store.value.count += 1 }) {
             Text("+")
           }
         }
@@ -39,18 +39,18 @@ struct CounterView: View {
           Text("Is this prime?")
         }
         Button(action: self.nthPrimeButtonAction) {
-          Text("What is the \(ordinal(self.state.count)) prime?")
+            Text("What is the \(ordinal(self.store.value.count)) prime?")
         }.disabled(isNthPrimeButtonDisabled)
       }
       .font(.title)
       .navigationBarTitle("Counter demo")
       .sheet(isPresented: self.$isPrimeModalShown) {
-        IsPrimeModalView(state: self.state)
+        IsPrimeModalView(store: self.store)
       }
       .alert(item: self.$alertNthPrime) { alert in
         Alert(
           title: Text(
-            "The \(ordinal(self.state.count)) prime is \(alert.prime)"
+            "The \(ordinal(self.store.value.count)) prime is \(alert.prime)"
           ),
           dismissButton: .default(Text("Ok"))
         )
@@ -66,7 +66,7 @@ struct CounterView: View {
     private func nthPrimeButtonAction() {
     
       self.isNthPrimeButtonDisabled = true
-      nthPrime(self.state.count) { prime in
+      nthPrime(self.store.value.count) { prime in
         self.alertNthPrime = prime.map(PrimeAlert.init(prime:))
         self.isNthPrimeButtonDisabled = false
       }
@@ -76,7 +76,7 @@ struct CounterView: View {
 struct CounterView_Previews: PreviewProvider {
     static var previews: some View {
         CounterView(
-            state: AppState()
+            store: Store<AppState>(initialValue: AppState())
         )
     }
 }

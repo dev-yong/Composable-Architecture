@@ -7,11 +7,11 @@
 
 import Foundation
 
-final class Store: ObservableObject {
+final class Store<Value>: ObservableObject {
     
-    @Published var value: AppState
+    @Published var value: Value
     
-    init(initialValue: AppState) {
+    init(initialValue: Value) {
         
         self.value = initialValue
     }

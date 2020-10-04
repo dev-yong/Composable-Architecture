@@ -11,7 +11,9 @@ import SwiftUI
 struct CombosableArchitectureApp: App {
     var body: some Scene {
         WindowGroup {
-            ContentView(state: AppState())
+            ContentView(
+                store: Store<AppState>(initialValue: AppState())
+            )
         }
     }
 }

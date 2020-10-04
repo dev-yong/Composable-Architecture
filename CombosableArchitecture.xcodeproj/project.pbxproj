@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		FC32EA3B2529F9280033EF80 /* Store.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC32EA3A2529F9280033EF80 /* Store.swift */; };
+		FC32EA3F2529FF390033EF80 /* CounterAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC32EA3E2529FF390033EF80 /* CounterAction.swift */; };
 		FCB011932517A776000F7195 /* CombosableArchitectureApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCB011922517A776000F7195 /* CombosableArchitectureApp.swift */; };
 		FCB011972517A777000F7195 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FCB011962517A777000F7195 /* Assets.xcassets */; };
 		FCB0119A2517A777000F7195 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FCB011992517A777000F7195 /* Preview Assets.xcassets */; };
@@ -21,6 +22,7 @@
 
 /* Begin PBXFileReference section */
 		FC32EA3A2529F9280033EF80 /* Store.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Store.swift; sourceTree = "<group>"; };
+		FC32EA3E2529FF390033EF80 /* CounterAction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CounterAction.swift; sourceTree = "<group>"; };
 		FCB0118F2517A776000F7195 /* CombosableArchitecture.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CombosableArchitecture.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FCB011922517A776000F7195 /* CombosableArchitectureApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CombosableArchitectureApp.swift; sourceTree = "<group>"; };
 		FCB011962517A777000F7195 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -45,6 +47,41 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		FC32EA3D2529FF2F0033EF80 /* Action */ = {
+			isa = PBXGroup;
+			children = (
+				FC32EA3E2529FF390033EF80 /* CounterAction.swift */,
+			);
+			path = Action;
+			sourceTree = "<group>";
+		};
+		FC32EA422529FF8E0033EF80 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				FCB011B42517AB20000F7195 /* ContentView.swift */,
+				FCB011A92517A7DB000F7195 /* CounterView.swift */,
+				FCB011BD25185BAE000F7195 /* IsPrimeModalView.swift */,
+				FCB011C4251860AA000F7195 /* FavoritePrimesView.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		FC32EA432529FF9A0033EF80 /* Appication */ = {
+			isa = PBXGroup;
+			children = (
+				FCB011922517A776000F7195 /* CombosableArchitectureApp.swift */,
+			);
+			path = Appication;
+			sourceTree = "<group>";
+		};
+		FC32EA442529FFA50033EF80 /* Helper */ = {
+			isa = PBXGroup;
+			children = (
+				FCB011C025185DCC000F7195 /* WolframAlphaHelper.swift */,
+			);
+			path = Helper;
+			sourceTree = "<group>";
+		};
 		FCB011862517A776000F7195 = {
 			isa = PBXGroup;
 			children = (
@@ -64,14 +101,12 @@
 		FCB011912517A776000F7195 /* CombosableArchitecture */ = {
 			isa = PBXGroup;
 			children = (
-				FCB011922517A776000F7195 /* CombosableArchitectureApp.swift */,
-				FC32EA3A2529F9280033EF80 /* Store.swift */,
+				FC32EA432529FF9A0033EF80 /* Appication */,
 				FCB011B72517ABD3000F7195 /* AppState.swift */,
-				FCB011B42517AB20000F7195 /* ContentView.swift */,
-				FCB011A92517A7DB000F7195 /* CounterView.swift */,
-				FCB011BD25185BAE000F7195 /* IsPrimeModalView.swift */,
-				FCB011C025185DCC000F7195 /* WolframAlphaHelper.swift */,
-				FCB011C4251860AA000F7195 /* FavoritePrimesView.swift */,
+				FC32EA3A2529F9280033EF80 /* Store.swift */,
+				FC32EA3D2529FF2F0033EF80 /* Action */,
+				FC32EA422529FF8E0033EF80 /* View */,
+				FC32EA442529FFA50033EF80 /* Helper */,
 				FCB011962517A777000F7195 /* Assets.xcassets */,
 				FCB0119B2517A777000F7195 /* Info.plist */,
 				FCB011982517A777000F7195 /* Preview Content */,
@@ -159,6 +194,7 @@
 				FCB011B52517AB20000F7195 /* ContentView.swift in Sources */,
 				FCB011B82517ABD3000F7195 /* AppState.swift in Sources */,
 				FCB011932517A776000F7195 /* CombosableArchitectureApp.swift in Sources */,
+				FC32EA3F2529FF390033EF80 /* CounterAction.swift in Sources */,
 				FC32EA3B2529F9280033EF80 /* Store.swift in Sources */,
 				FCB011AA2517A7DB000F7195 /* CounterView.swift in Sources */,
 				FCB011BE25185BAE000F7195 /* IsPrimeModalView.swift in Sources */,
