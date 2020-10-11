@@ -13,21 +13,21 @@ struct AppState {
    var favoritePrimes: [Int] = []
    var loggedInUser: User?
    var activityFeed: [Activity] = []
-}
-
-struct User {
     
-    let id: Int
-    let name: String
-    let bio: String
-}
+    struct User {
+        
+        let id: Int
+        let name: String
+        let bio: String
+    }
 
-struct Activity {
-  let timestamp: Date
-  let type: ActivityType
+    struct Activity {
+      let timestamp: Date
+      let type: ActivityType
 
-  enum ActivityType {
-    case addedFavoritePrime(Int)
-    case removedFavoritePrime(Int)
-  }
+      enum ActivityType {
+        case addedFavoritePrime(Int)
+        case removedFavoritePrime(Int)
+      }
+    }
 }

@@ -10,7 +10,7 @@ import Foundation
 let appReducer = combine(
     pullback(counterReducer, value: \.count),
     primeModalReducer,
-    favoritePrimesReducer
+    pullback(favoritePrimesReducer, value: \.favoritePrimesState)
 )
 
 func counterReducer(state: inout Int, action: AppAction) -> Void {
@@ -40,7 +40,7 @@ func primeModalReducer(state: inout AppState, action: AppAction) -> Void {
     }
 }
 
-func favoritePrimesReducer(state: inout AppState, action: AppAction) -> Void {
+func favoritePrimesReducer(state: inout FavoritePrimesState, action: AppAction) -> Void {
     
     switch action {
     case let .favoritePrimes(.deleteFavoritePrimes(indexSet)):

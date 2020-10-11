@@ -24,6 +24,7 @@
 		FCF40A7C2532E06900727DC4 /* Combine.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCF40A7B2532E06900727DC4 /* Combine.swift */; };
 		FCF40A802532E0BE00727DC4 /* Reducers.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCF40A7F2532E0BE00727DC4 /* Reducers.swift */; };
 		FCF40A842532E93A00727DC4 /* Pullback.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCF40A832532E93A00727DC4 /* Pullback.swift */; };
+		FCF40A872532EF6600727DC4 /* FavoritePrimesState.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCF40A862532EF6600727DC4 /* FavoritePrimesState.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -46,6 +47,7 @@
 		FCF40A7B2532E06900727DC4 /* Combine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Combine.swift; sourceTree = "<group>"; };
 		FCF40A7F2532E0BE00727DC4 /* Reducers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Reducers.swift; sourceTree = "<group>"; };
 		FCF40A832532E93A00727DC4 /* Pullback.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Pullback.swift; sourceTree = "<group>"; };
+		FCF40A862532EF6600727DC4 /* FavoritePrimesState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritePrimesState.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -118,6 +120,7 @@
 			children = (
 				FC32EA432529FF9A0033EF80 /* Appication */,
 				FCB011B72517ABD3000F7195 /* AppState.swift */,
+				FCF40A862532EF6600727DC4 /* FavoritePrimesState.swift */,
 				FC32EA3A2529F9280033EF80 /* Store.swift */,
 				FCF40A752532E04C00727DC4 /* Reducer */,
 				FC32EA3D2529FF2F0033EF80 /* Action */,
@@ -230,6 +233,7 @@
 				FCF40A842532E93A00727DC4 /* Pullback.swift in Sources */,
 				FCF40A802532E0BE00727DC4 /* Reducers.swift in Sources */,
 				FCB011932517A776000F7195 /* CombosableArchitectureApp.swift in Sources */,
+				FCF40A872532EF6600727DC4 /* FavoritePrimesState.swift in Sources */,
 				FC32EA4F252A08990033EF80 /* FavoritePrimesAction.swift in Sources */,
 				FC32EA3F2529FF390033EF80 /* CounterAction.swift in Sources */,
 				FC32EA4B252A07480033EF80 /* PrimeModalAction.swift in Sources */,
