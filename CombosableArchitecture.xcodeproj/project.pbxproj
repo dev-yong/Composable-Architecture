@@ -21,6 +21,8 @@
 		FCB011BE25185BAE000F7195 /* IsPrimeModalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCB011BD25185BAE000F7195 /* IsPrimeModalView.swift */; };
 		FCB011C125185DCC000F7195 /* WolframAlphaHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCB011C025185DCC000F7195 /* WolframAlphaHelper.swift */; };
 		FCB011C5251860AA000F7195 /* FavoritePrimesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCB011C4251860AA000F7195 /* FavoritePrimesView.swift */; };
+		FCF40A7C2532E06900727DC4 /* Combine.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCF40A7B2532E06900727DC4 /* Combine.swift */; };
+		FCF40A802532E0BE00727DC4 /* Reducers.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCF40A7F2532E0BE00727DC4 /* Reducers.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -40,6 +42,8 @@
 		FCB011BD25185BAE000F7195 /* IsPrimeModalView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IsPrimeModalView.swift; sourceTree = "<group>"; };
 		FCB011C025185DCC000F7195 /* WolframAlphaHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WolframAlphaHelper.swift; sourceTree = "<group>"; };
 		FCB011C4251860AA000F7195 /* FavoritePrimesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritePrimesView.swift; sourceTree = "<group>"; };
+		FCF40A7B2532E06900727DC4 /* Combine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Combine.swift; sourceTree = "<group>"; };
+		FCF40A7F2532E0BE00727DC4 /* Reducers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Reducers.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -113,6 +117,7 @@
 				FC32EA432529FF9A0033EF80 /* Appication */,
 				FCB011B72517ABD3000F7195 /* AppState.swift */,
 				FC32EA3A2529F9280033EF80 /* Store.swift */,
+				FCF40A752532E04C00727DC4 /* Reducer */,
 				FC32EA3D2529FF2F0033EF80 /* Action */,
 				FC32EA422529FF8E0033EF80 /* View */,
 				FC32EA442529FFA50033EF80 /* Helper */,
@@ -129,6 +134,23 @@
 				FCB011992517A777000F7195 /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		FCF40A752532E04C00727DC4 /* Reducer */ = {
+			isa = PBXGroup;
+			children = (
+				FCF40A7A2532E05E00727DC4 /* Operator */,
+				FCF40A7F2532E0BE00727DC4 /* Reducers.swift */,
+			);
+			path = Reducer;
+			sourceTree = "<group>";
+		};
+		FCF40A7A2532E05E00727DC4 /* Operator */ = {
+			isa = PBXGroup;
+			children = (
+				FCF40A7B2532E06900727DC4 /* Combine.swift */,
+			);
+			path = Operator;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -202,12 +224,14 @@
 			files = (
 				FCB011B52517AB20000F7195 /* ContentView.swift in Sources */,
 				FCB011B82517ABD3000F7195 /* AppState.swift in Sources */,
+				FCF40A802532E0BE00727DC4 /* Reducers.swift in Sources */,
 				FCB011932517A776000F7195 /* CombosableArchitectureApp.swift in Sources */,
 				FC32EA4F252A08990033EF80 /* FavoritePrimesAction.swift in Sources */,
 				FC32EA3F2529FF390033EF80 /* CounterAction.swift in Sources */,
 				FC32EA4B252A07480033EF80 /* PrimeModalAction.swift in Sources */,
 				FC32EA3B2529F9280033EF80 /* Store.swift in Sources */,
 				FCB011AA2517A7DB000F7195 /* CounterView.swift in Sources */,
+				FCF40A7C2532E06900727DC4 /* Combine.swift in Sources */,
 				FCB011BE25185BAE000F7195 /* IsPrimeModalView.swift in Sources */,
 				FC32EA48252A07250033EF80 /* AppAction.swift in Sources */,
 				FCB011C5251860AA000F7195 /* FavoritePrimesView.swift in Sources */,
