@@ -23,6 +23,7 @@
 		FCB011C5251860AA000F7195 /* FavoritePrimesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCB011C4251860AA000F7195 /* FavoritePrimesView.swift */; };
 		FCF40A7C2532E06900727DC4 /* Combine.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCF40A7B2532E06900727DC4 /* Combine.swift */; };
 		FCF40A802532E0BE00727DC4 /* Reducers.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCF40A7F2532E0BE00727DC4 /* Reducers.swift */; };
+		FCF40A842532E93A00727DC4 /* Pullback.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCF40A832532E93A00727DC4 /* Pullback.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -44,6 +45,7 @@
 		FCB011C4251860AA000F7195 /* FavoritePrimesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritePrimesView.swift; sourceTree = "<group>"; };
 		FCF40A7B2532E06900727DC4 /* Combine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Combine.swift; sourceTree = "<group>"; };
 		FCF40A7F2532E0BE00727DC4 /* Reducers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Reducers.swift; sourceTree = "<group>"; };
+		FCF40A832532E93A00727DC4 /* Pullback.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Pullback.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -149,6 +151,7 @@
 			isa = PBXGroup;
 			children = (
 				FCF40A7B2532E06900727DC4 /* Combine.swift */,
+				FCF40A832532E93A00727DC4 /* Pullback.swift */,
 			);
 			path = Operator;
 			sourceTree = "<group>";
@@ -224,6 +227,7 @@
 			files = (
 				FCB011B52517AB20000F7195 /* ContentView.swift in Sources */,
 				FCB011B82517ABD3000F7195 /* AppState.swift in Sources */,
+				FCF40A842532E93A00727DC4 /* Pullback.swift in Sources */,
 				FCF40A802532E0BE00727DC4 /* Reducers.swift in Sources */,
 				FCB011932517A776000F7195 /* CombosableArchitectureApp.swift in Sources */,
 				FC32EA4F252A08990033EF80 /* FavoritePrimesAction.swift in Sources */,

@@ -9,41 +9,41 @@ import Foundation
 
 let appReducer = combine(counterReducer, primeModalReducer, favoritePrimesReducer)
 
-func counterReducer(value: inout AppState, action: AppAction) -> Void {
+func counterReducer(state: inout Int, action: AppAction) -> Void {
     
     switch action {
     case . counter(.decrTapped):
-        value.count -= 1
+        state -= 1
     case .counter(.incrTapped):
-        value.count += 1
+        state += 1
     default:
         break
     }
 }
 
-func primeModalReducer(value: inout AppState, action: AppAction) -> Void {
+func primeModalReducer(state: inout AppState, action: AppAction) -> Void {
     
     switch action {
     
     case .primeModal(.saveFavoritePrimeTapped):
-        value.favoritePrimes.append(value.count)
-        value.activityFeed.append(.init(timestamp: Date(), type: .addedFavoritePrime(value.count)))
+        state.favoritePrimes.append(state.count)
+        state.activityFeed.append(.init(timestamp: Date(), type: .addedFavoritePrime(state.count)))
     case .primeModal(.removeFavoritePrimeTapped):
-        value.favoritePrimes.removeAll(where: { $0 == value.count })
-        value.activityFeed.append(.init(timestamp: Date(), type: .removedFavoritePrime(value.count)))
+        state.favoritePrimes.removeAll(where: { $0 == state.count })
+        state.activityFeed.append(.init(timestamp: Date(), type: .removedFavoritePrime(state.count)))
     default:
         break
     }
 }
 
-func favoritePrimesReducer(value: inout AppState, action: AppAction) -> Void {
+func favoritePrimesReducer(state: inout AppState, action: AppAction) -> Void {
     
     switch action {
     case let .favoritePrimes(.deleteFavoritePrimes(indexSet)):
         for index in indexSet {
-            let prime = value.favoritePrimes[index]
-            value.favoritePrimes.remove(at: index)
-            value.activityFeed.append(.init(timestamp: Date(), type: .removedFavoritePrime(prime)))
+            let prime = state.favoritePrimes[index]
+            state.favoritePrimes.remove(at: index)
+            state.activityFeed.append(.init(timestamp: Date(), type: .removedFavoritePrime(prime)))
         }
     default:
         break
