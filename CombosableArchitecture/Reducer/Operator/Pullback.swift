@@ -9,12 +9,13 @@ import Foundation
 
 func pullback<LocalValue, GlobalValue, Action>(
     _ reducer: @escaping (inout LocalValue, Action) -> Void,
-    _ f: @escaping (inout GlobalValue) -> LocalValue
+    get: @escaping (GlobalValue) -> LocalValue,
+    set: @escaping (inout GlobalValue, LocalValue) -> Void
 ) -> (inout GlobalValue, Action) -> Void {
     
-    return { globalValue, action in
-        
-        var localValue = f(&globalValue)
+    return  { globalValue, action in
+        var localValue = get(globalValue)
         reducer(&localValue, action)
+        set(&globalValue, localValue)
     }
 }
