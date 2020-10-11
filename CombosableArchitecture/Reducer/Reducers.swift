@@ -7,7 +7,11 @@
 
 import Foundation
 
-let appReducer = combine(counterReducer, primeModalReducer, favoritePrimesReducer)
+let appReducer = combine(
+    pullback(counterReducer, value: \.count),
+    primeModalReducer,
+    favoritePrimesReducer
+)
 
 func counterReducer(state: inout Int, action: AppAction) -> Void {
     
