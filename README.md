@@ -10,7 +10,3 @@
 - 일관적인 방법으로 mutation을 수행하라.
 - User Action에 대하여 정의하라.
 - BoilerPlate 코드를 없애기 위하여, copy process를 줄이기 위하여 `inout` 을 이용하자.
-
-### State Pullback
-
-- 
