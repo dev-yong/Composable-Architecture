@@ -13,21 +13,14 @@ let appReducer = combine(
     pullback(favoritePrimesReducer, value: \.favoritePrimesState)
 )
 
-func counterReducer(state: inout Int, action: AppAction) -> Void {
+func counterReducer(state: inout Int, action: CounterAction) -> Void {
     
     switch action {
     
-    case .counter(let counterAction):
-        
-        switch counterAction {
-        
-        case .incrTapped:
-            state += 1
-        case .decrTapped:
-            state -= 1
-        }
-    default:
-        break
+    case .incrTapped:
+        state += 1
+    case .decrTapped:
+        state -= 1
     }
 }
 
