@@ -16,10 +16,16 @@ let appReducer = combine(
 func counterReducer(state: inout Int, action: AppAction) -> Void {
     
     switch action {
-    case . counter(.decrTapped):
-        state -= 1
-    case .counter(.incrTapped):
-        state += 1
+    
+    case .counter(let counterAction):
+        
+        switch counterAction {
+        
+        case .incrTapped:
+            state += 1
+        case .decrTapped:
+            state -= 1
+        }
     default:
         break
     }
