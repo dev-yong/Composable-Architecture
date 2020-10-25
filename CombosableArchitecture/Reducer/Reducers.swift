@@ -7,14 +7,42 @@
 
 import Foundation
 
-func higherOrderReducer(
+func activityFeed(
   _ reducer: @escaping (inout AppState, AppAction) -> Void
 ) -> (inout AppState, AppAction) -> Void {
 
     return { state, action in
-        // do some computations with state and action
+        
+        switch action {
+        
+        // activity feed에 중요하지 않다.
+        case .counter:
+            break
+        case .primeModal(.removeFavoritePrimeTapped):
+            state.activityFeed.append(
+                .init(
+                    timestamp: Date(),
+                    type: .removedFavoritePrime(state.count)
+                )
+            )
+        case .primeModal(.saveFavoritePrimeTapped):
+            state.activityFeed.append(
+                .init(
+                    timestamp: Date(),
+                    type: .addedFavoritePrime(state.count)
+                )
+            )
+        case let .favoritePrimes(.deleteFavoritePrimes(indexSet)):
+            for index in indexSet {
+                state.activityFeed.append(
+                    .init(
+                        timestamp: Date(),
+                        type: .removedFavoritePrime(state.favoritePrimes[index])
+                    )
+                )
+            }
+        }
         reducer(&state, action)
-        // inspect what happened to state?
     }
 }
 
@@ -42,10 +70,8 @@ func primeModalReducer(state: inout AppState, action: AppAction) -> Void {
     
     case .primeModal(.saveFavoritePrimeTapped):
         state.favoritePrimes.append(state.count)
-        state.activityFeed.append(.init(timestamp: Date(), type: .addedFavoritePrime(state.count)))
     case .primeModal(.removeFavoritePrimeTapped):
         state.favoritePrimes.removeAll(where: { $0 == state.count })
-        state.activityFeed.append(.init(timestamp: Date(), type: .removedFavoritePrime(state.count)))
     default:
         break
     }
@@ -58,7 +84,6 @@ func favoritePrimesReducer(state: inout FavoritePrimesState, action: AppAction) 
         for index in indexSet {
             let prime = state.favoritePrimes[index]
             state.favoritePrimes.remove(at: index)
-            state.activityFeed.append(.init(timestamp: Date(), type: .removedFavoritePrime(prime)))
         }
     default:
         break
