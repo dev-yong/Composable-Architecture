@@ -7,6 +7,17 @@
 
 import Foundation
 
+func higherOrderReducer(
+  _ reducer: @escaping (inout AppState, AppAction) -> Void
+) -> (inout AppState, AppAction) -> Void {
+
+    return { state, action in
+        // do some computations with state and action
+        reducer(&state, action)
+        // inspect what happened to state?
+    }
+}
+
 let appReducer = combine(
     pullback(counterReducer, value: \.count),
     primeModalReducer,
