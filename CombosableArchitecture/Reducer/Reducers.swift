@@ -49,7 +49,7 @@ func activityFeed(
 let appReducer = combine(
     pullback(counterReducer, value: \.count),
     primeModalReducer,
-    pullback(favoritePrimesReducer, value: \.favoritePrimesState)
+    pullback(favoritePrimesReducer, value: \.favoritePrimes)
 )
 
 func counterReducer(state: inout Int, action: AppAction) -> Void {
@@ -77,13 +77,12 @@ func primeModalReducer(state: inout AppState, action: AppAction) -> Void {
     }
 }
 
-func favoritePrimesReducer(state: inout FavoritePrimesState, action: AppAction) -> Void {
+func favoritePrimesReducer(state: inout [Int], action: AppAction) -> Void {
     
     switch action {
     case let .favoritePrimes(.deleteFavoritePrimes(indexSet)):
         for index in indexSet {
-            let prime = state.favoritePrimes[index]
-            state.favoritePrimes.remove(at: index)
+            state.remove(at: index)
         }
     default:
         break
