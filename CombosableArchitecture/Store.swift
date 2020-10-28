@@ -22,5 +22,9 @@ final class Store<Value, Action>: ObservableObject {
     
     func send(_ action: Action) {
         self.reducer(&self.value, action)
+        print("Action: \(action)")
+        print("Value:")
+        dump(self.value)
+        print("---")
     }
 }
