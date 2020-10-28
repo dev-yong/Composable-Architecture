@@ -88,3 +88,16 @@ func favoritePrimesReducer(state: inout [Int], action: AppAction) -> Void {
         break
     }
 }
+
+func logging<Value, Action>(
+    _ reducer: @escaping (inout Value, Action) -> Void
+) -> (inout Value, Action) -> Void {
+    
+    return { value, action in
+        reducer(&value, action)
+        print("Action: \(action)")
+        print("value:")
+        dump(value)
+        print("---")
+    }
+}
