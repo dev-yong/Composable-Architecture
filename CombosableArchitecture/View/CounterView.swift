@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import Core
 
 struct PrimeAlert: Identifiable {
   let prime: Int

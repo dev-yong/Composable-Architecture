@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import Core
 
 struct ContentView: View {
     @ObservedObject var store: Store<AppState, AppAction>
