@@ -1,4 +1,4 @@
-# Higher-Order Reducers
+# Reducer and Stores : Higher-Order Reducers
 
 - **Higher-order function** : 함수를 입력으로 사용하고 함수를 출력으로 반환하는 함수
 

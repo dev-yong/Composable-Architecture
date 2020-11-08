@@ -1,4 +1,4 @@
-## Reducer
+# Reducer and Stores : Reducers
 
 ### Introduction
 
