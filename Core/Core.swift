@@ -27,12 +27,13 @@ public final class Store<Value, Action>: ObservableObject {
     }
     
     func ___<LocalValue>(
-        _ f: (Value) -> LocalValue
+        _ f: @escaping (Value) -> LocalValue
     ) -> Store<LocalValue, Action> {
         return Store<LocalValue, Action>(
             initialValue: f(self.value),
             reducer: { localValue, action in
-                
+                self.send(action)
+                localValue = f(self.value)
             }
         )
     }
@@ -105,3 +106,10 @@ public func logging<Value, Action>(
         print("---")
     }
 }
+
+public func transform<A, B, Action>(
+    _ reducer: (inout A, Action) -> Void,
+    _ f: (A) -> B
+  ) -> (inout B, Action) -> Void {
+    fatalError()
+  }
