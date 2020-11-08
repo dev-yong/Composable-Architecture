@@ -25,6 +25,17 @@ public final class Store<Value, Action>: ObservableObject {
     public func send(_ action: Action) {
         self.reducer(&self.value, action)
     }
+    
+    func ___<LocalValue>(
+        _ f: (Value) -> LocalValue
+    ) -> Store<LocalValue, Action> {
+        return Store<LocalValue, Action>(
+            initialValue: f(self.value),
+            reducer: { localValue, action in
+                
+            }
+        )
+    }
 }
 
 public func combine<Value, Action>(
