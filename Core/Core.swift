@@ -26,7 +26,7 @@ public final class Store<Value, Action>: ObservableObject {
         self.reducer(&self.value, action)
     }
     
-    func map<LocalValue>(
+    func view<LocalValue>(
         _ f: @escaping (Value) -> LocalValue
     ) -> Store<LocalValue, Action> {
         return Store<LocalValue, Action>(
