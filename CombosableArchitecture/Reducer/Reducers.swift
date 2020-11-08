@@ -7,6 +7,9 @@
 
 import Foundation
 import Core
+import Counter
+import PrimeModal
+import FavoritePrimes
 
 func activityFeed(
   _ reducer: @escaping (inout AppState, AppAction) -> Void
@@ -47,45 +50,10 @@ func activityFeed(
     }
 }
 
-let appReducer = combine(
-    pullback(counterReducer, value: \.count),
-    primeModalReducer,
-    pullback(favoritePrimesReducer, value: \.favoritePrimes)
+let _appReducer: (inout AppState, AppAction) -> Void = combine(
+    pullback(counterReducer, value: \.count, action: \.counter),
+    pullback(primeModalReducer, value: \.primeModal, action: \.primeModal),
+    pullback(favoritePrimesReducer, value: \.favoritePrimes, action: \.favoritePrimes)
 )
 
-func counterReducer(state: inout Int, action: AppAction) -> Void {
-    
-    switch action {
-    case . counter(.decrTapped):
-        state -= 1
-    case .counter(.incrTapped):
-        state += 1
-    default:
-        break
-    }
-}
-
-func primeModalReducer(state: inout AppState, action: AppAction) -> Void {
-    
-    switch action {
-    
-    case .primeModal(.saveFavoritePrimeTapped):
-        state.favoritePrimes.append(state.count)
-    case .primeModal(.removeFavoritePrimeTapped):
-        state.favoritePrimes.removeAll(where: { $0 == state.count })
-    default:
-        break
-    }
-}
-
-func favoritePrimesReducer(state: inout [Int], action: AppAction) -> Void {
-    
-    switch action {
-    case let .favoritePrimes(.deleteFavoritePrimes(indexSet)):
-        for index in indexSet {
-            state.remove(at: index)
-        }
-    default:
-        break
-    }
-}
+let appReducer = pullback(_appReducer, value: \.self, action: \.self)

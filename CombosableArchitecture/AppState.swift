@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import PrimeModal
 
 struct AppState {
     
@@ -30,4 +31,19 @@ struct AppState {
         case removedFavoritePrime(Int)
       }
     }
+}
+
+extension AppState {
+  var primeModal: PrimeModalState {
+    get {
+      PrimeModalState(
+        count: self.count,
+        favoritePrimes: self.favoritePrimes
+      )
+    }
+    set {
+      self.count = newValue.count
+      self.favoritePrimes = newValue.favoritePrimes
+    }
+  }
 }

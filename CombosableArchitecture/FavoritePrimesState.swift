@@ -13,16 +13,17 @@ struct FavoritePrimesState {
 }
 
 extension AppState {
-  var favoritePrimesState: FavoritePrimesState {
-    get {
-      return FavoritePrimesState(
-        favoritePrimes: self.favoritePrimes,
-        activityFeed: self.activityFeed
-      )
+    var favoritePrimesState: FavoritePrimesState {
+        get {
+            return FavoritePrimesState(
+                favoritePrimes: self.favoritePrimes,
+                activityFeed: self.activityFeed
+            )
+        }
+        set {
+            self.activityFeed = newValue.activityFeed
+            self.favoritePrimes = newValue.favoritePrimes
+        }
     }
-    set {
-      self.activityFeed = newValue.activityFeed
-      self.favoritePrimes = newValue.favoritePrimes
-    }
-  }
 }
+

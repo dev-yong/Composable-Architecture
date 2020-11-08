@@ -1,0 +1,25 @@
+//
+//  Counter.swift
+//  Counter
+//
+//  Created by 이광용 on 2020/11/08.
+//
+
+import Foundation
+
+public enum CounterAction {
+    
+    case decrTapped
+    case incrTapped
+}
+
+public func counterReducer(state: inout Int, action: CounterAction) {
+    switch action {
+    case .decrTapped:
+      state -= 1
+
+    case .incrTapped:
+      state += 1
+    }
+  }
+
