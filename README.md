@@ -24,3 +24,9 @@
 - Reducer를 입력으로 사용하고 Reducer를 출력으로 반환하는 Reducer
 - 기능별 Logic 을 한 곳에 집중시킬 수 있다.
 - 아직까지는 composition nesting이 지저분해지는 단점이 존재한다.
+
+### [Modular_State Management_Reducers](/Modular_State Management_Reducers.md)
+
+- 모듈이란 Application에 import 되어질 수 있는 코드의 단위 이다.
+- Application을 module 단위로 쪼개라.
+- Reducer 들을 자체 모듈로 추출하자.
