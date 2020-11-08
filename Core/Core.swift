@@ -13,11 +13,13 @@ public final class Store<Value, Action>: ObservableObject {
     public let reducer: (inout Value, Action) -> Void
     @Published
     public private(set) var value: Value
+    private var cancellableBag = Set<AnyCancellable>()
     
     public init(
         initialValue: Value,
         reducer: @escaping (inout Value, Action) -> Void
     ) {
+        
         self.value = initialValue
         self.reducer = reducer
     }
@@ -29,13 +31,19 @@ public final class Store<Value, Action>: ObservableObject {
     func view<LocalValue>(
         _ f: @escaping (Value) -> LocalValue
     ) -> Store<LocalValue, Action> {
-        return Store<LocalValue, Action>(
+        let localStore = Store<LocalValue, Action>(
             initialValue: f(self.value),
             reducer: { localValue, action in
                 self.send(action)
                 localValue = f(self.value)
             }
         )
+        self.cancellableBag.insert(
+            self.$value.sink { [weak localStore] (newValue) in
+                localStore?.value = f(newValue)
+            }
+        )
+        return localStore
     }
 }
 
