@@ -7,6 +7,7 @@
 
 import SwiftUI
 import Core
+import PrimeModal
 
 struct PrimeAlert: Identifiable {
   let prime: Int
@@ -14,10 +15,12 @@ struct PrimeAlert: Identifiable {
   var id: Int { self.prime }
 }
 
+typealias CounterViewState = (count: Int, favoritePrimes: [Int])
+
 struct CounterView: View {
     
     // MARK: AppState
-    @ObservedObject var store: Store<AppState, AppAction>
+    @ObservedObject var store: Store<CounterViewState, AppAction>
     
     // MARK: Local State
     @State var isPrimeModalShown = false
@@ -50,7 +53,7 @@ struct CounterView: View {
       .font(.title)
       .navigationBarTitle("Counter demo")
       .sheet(isPresented: self.$isPrimeModalShown) {
-        IsPrimeModalView(store: self.store)
+        IsPrimeModalView(store: self.store.view { PrimeModalState(count: $0.count, favoritePrimes: $0.favoritePrimes) } )
       }
       .alert(item: self.$alertNthPrime) { alert in
         Alert(
@@ -81,7 +84,7 @@ struct CounterView: View {
 struct CounterView_Previews: PreviewProvider {
     static var previews: some View {
         CounterView(
-            store: Store(initialValue: AppState(), reducer: appReducer)
+            store: Store(initialValue: AppState(), reducer: appReducer).view { ($0.count, $0.favoritePrimes) }
         )
     }
 }

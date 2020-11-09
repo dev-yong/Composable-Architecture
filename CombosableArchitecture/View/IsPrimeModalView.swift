@@ -7,10 +7,11 @@
 
 import SwiftUI
 import Core
+import PrimeModal
 
 struct IsPrimeModalView: View {
     
-    @ObservedObject var store: Store<AppState, AppAction>
+    @ObservedObject var store: Store<PrimeModalState, AppAction>
     var body: some View {
         VStack {
             if self.isPrime(self.store.value.count) {
@@ -50,7 +51,7 @@ struct IsPrimeModalView: View {
 struct IsPrimeModalView_Previews: PreviewProvider {
     static var previews: some View {
         IsPrimeModalView(
-            store: Store(initialValue: AppState(), reducer: appReducer)
+            store: Store(initialValue: AppState(), reducer: appReducer).view { $0.primeModal }
         )
     }
 }

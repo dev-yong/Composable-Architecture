@@ -39,7 +39,6 @@
 		FCD0EEE6255007F8005FB3A4 /* Core.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = FCD0EED0255007F8005FB3A4 /* Core.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		FCD0EEF62550080E005FB3A4 /* Core.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCD0EEF52550080E005FB3A4 /* Core.swift */; };
 		FCF40A802532E0BE00727DC4 /* Reducers.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCF40A7F2532E0BE00727DC4 /* Reducers.swift */; };
-		FCF40A872532EF6600727DC4 /* FavoritePrimesState.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCF40A862532EF6600727DC4 /* FavoritePrimesState.swift */; };
 		FCFFDA182558223C0094B4FB /* Counter.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCFFDA172558223C0094B4FB /* Counter.swift */; };
 		FCFFDA22255822430094B4FB /* PrimeModal.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCFFDA21255822430094B4FB /* PrimeModal.swift */; };
 		FCFFDA2C255822490094B4FB /* FavoritePrimes.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCFFDA2B255822490094B4FB /* FavoritePrimes.swift */; };
@@ -188,7 +187,6 @@
 		FCD0EEE1255007F8005FB3A4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		FCD0EEF52550080E005FB3A4 /* Core.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Core.swift; sourceTree = "<group>"; };
 		FCF40A7F2532E0BE00727DC4 /* Reducers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Reducers.swift; sourceTree = "<group>"; };
-		FCF40A862532EF6600727DC4 /* FavoritePrimesState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritePrimesState.swift; sourceTree = "<group>"; };
 		FCFFDA172558223C0094B4FB /* Counter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Counter.swift; sourceTree = "<group>"; };
 		FCFFDA21255822430094B4FB /* PrimeModal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrimeModal.swift; sourceTree = "<group>"; };
 		FCFFDA2B255822490094B4FB /* FavoritePrimes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritePrimes.swift; sourceTree = "<group>"; };
@@ -341,7 +339,6 @@
 			children = (
 				FC32EA432529FF9A0033EF80 /* Appication */,
 				FCB011B72517ABD3000F7195 /* AppState.swift */,
-				FCF40A862532EF6600727DC4 /* FavoritePrimesState.swift */,
 				FCF40A752532E04C00727DC4 /* Reducer */,
 				FC32EA3D2529FF2F0033EF80 /* Action */,
 				FC32EA422529FF8E0033EF80 /* View */,
@@ -802,7 +799,6 @@
 				FCB011B82517ABD3000F7195 /* AppState.swift in Sources */,
 				FCF40A802532E0BE00727DC4 /* Reducers.swift in Sources */,
 				FCB011932517A776000F7195 /* CombosableArchitectureApp.swift in Sources */,
-				FCF40A872532EF6600727DC4 /* FavoritePrimesState.swift in Sources */,
 				FCB011AA2517A7DB000F7195 /* CounterView.swift in Sources */,
 				FCB011BE25185BAE000F7195 /* IsPrimeModalView.swift in Sources */,
 				FC32EA48252A07250033EF80 /* AppAction.swift in Sources */,
