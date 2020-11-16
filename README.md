@@ -33,3 +33,9 @@
 - Application을 module 단위로 쪼개라.
 - Reducer 들을 자체 모듈로 추출하자.
 
+### [View State](/Note/Moduler_State_Management/View_State.md)
+
+- View 들에 대하여 modularizing을 하자.
+- Global Store의 value를 Local Store의 value로 변환하자.
+- Global Store의 파생된 변화를 Local Store가 받도록 하자.
+
