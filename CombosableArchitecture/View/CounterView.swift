@@ -53,7 +53,12 @@ struct CounterView: View {
       .font(.title)
       .navigationBarTitle("Counter demo")
       .sheet(isPresented: self.$isPrimeModalShown) {
-        IsPrimeModalView(store: self.store.view { PrimeModalState(count: $0.count, favoritePrimes: $0.favoritePrimes) } )
+        IsPrimeModalView(
+            store: self.store.view(
+                value: { PrimeModalState(count: $0.count, favoritePrimes: $0.favoritePrimes) },
+                action: { $0 }
+            )
+        )
       }
       .alert(item: self.$alertNthPrime) { alert in
         Alert(
