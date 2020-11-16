@@ -42,7 +42,7 @@ private func wolframAlpha(query: String, callback: @escaping (WolframAlphaResult
   .resume()
 }
 
-func nthPrime(_ n: Int, callback: @escaping (Int?) -> Void) -> Void {
+public func nthPrime(_ n: Int, callback: @escaping (Int?) -> Void) -> Void {
   wolframAlpha(query: "prime \(n)") { result in
     callback(
       result

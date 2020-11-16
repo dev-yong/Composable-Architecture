@@ -7,6 +7,7 @@
 
 import SwiftUI
 import Core
+import Counter
 import FavoritePrimes
 
 struct ContentView: View {
@@ -19,7 +20,14 @@ struct ContentView: View {
                     destination: CounterView(
                         store:  self.store.view(
                             value: { ($0.count, $0.favoritePrimes) },
-                            action: { $0 }
+                            action: {
+                                switch $0 {
+                                case .counter(let action):
+                                    return AppAction.counter(action)
+                                case .primeModal(let action):
+                                    return AppAction.primeModal(action)
+                                }
+                            }
                         )
                     )
                 ) {

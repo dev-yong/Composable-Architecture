@@ -15,12 +15,22 @@ struct PrimeAlert: Identifiable {
   var id: Int { self.prime }
 }
 
-typealias CounterViewState = (count: Int, favoritePrimes: [Int])
+public typealias CounterViewState = (count: Int, favoritePrimes: [Int])
+public enum CounterViewAction {
+    
+  case counter(CounterAction)
+  case primeModal(PrimeModalAction)
+}
 
-struct CounterView: View {
+public struct CounterView: View {
     
     // MARK: AppState
-    @ObservedObject var store: Store<CounterViewState, AppAction>
+    @ObservedObject var store: Store<CounterViewState, CounterViewAction>
+    
+    public init(store: Store<CounterViewState, CounterViewAction>) {
+        
+        self.store = store
+    }
     
     // MARK: Local State
     @State var isPrimeModalShown = false
@@ -28,7 +38,7 @@ struct CounterView: View {
     @State var isNthPrimeButtonDisabled = false
     
     // MARK: Body
-    var body: some View {
+    public var body: some View {
       VStack {
         HStack {
             Button(action: {
@@ -86,10 +96,19 @@ struct CounterView: View {
     }
 }
 
-struct CounterView_Previews: PreviewProvider {
-    static var previews: some View {
-        CounterView(
-            store: Store(initialValue: AppState(), reducer: appReducer).view { ($0.count, $0.favoritePrimes) }
-        )
-    }
-}
+//struct CounterView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        CounterView(store: Store<CounterViewState, CounterViewAction>(initialValue: (0, [0]), reducer: { (state, action) in
+//
+//            switch action {
+//
+//            case.counter(let action):
+//                counterReducer(state: &state.count, action: action)
+//            case .primeModal(let action):
+//
+//                primeModalReducer(state: PrimeModalState(count: state.count, favoritePrimes: state.favoritePrimes), action: action)
+//            }
+//        }))
+//    }
+//}
+//
