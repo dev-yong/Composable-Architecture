@@ -56,7 +56,7 @@ struct CounterView: View {
         IsPrimeModalView(
             store: self.store.view(
                 value: { PrimeModalState(count: $0.count, favoritePrimes: $0.favoritePrimes) },
-                action: { $0 }
+                action: { .primeModal($0) }
             )
         )
       }
