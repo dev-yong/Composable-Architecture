@@ -7,6 +7,7 @@
 
 import SwiftUI
 import Core
+import FavoritePrimes
 
 struct ContentView: View {
     @ObservedObject var store: Store<AppState, AppAction>

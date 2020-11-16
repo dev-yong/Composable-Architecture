@@ -6,14 +6,18 @@
 //
 
 import SwiftUI
-import FavoritePrimes
 import Core
 
-struct FavoritePrimesView: View {
+public struct FavoritePrimesView: View {
     
     @ObservedObject var store: Store<[Int], FavoritePrimesAction>
     
-    var body: some View {
+    public init(store: Store<[Int], FavoritePrimesAction>) {
+        
+        self.store = store
+    }
+    
+    public var body: some View {
         List {
             ForEach(self.store.value, id: \.self) { prime in
             Text("\(prime)")
@@ -30,8 +34,7 @@ struct FavoritePrimesView: View {
 struct FavoritePrimesView_Previews: PreviewProvider {
     static var previews: some View {
         FavoritePrimesView(
-            store: Store(initialValue: AppState(), reducer: appReducer)
-                .view(value: { $0.favoritePrimes }, action: { .favoritePrimes($0) })
+            store: Store(initialValue: [0], reducer: favoritePrimesReducer)
         )
     }
 }

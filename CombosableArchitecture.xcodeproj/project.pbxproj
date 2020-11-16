@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		FC32EA48252A07250033EF80 /* AppAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC32EA47252A07250033EF80 /* AppAction.swift */; };
+		FC61700C2562766100BC8B5D /* FavoritePrimesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCB011C4251860AA000F7195 /* FavoritePrimesView.swift */; };
 		FCB011932517A776000F7195 /* CombosableArchitectureApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCB011922517A776000F7195 /* CombosableArchitectureApp.swift */; };
 		FCB011972517A777000F7195 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FCB011962517A777000F7195 /* Assets.xcassets */; };
 		FCB0119A2517A777000F7195 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FCB011992517A777000F7195 /* Preview Assets.xcassets */; };
@@ -16,7 +17,6 @@
 		FCB011B82517ABD3000F7195 /* AppState.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCB011B72517ABD3000F7195 /* AppState.swift */; };
 		FCB011BE25185BAE000F7195 /* IsPrimeModalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCB011BD25185BAE000F7195 /* IsPrimeModalView.swift */; };
 		FCB011C125185DCC000F7195 /* WolframAlphaHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCB011C025185DCC000F7195 /* WolframAlphaHelper.swift */; };
-		FCB011C5251860AA000F7195 /* FavoritePrimesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCB011C4251860AA000F7195 /* FavoritePrimesView.swift */; };
 		FCD0EE66255007E0005FB3A4 /* Counter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FCD0EE5D255007E0005FB3A4 /* Counter.framework */; };
 		FCD0EE6D255007E0005FB3A4 /* CounterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCD0EE6C255007E0005FB3A4 /* CounterTests.swift */; };
 		FCD0EE6F255007E0005FB3A4 /* Counter.h in Headers */ = {isa = PBXBuildFile; fileRef = FCD0EE5F255007E0005FB3A4 /* Counter.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -281,7 +281,6 @@
 				FCB011B42517AB20000F7195 /* ContentView.swift */,
 				FCB011A92517A7DB000F7195 /* CounterView.swift */,
 				FCB011BD25185BAE000F7195 /* IsPrimeModalView.swift */,
-				FCB011C4251860AA000F7195 /* FavoritePrimesView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -402,6 +401,7 @@
 				FCD0EEAA255007EB005FB3A4 /* FavoritePrimes.h */,
 				FCD0EEAB255007EB005FB3A4 /* Info.plist */,
 				FCFFDA2B255822490094B4FB /* FavoritePrimes.swift */,
+				FCB011C4251860AA000F7195 /* FavoritePrimesView.swift */,
 			);
 			path = FavoritePrimes;
 			sourceTree = "<group>";
@@ -802,7 +802,6 @@
 				FCB011AA2517A7DB000F7195 /* CounterView.swift in Sources */,
 				FCB011BE25185BAE000F7195 /* IsPrimeModalView.swift in Sources */,
 				FC32EA48252A07250033EF80 /* AppAction.swift in Sources */,
-				FCB011C5251860AA000F7195 /* FavoritePrimesView.swift in Sources */,
 				FCB011C125185DCC000F7195 /* WolframAlphaHelper.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -843,6 +842,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FC61700C2562766100BC8B5D /* FavoritePrimesView.swift in Sources */,
 				FCFFDA2C255822490094B4FB /* FavoritePrimes.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
