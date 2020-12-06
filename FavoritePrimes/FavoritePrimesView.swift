@@ -51,7 +51,7 @@ public struct FavoritePrimesView: View {
                         let data = try? Data(contentsOf: favoritePrimesUrl),
                         let favoritePrimes = try? JSONDecoder().decode([Int].self, from: data)
                     else { return }
-                    self.store.value = favoritePrimes
+                    self.store.send(.loadedFavoritePrimes(favoritePrimes))
                 }
                 
             }
