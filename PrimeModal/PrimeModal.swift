@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import Core
 
 public enum PrimeModalAction {
     case saveFavoritePrimeTapped
@@ -13,22 +14,23 @@ public enum PrimeModalAction {
 }
 
 public struct PrimeModalState {
-  public var count: Int
-  public var favoritePrimes: [Int]
-
-  public init(count: Int, favoritePrimes: [Int]) {
-    self.count = count
-    self.favoritePrimes = favoritePrimes
-  }
+    public var count: Int
+    public var favoritePrimes: [Int]
+    
+    public init(count: Int, favoritePrimes: [Int]) {
+        self.count = count
+        self.favoritePrimes = favoritePrimes
+    }
 }
 
-public func primeModalReducer(state: inout PrimeModalState, action: PrimeModalAction) {
+public func primeModalReducer(state: inout PrimeModalState, action: PrimeModalAction) -> Effect {
     switch action {
     case .removeFavoritePrimeTapped:
-      state.favoritePrimes.removeAll(where: { $0 == state.count })
-
+        state.favoritePrimes.removeAll(where: { $0 == state.count })
+        return {}
     case .saveFavoritePrimeTapped:
-      state.favoritePrimes.append(state.count)
+        state.favoritePrimes.append(state.count)
+        return {}
     }
-  }
+}
 

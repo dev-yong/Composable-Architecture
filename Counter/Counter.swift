@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import Core
 
 public enum CounterAction {
     
@@ -13,13 +14,14 @@ public enum CounterAction {
     case incrTapped
 }
 
-public func counterReducer(state: inout Int, action: CounterAction) {
+public func counterReducer(state: inout Int, action: CounterAction) -> Effect {
     switch action {
     case .decrTapped:
-      state -= 1
-
+        state -= 1
+        return {}
     case .incrTapped:
-      state += 1
+        state += 1
+        return {}
     }
-  }
+}
 

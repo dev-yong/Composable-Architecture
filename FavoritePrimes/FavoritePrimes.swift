@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import Core
 
 public enum FavoritePrimesAction {
     case deleteFavoritePrimes(IndexSet)
@@ -13,23 +14,31 @@ public enum FavoritePrimesAction {
     case saveButtonTapped
 }
 
-public func favoritePrimesReducer(state: inout [Int], action: FavoritePrimesAction) {
+public func favoritePrimesReducer(
+    state: inout [Int],
+    action: FavoritePrimesAction
+) -> Effect {
     switch action {
     case let .deleteFavoritePrimes(indexSet):
         for index in indexSet {
             state.remove(at: index)
         }
+        return {}
     case let .loadedFavoritePrimes(favoritePrimes):
         state = favoritePrimes
+        return {}
     case .saveButtonTapped:
-        let data = try! JSONEncoder().encode(state)
-        let documentsPath = NSSearchPathForDirectoriesInDomains(
-            .documentDirectory, .userDomainMask, true
-        )[0]
-        let documentsUrl = URL(fileURLWithPath: documentsPath)
-        let favoritePrimesUrl = documentsUrl
-            .appendingPathComponent("favorite-primes.json")
-        try! data.write(to: favoritePrimesUrl)
+        let state = state
+        return {
+            let data = try! JSONEncoder().encode(state)
+            let documentsPath = NSSearchPathForDirectoriesInDomains(
+                .documentDirectory, .userDomainMask, true
+            )[0]
+            let documentsUrl = URL(fileURLWithPath: documentsPath)
+            let favoritePrimesUrl = documentsUrl
+                .appendingPathComponent("favorite-primes.json")
+            try! data.write(to: favoritePrimesUrl)
+        }
     }
 }
 

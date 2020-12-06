@@ -136,6 +136,13 @@
 			remoteGlobalIDString = FCD0EECF255007F8005FB3A4;
 			remoteInfo = Core;
 		};
+		FCFDEFEF257D15F200599DAB /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = FCB011872517A776000F7195 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = FCD0EECF255007F8005FB3A4;
+			remoteInfo = Core;
+		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -588,6 +595,7 @@
 			buildRules = (
 			);
 			dependencies = (
+				FCFDEFF0257D15F200599DAB /* PBXTargetDependency */,
 			);
 			name = FavoritePrimes;
 			productName = FavoritePrimes;
@@ -938,6 +946,11 @@
 			isa = PBXTargetDependency;
 			target = FCD0EECF255007F8005FB3A4 /* Core */;
 			targetProxy = FCD0EEE3255007F8005FB3A4 /* PBXContainerItemProxy */;
+		};
+		FCFDEFF0257D15F200599DAB /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = FCD0EECF255007F8005FB3A4 /* Core */;
+			targetProxy = FCFDEFEF257D15F200599DAB /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 

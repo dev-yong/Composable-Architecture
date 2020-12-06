@@ -12,8 +12,8 @@ import PrimeModal
 import FavoritePrimes
 
 func activityFeed(
-  _ reducer: @escaping (inout AppState, AppAction) -> Void
-) -> (inout AppState, AppAction) -> Void {
+  _ reducer: @escaping Reducer<AppState, AppAction>
+) -> Reducer<AppState, AppAction> {
 
     return { state, action in
         
@@ -48,11 +48,12 @@ func activityFeed(
                 )
             }
         }
-        reducer(&state, action)
+        let effect = reducer(&state, action)
+        return effect
     }
 }
 
-let _appReducer: (inout AppState, AppAction) -> Void = combine(
+let _appReducer: (inout AppState, AppAction) -> Effect = combine(
     pullback(counterReducer, value: \.count, action: \.counter),
     pullback(primeModalReducer, value: \.primeModal, action: \.primeModal),
     pullback(favoritePrimesReducer, value: \.favoritePrimes, action: \.favoritePrimes)
