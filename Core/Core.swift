@@ -8,7 +8,8 @@
 import Combine
 import SwiftUI
 
-public typealias Reducer<Value, Action> = (inout Value, Action) -> Void
+public typealias Effect = () -> Void
+public typealias Reducer<Value, Action> = (inout Value, Action) -> Effect
 
 public final class Store<Value, Action>: ObservableObject {
     
