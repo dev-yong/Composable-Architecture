@@ -43,3 +43,11 @@
 
 - AppAction에 의존하는 것을 완전히 분리 시키자.
 - Global Action 대신 Local Action을 보내자.
+
+## Side Effects
+
+### [Synchronous Effect]((/Note/SideEffects/SynchronousEffects.md))
+
+- 단순한 synchronous side effect른 만들자.
+- Reducer에 모든 로직을 이동하여 View는 logic-less를 유지하라.
+- 작업 실행의 책임은 Store가 갖는다.
