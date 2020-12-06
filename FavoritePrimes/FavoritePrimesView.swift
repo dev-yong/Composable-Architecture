@@ -31,14 +31,7 @@ public struct FavoritePrimesView: View {
         .navigationBarItems(
             trailing: HStack {
                 Button("Save") {
-                    let data = try! JSONEncoder().encode(self.store.value)
-                    let documentsPath = NSSearchPathForDirectoriesInDomains(
-                        .documentDirectory, .userDomainMask, true
-                    )[0]
-                    let documentsUrl = URL(fileURLWithPath: documentsPath)
-                    let favoritePrimesUrl = documentsUrl
-                        .appendingPathComponent("favorite-primes.json")
-                    try! data.write(to: favoritePrimesUrl)
+                    self.store.send(.saveButtonTapped)
                 }
                 Button("Load") {
                     let documentsPath = NSSearchPathForDirectoriesInDomains(
