@@ -23,14 +23,14 @@ public struct PrimeModalState {
     }
 }
 
-public func primeModalReducer(state: inout PrimeModalState, action: PrimeModalAction) -> Effect<Void> {
+public func primeModalReducer(state: inout PrimeModalState, action: PrimeModalAction) -> [Effect<PrimeModalAction>] {
     switch action {
     case .removeFavoritePrimeTapped:
         state.favoritePrimes.removeAll(where: { $0 == state.count })
-        return {}
+        return []
     case .saveFavoritePrimeTapped:
         state.favoritePrimes.append(state.count)
-        return {}
+        return []
     }
 }
 

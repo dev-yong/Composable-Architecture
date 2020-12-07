@@ -54,7 +54,7 @@ func activityFeed(
     }
 }
 
-let _appReducer: (inout AppState, AppAction) -> Effect = combine(
+let _appReducer: Reducer<AppState, AppAction> = combine(
     pullback(counterReducer, value: \.count, action: \.counter),
     pullback(primeModalReducer, value: \.primeModal, action: \.primeModal),
     pullback(favoritePrimesReducer, value: \.favoritePrimes, action: \.favoritePrimes)

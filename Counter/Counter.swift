@@ -14,14 +14,14 @@ public enum CounterAction {
     case incrTapped
 }
 
-public func counterReducer(state: inout Int, action: CounterAction) -> Effect {
+public func counterReducer(state: inout Int, action: CounterAction) -> [Effect<CounterAction>] {
     switch action {
     case .decrTapped:
         state -= 1
-        return {}
+        return []
     case .incrTapped:
         state += 1
-        return {}
+        return []
     }
 }
 
