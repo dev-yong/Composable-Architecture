@@ -39,14 +39,14 @@
 - Global Store의 value를 Local Store의 value로 변환하자.
 - Global Store의 파생된 변화를 Local Store가 받도록 하자.
 
-### [View Actions]((/Note/Moduler_State_Management/View_Actions.md))
+### [View Actions](/Note/Moduler_State_Management/View_Action.md)
 
 - AppAction에 의존하는 것을 완전히 분리 시키자.
 - Global Action 대신 Local Action을 보내자.
 
 ## Side Effects
 
-### [Synchronous Effect]((/Note/SideEffects/SynchronousEffects.md))
+### [Synchronous Effect](/Note/SideEffects/SynchronousEffects.md)
 
 - 단순한 synchronous side effect른 만들자.
 - Reducer에 모든 로직을 이동하여 View는 logic-less를 유지하라.
