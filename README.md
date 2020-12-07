@@ -51,3 +51,9 @@
 - 단순한 synchronous side effect른 만들자.
 - Reducer에 모든 로직을 이동하여 View는 logic-less를 유지하라.
 - 작업 실행의 책임은 Store가 갖는다.
+
+### [Unidirectional Effects](/Note/SideEffects/UnidirectionalEffects.md)
+
+- effect의 결과를 가져 와서 reducer 바로 되돌리는 방법이 필요로 하다.
+- 데이터는 한 가지 방식으로만 변경된다.
+
