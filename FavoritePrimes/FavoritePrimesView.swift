@@ -34,17 +34,7 @@ public struct FavoritePrimesView: View {
                     self.store.send(.saveButtonTapped)
                 }
                 Button("Load") {
-                    let documentsPath = NSSearchPathForDirectoriesInDomains(
-                        .documentDirectory, .userDomainMask, true
-                    )[0]
-                    let documentsUrl = URL(fileURLWithPath: documentsPath)
-                    let favoritePrimesUrl = documentsUrl
-                        .appendingPathComponent("favorite-primes.json")
-                    guard
-                        let data = try? Data(contentsOf: favoritePrimesUrl),
-                        let favoritePrimes = try? JSONDecoder().decode([Int].self, from: data)
-                    else { return }
-                    self.store.send(.loadedFavoritePrimes(favoritePrimes))
+                    self.store.send(.loadButtonTapped)
                 }
                 
             }

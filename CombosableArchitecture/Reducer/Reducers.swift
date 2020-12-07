@@ -22,7 +22,8 @@ func activityFeed(
         // activity feed에 중요하지 않다.
         case .counter,
              .favoritePrimes(.loadedFavoritePrimes),
-             .favoritePrimes(.saveButtonTapped):
+             .favoritePrimes(.saveButtonTapped),
+             .favoritePrimes(.loadButtonTapped):
             break
         case .primeModal(.removeFavoritePrimeTapped):
             state.activityFeed.append(
