@@ -9,7 +9,7 @@ import Combine
 import SwiftUI
 
 public typealias Effect<Action> = () -> Action?
-public typealias Reducer<Value, Action> = (inout Value, Action) -> Effect<Action>
+public typealias Reducer<Value, Action> = (inout Value, Action) -> [Effect<Action>]
 
 public final class Store<Value, Action>: ObservableObject {
     
@@ -28,12 +28,14 @@ public final class Store<Value, Action>: ObservableObject {
     }
     
     public func send(_ action: Action) {
-        let effect = self.reducer(&self.value, action)
+        let effects = self.reducer(&self.value, action)
         
         // Effect를 수행할 때, 어떠한 action이 발생할 경우
         // 즉각적으로 store에 주입할 수 있다.
-        if let action = effect() {
-            self.send(action)
+        effects.forEach { effect in
+            if let action = effect() {
+                self.send(action)
+            }
         }
     }
     
@@ -47,7 +49,7 @@ public final class Store<Value, Action>: ObservableObject {
             reducer: { localValue, localAction in
                 self.send(toGlobalAction(localAction))
                 localValue = toLocalValue(self.value)
-                return { nil }
+                return []
             }
         )
         self.cancellableBag.insert(
@@ -67,7 +69,7 @@ public final class Store<Value, Action>: ObservableObject {
             
             self.send(f(localAction))
             value = self.value
-            return { nil }
+            return []
         }
     }
     
@@ -79,7 +81,7 @@ public final class Store<Value, Action>: ObservableObject {
             reducer: { localValue, action in
                 self.send(action)
                 localValue = f(self.value)
-                return { nil }
+                return []
             }
         )
         self.cancellableBag.insert(
@@ -96,17 +98,8 @@ public func combine<Value, Action>(
 ) -> Reducer<Value, Action> {
     
     return { value, action in
-        let effects = reducers.map { reducer in reducer(&value, action) }
-        return { () -> Action? in
-          var finalAction: Action?
-          for effect in effects {
-            let action = effect()
-            if let action = action {
-              finalAction = action
-            }
-          }
-          return finalAction
-        }
+        let effects = reducers.flatMap { $0(&value, action) }
+        return effects
     }
 }
 
