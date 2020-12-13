@@ -35,13 +35,15 @@ public func counterReducer(state: inout CounterState, action: CounterAction) -> 
         state.isNthPrimeButtonDisabled = true
         let count = state.count
         return [
-            Effect(run: { callback in
-                nthPrime(count) { prime in
-                    DispatchQueue.main.async {
-                        callback(.nthPrimeResponse(prime))
+            Effect<Int?>(
+                run: { callback in
+                    nthPrime(count) { prime in
+                        DispatchQueue.main.async {
+                            callback(prime)
+                        }
                     }
                 }
-            })
+            ).map { .nthPrimeResponse($0) }
         ]
     case .alertDismissButtonTapped:
         state.alertNthPrime = nil
