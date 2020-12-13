@@ -34,15 +34,11 @@ public func counterReducer(state: inout CounterState, action: CounterAction) -> 
         state.isNthPrimeButtonDisabled = true
         let count = state.count
         var result: Int?
-        let semaphore = DispatchSemaphore(value: 0)
-        return [{
+        return [{ callback in
             nthPrime(count) { prime in
                 
-                result = prime
-                semaphore.signal()
+                callback(.nthPrimeResponse(prime))
             }
-            semaphore.wait()
-            return .nthPrimeResponse(result)
         }]
     case .nthPrimeResponse(let prime):
         state.alertNthPrime = prime.map(PrimeAlert.init(prime:))

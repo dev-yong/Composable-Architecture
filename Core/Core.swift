@@ -8,7 +8,7 @@
 import Combine
 import SwiftUI
 
-public typealias Effect<Action> = () -> Action?
+public typealias Effect<Action> = (@escaping (Action) -> Void) -> Void
 public typealias Reducer<Value, Action> = (inout Value, Action) -> [Effect<Action>]
 
 public final class Store<Value, Action>: ObservableObject {
@@ -29,18 +29,7 @@ public final class Store<Value, Action>: ObservableObject {
     
     public func send(_ action: Action) {
         let effects = self.reducer(&self.value, action)
-        
-        // Effect를 수행할 때, 어떠한 action이 발생할 경우
-        // 즉각적으로 store에 주입할 수 있다.
-        DispatchQueue.global().async {
-          effects.forEach { effect in
-            if let action = effect() {
-              DispatchQueue.main.async {
-                self.send(action)
-              }
-            }
-          }
-        }
+        effects.forEach { $0(self.send) }
     }
     
     public func view<LocalValue, LocalAction>(
@@ -126,15 +115,21 @@ public func pullback<LocalValue, GlobalValue, LocalAction, GlobalAction>(
     return { globalValue, globalAction in
         guard let localAction = globalAction[keyPath: action] else { return [] }
         let localEffects = reducer(&globalValue[keyPath: value], localAction)
+        // Local Effects를  Global Effects로 변환한다.
         return localEffects.map { localEffect in
             // GlobalEffect
-            { () -> GlobalAction? in
-                guard let localAction = localEffect() else {
-                    return nil
+            { callback in
+//                guard let localAction = localEffect() else {
+//                    return nil
+//                }
+                // Local Effect로 부터 나온 LocalAction을
+                localEffect { localAction in
+                    var globalAction = globalAction
+                    // Global Action으로 변환한다.
+                    globalAction[keyPath: action] = localAction
+                    // callback을 사용하여 global effect를 가져온다.
+                    callback(globalAction)
                 }
-                var globalAction = globalAction
-                globalAction[keyPath: action] = localAction
-                return globalAction
             }
         }
     }
@@ -147,12 +142,11 @@ public func logging<Value, Action>(
     return { value, action in
         let effects = reducer(&value, action)
         let newValue = value
-        return [{
+        return [{ _ in
             print("Action: \(action)")
             print("value:")
             dump(newValue)
             print("---")
-            return nil
         }] + effects
     }
 }
