@@ -36,8 +36,9 @@ public func counterReducer(state: inout CounterState, action: CounterAction) -> 
         var result: Int?
         return [{ callback in
             nthPrime(count) { prime in
-                
-                callback(.nthPrimeResponse(prime))
+                DispatchQueue.main.async {
+                    callback(.nthPrimeResponse(prime))
+                }
             }
         }]
     case .nthPrimeResponse(let prime):
