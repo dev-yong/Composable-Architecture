@@ -18,9 +18,36 @@ struct PrimeAlert: Identifiable {
 public typealias CounterViewState = (count: Int, favoritePrimes: [Int])
 public enum CounterViewAction {
     
-  case counter(CounterAction)
-  case primeModal(PrimeModalAction)
+    case counter(CounterAction)
+    case primeModal(PrimeModalAction)
+    
+    var counter: CounterAction? {
+        get {
+            guard case let .counter(value) = self else { return nil }
+            return value
+        }
+        set {
+            guard case .counter = self, let newValue = newValue else { return }
+            self = .counter(newValue)
+        }
+    }
+    
+    var primeModal: PrimeModalAction? {
+        get {
+            guard case let .primeModal(value) = self else { return nil }
+            return value
+        }
+        set {
+            guard case .primeModal = self, let newValue = newValue else { return }
+            self = .primeModal(newValue)
+        }
+    }
 }
+public let counterViewReducer = combine(
+    pullback(counterReducer, value: \CounterViewState.count, action: \CounterViewAction.counter),
+    pullback(primeModalReducer, value: \.self, action: \.primeModal)
+)
+
 
 public struct CounterView: View {
     
@@ -96,19 +123,14 @@ public struct CounterView: View {
     }
 }
 
-//struct CounterView_Previews: PreviewProvider {
-//    static var previews: some View {
-//        CounterView(store: Store<CounterViewState, CounterViewAction>(initialValue: (0, [0]), reducer: { (state, action) in
-//
-//            switch action {
-//
-//            case.counter(let action):
-//                counterReducer(state: &state.count, action: action)
-//            case .primeModal(let action):
-//
-//                primeModalReducer(state: PrimeModalState(count: state.count, favoritePrimes: state.favoritePrimes), action: action)
-//            }
-//        }))
-//    }
-//}
-//
+struct CounterView_Previews: PreviewProvider {
+    static var previews: some View {
+        CounterView(
+            store: Store<CounterViewState, CounterViewAction>(
+                initialValue: (0, [0]),
+                reducer: counterViewReducer
+            )
+        )
+    }
+}
+

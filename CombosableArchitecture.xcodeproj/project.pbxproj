@@ -136,6 +136,20 @@
 			remoteGlobalIDString = FCD0EECF255007F8005FB3A4;
 			remoteInfo = Core;
 		};
+		FCEC34502586272E00FF0208 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = FCB011872517A776000F7195 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = FCD0EECF255007F8005FB3A4;
+			remoteInfo = Core;
+		};
+		FCEC34522586273700FF0208 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = FCB011872517A776000F7195 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = FCD0EECF255007F8005FB3A4;
+			remoteInfo = Core;
+		};
 		FCFDEFEF257D15F200599DAB /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = FCB011872517A776000F7195 /* Project object */;
@@ -520,6 +534,7 @@
 			buildRules = (
 			);
 			dependencies = (
+				FCEC34532586273700FF0208 /* PBXTargetDependency */,
 				FC61704125627CE900BC8B5D /* PBXTargetDependency */,
 			);
 			name = Counter;
@@ -558,6 +573,7 @@
 			buildRules = (
 			);
 			dependencies = (
+				FCEC34512586272E00FF0208 /* PBXTargetDependency */,
 			);
 			name = PrimeModal;
 			productName = PrimeModal;
@@ -946,6 +962,16 @@
 			isa = PBXTargetDependency;
 			target = FCD0EECF255007F8005FB3A4 /* Core */;
 			targetProxy = FCD0EEE3255007F8005FB3A4 /* PBXContainerItemProxy */;
+		};
+		FCEC34512586272E00FF0208 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = FCD0EECF255007F8005FB3A4 /* Core */;
+			targetProxy = FCEC34502586272E00FF0208 /* PBXContainerItemProxy */;
+		};
+		FCEC34532586273700FF0208 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = FCD0EECF255007F8005FB3A4 /* Core */;
+			targetProxy = FCEC34522586273700FF0208 /* PBXContainerItemProxy */;
 		};
 		FCFDEFF0257D15F200599DAB /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
