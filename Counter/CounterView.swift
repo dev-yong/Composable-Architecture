@@ -115,11 +115,7 @@ public struct CounterView: View {
     
     private func nthPrimeButtonAction() {
     
-      self.isNthPrimeButtonDisabled = true
-      nthPrime(self.store.value.count) { prime in
-        self.alertNthPrime = prime.map(PrimeAlert.init(prime:))
-        self.isNthPrimeButtonDisabled = false
-      }
+        self.store.send(.nthPrimeButtonTapped)
     }
 }
 
