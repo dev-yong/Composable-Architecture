@@ -12,10 +12,11 @@ import PrimeModal
 public struct PrimeAlert: Identifiable {
   let prime: Int
 
-  var id: Int { self.prime }
+  public var id: Int { self.prime }
 }
 
 public typealias CounterViewState = (count: Int, favoritePrimes: [Int])
+
 public enum CounterViewAction {
     
     case counter(CounterAction)
@@ -115,7 +116,7 @@ public struct CounterView: View {
     
     private func nthPrimeButtonAction() {
     
-        self.store.send(.nthPrimeButtonTapped)
+        self.store.send(.counter(.nthPrimeButtonTapped))
     }
 }
 
