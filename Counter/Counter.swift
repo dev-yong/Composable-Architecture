@@ -13,25 +13,35 @@ public enum CounterAction {
     case decrTapped
     case incrTapped
     case nthPrimeButtonTapped
+    case nthPrimeResponse(Int?)
 }
 
-public func counterReducer(state: inout Int, action: CounterAction) -> [Effect<CounterAction>] {
+public typealias CounterState = (
+    alertNthPrime: PrimeAlert?,
+    count: Int,
+    isNthPrimeButtonDisabled: Bool
+)
+
+public func counterReducer(state: inout CounterState, action: CounterAction) -> [Effect<CounterAction>] {
     switch action {
     case .decrTapped:
-        state -= 1
+        state.count -= 1
         return []
     case .incrTapped:
-        state += 1
+        state.count += 1
         return []
-    case .nthPrimeButtonTapped
+    case .nthPrimeButtonTapped:
+        state.isNthPrimeButtonDisabled = true
+        let count = state.count
         return [{
-             // counterReducer에게 더 많은 state를 알 수 있도록 해야한다.
-//            self.isNthPrimeButtonDisabled = true
-//            nthPrime(self.store.value.count) { prime in
-//                self.alertNthPrime = prime.map(PrimeAlert.init(prime:))
-//                self.isNthPrimeButtonDisabled = false
-//            }
+            nthPrime(count) { prime in
+                
+            }
         }]
+    case .nthPrimeResponse(let prime):
+        state.alertNthPrime = prime.map(PrimeAlert.init(prime:))
+        state.isNthPrimeButtonDisabled = false
+        return []
     }
 }
 
