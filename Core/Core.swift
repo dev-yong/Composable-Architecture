@@ -20,9 +20,9 @@ public struct Effect<Action> {
     public func map<T>(
         _ transform: @escaping (Action) -> T
     ) -> Effect<T> {
-        return Effect<T> { (newAction) in
+        return Effect<T> { closure in
             self.run { action in
-                newAction(transform(action))
+                closure(transform(action))
             }
         }
     }
@@ -50,6 +50,17 @@ public struct Effect<Action> {
         }
     }
     
+    func flatMap<T>(
+        _ transform: @escaping (Action) -> Effect<T>
+    ) -> Effect<T> {
+        return Effect<T> { closure in
+            self.run { action in
+                transform(action).run() { _action in
+                    closure(_action)
+                }
+            }
+        }
+    }
 }
 
 struct Parallel<A> {
