@@ -32,10 +32,14 @@ public final class Store<Value, Action>: ObservableObject {
         
         // Effect를 수행할 때, 어떠한 action이 발생할 경우
         // 즉각적으로 store에 주입할 수 있다.
-        effects.forEach { effect in
+        DispatchQueue.global().async {
+          effects.forEach { effect in
             if let action = effect() {
+              DispatchQueue.main.async {
                 self.send(action)
+              }
             }
+          }
         }
     }
     
