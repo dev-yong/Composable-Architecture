@@ -138,7 +138,12 @@ public struct CounterView: View {
                 title: Text(
                     "The \(ordinal(self.store.value.count)) prime is \(alert.prime)"
                 ),
-                dismissButton: .default(Text("Ok"))
+                dismissButton: .default(
+                    Text("OK"),
+                    action: {
+                        self.store.send(.counter(.alertDismissButtonTapped))
+                    }
+                )
             )
         }
     }
