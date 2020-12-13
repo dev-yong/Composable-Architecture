@@ -16,6 +16,17 @@ public struct Effect<Action> {
     ) {
         self.run = run
     }
+    
+    public func map<T>(
+        _ transform: @escaping (Action) -> T
+    ) -> Effect<T> {
+        return Effect<T> { (newAction) in
+            self.run() { action in
+                newAction(transform(action))
+            }
+        }
+    }
+    
 }
 
 struct Parallel<A> {
