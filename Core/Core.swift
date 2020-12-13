@@ -26,6 +26,16 @@ public struct Effect<Action> {
             }
         }
     }
+ 
+    public func receive(
+        on queue: DispatchQueue
+    ) -> Effect<Action> {
+        return Effect { closure in
+            queue.async {
+                self.run(closure)
+            }
+        }
+    }
     
 }
 
