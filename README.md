@@ -57,3 +57,8 @@
 - effect의 결과를 가져 와서 reducer 바로 되돌리는 방법이 필요로 하다.
 - 데이터는 한 가지 방식으로만 변경된다.
 
+### [Asynchronous Effects](/Note/SideEffects/AsynchronousEffects.md)
+
+- Asyncrhonous한 것을 synchronous effect로 변경해보자.
+- Asyncrhonous effect를 만들자.
+
