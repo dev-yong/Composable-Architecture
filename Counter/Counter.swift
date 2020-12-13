@@ -37,10 +37,14 @@ public func counterReducer(state: inout CounterState, action: CounterAction) -> 
         return [
             Effect<Int?>(
                 run: { callback in
-                    nthPrime(count) { callback($0) }
+                    nthPrime(count) { prime in
+                        DispatchQueue.main.async {
+                            callback(prime)
+                        }
+                    }
                 }
             ).map { .nthPrimeResponse($0) }
-            .receive(on: .main)
+//            .receive(on: .main)
         ]
     case .alertDismissButtonTapped:
         state.alertNthPrime = nil

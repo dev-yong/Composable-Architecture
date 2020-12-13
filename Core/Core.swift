@@ -21,7 +21,7 @@ public struct Effect<Action> {
         _ transform: @escaping (Action) -> T
     ) -> Effect<T> {
         return Effect<T> { (newAction) in
-            self.run() { action in
+            self.run { action in
                 newAction(transform(action))
             }
         }
@@ -33,6 +33,19 @@ public struct Effect<Action> {
         return Effect { closure in
             queue.async {
                 self.run(closure)
+            }
+        }
+    }
+    
+    static func zip<A, B>(
+        _ a: Effect<A>,
+        _ b: Effect<B>
+    ) -> Effect<(A, B)> {
+        return Effect<(A,B)> { (closure) in
+            a.run { aAction in
+                b.run{ bAction in
+                    closure((aAction, bAction))
+                }
             }
         }
     }
