@@ -15,7 +15,12 @@ public struct PrimeAlert: Identifiable {
   public var id: Int { self.prime }
 }
 
-public typealias CounterViewState = (count: Int, favoritePrimes: [Int])
+public typealias CounterViewState = (
+  alertNthPrime: PrimeAlert?,
+  count: Int,
+  favoritePrimes: [Int],
+  isNthPrimeButtonDisabled: Bool
+)
 
 public enum CounterViewAction {
     
