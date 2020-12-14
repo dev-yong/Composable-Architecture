@@ -132,18 +132,17 @@ public struct CounterView: View {
             )
         }
         .alert(
-            item: .constant(self.store.value.alertNthPrime)
+            item: Binding(get: {
+                self.store.value.alertNthPrime
+            }, set: { (newValue) in
+                self.store.send(.counter(.alertDismiss))
+            })
         ) { alert in
             Alert(
                 title: Text(
                     "The \(ordinal(self.store.value.count)) prime is \(alert.prime)"
                 ),
-                dismissButton: .default(
-                    Text("OK"),
-                    action: {
-                        self.store.send(.counter(.alertDismissButtonTapped))
-                    }
-                )
+                dismissButton: .default(Text("OK"))
             )
         }
     }

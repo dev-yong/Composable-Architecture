@@ -14,7 +14,8 @@ public enum CounterAction {
     case incrTapped
     case nthPrimeButtonTapped
     case nthPrimeResponse(Int?)
-    case alertDismissButtonTapped
+    case alertDismiss
+//    case alertDismissButtonTapped
 }
 
 public typealias CounterState = (
@@ -46,7 +47,10 @@ public func counterReducer(state: inout CounterState, action: CounterAction) -> 
             ).map { .nthPrimeResponse($0) }
 //            .receive(on: .main)
         ]
-    case .alertDismissButtonTapped:
+//    case .alertDismissButtonTapped:
+//        state.alertNthPrime = nil
+//        return []
+    case .alertDismiss:
         state.alertNthPrime = nil
         return []
     case .nthPrimeResponse(let prime):

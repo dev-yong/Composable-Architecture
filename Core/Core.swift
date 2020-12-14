@@ -63,9 +63,6 @@ public struct Effect<Action> {
     }
 }
 
-struct Parallel<A> {
-  let run: (@escaping (A) -> Void) -> Void
-}
 public typealias Reducer<Value, Action> = (inout Value, Action) -> [Effect<Action>]
 
 public final class Store<Value, Action>: ObservableObject {
