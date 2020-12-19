@@ -59,6 +59,10 @@
 
 ### [Asynchronous Effects](/Note/SideEffects/AsynchronousEffects.md)
 
-- Asyncrhonous한 것을 synchronous effect로 변경해보자.
-- Asyncrhonous effect를 만들자.
+- Asynchronous한 것을 synchronous effect로 변경해보자.
+- Asynchronous effect를 만들자.
 
+### [The Point](/Note/SideEffects/ThePoint.md)
+
+- Asynchronous effect signagure를 감싸는 struct를 만들다.
+- Asynchronous와 연관된 작업들을 Effect로 만들고, 분리하도록 하자.
