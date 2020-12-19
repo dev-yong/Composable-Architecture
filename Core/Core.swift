@@ -42,7 +42,7 @@ public final class Store<Value, Action>: ObservableObject {
     
     public func send(_ action: Action) {
         let effects = self.reducer(&self.value, action)
-        effects.forEach { $0(self.send) }
+        effects.forEach { $0.run(self.send) }
     }
     
     public func view<LocalValue, LocalAction>(
@@ -131,12 +131,12 @@ public func pullback<LocalValue, GlobalValue, LocalAction, GlobalAction>(
         // Local Effects를  Global Effects로 변환한다.
         return localEffects.map { localEffect in
             // GlobalEffect
-            { callback in
+            Effect { callback in
 //                guard let localAction = localEffect() else {
 //                    return nil
 //                }
                 // Local Effect로 부터 나온 LocalAction을
-                localEffect { localAction in
+                localEffect.run { localAction in
                     var globalAction = globalAction
                     // Global Action으로 변환한다.
                     globalAction[keyPath: action] = localAction
@@ -155,12 +155,14 @@ public func logging<Value, Action>(
     return { value, action in
         let effects = reducer(&value, action)
         let newValue = value
-        return [{ _ in
-            print("Action: \(action)")
-            print("value:")
-            dump(newValue)
-            print("---")
-        }] + effects
+        return [
+            Effect { _ in
+                print("Action: \(action)")
+                print("value:")
+                dump(newValue)
+                print("---")
+            }
+        ] + effects
     }
 }
 
