@@ -16,10 +16,10 @@ public struct PrimeAlert: Identifiable {
 }
 
 public struct CounterViewState {
-    var alertNthPrime: PrimeAlert?
-    var count: Int
-    var favoritePrimes: [Int]
-    var isNthPrimeButtonDisabled: Bool
+    public var alertNthPrime: PrimeAlert?
+    public var count: Int
+    public var favoritePrimes: [Int]
+    public var isNthPrimeButtonDisabled: Bool
     
     public init(
         alertNthPrime: PrimeAlert? = nil,
