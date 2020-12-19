@@ -20,6 +20,7 @@
 		FCCAA8D8258E39B500F187AB /* Effect.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCCAA8D7258E39B500F187AB /* Effect.swift */; };
 		FCCAA8E2258E39C300F187AB /* Store.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCCAA8E1258E39C300F187AB /* Store.swift */; };
 		FCCAA8EC258E39F800F187AB /* Reducer.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCCAA8EB258E39F800F187AB /* Reducer.swift */; };
+		FCCAA8FE258E3A4600F187AB /* URLSession + Effect.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCCAA8FD258E3A4600F187AB /* URLSession + Effect.swift */; };
 		FCD0EE66255007E0005FB3A4 /* Counter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FCD0EE5D255007E0005FB3A4 /* Counter.framework */; };
 		FCD0EE6D255007E0005FB3A4 /* CounterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCD0EE6C255007E0005FB3A4 /* CounterTests.swift */; };
 		FCD0EE6F255007E0005FB3A4 /* Counter.h in Headers */ = {isa = PBXBuildFile; fileRef = FCD0EE5F255007E0005FB3A4 /* Counter.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -194,6 +195,7 @@
 		FCCAA8D7258E39B500F187AB /* Effect.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Effect.swift; sourceTree = "<group>"; };
 		FCCAA8E1258E39C300F187AB /* Store.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Store.swift; sourceTree = "<group>"; };
 		FCCAA8EB258E39F800F187AB /* Reducer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Reducer.swift; sourceTree = "<group>"; };
+		FCCAA8FD258E3A4600F187AB /* URLSession + Effect.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "URLSession + Effect.swift"; sourceTree = "<group>"; };
 		FCD0EE5D255007E0005FB3A4 /* Counter.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Counter.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		FCD0EE5F255007E0005FB3A4 /* Counter.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Counter.h; sourceTree = "<group>"; };
 		FCD0EE60255007E0005FB3A4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -446,6 +448,7 @@
 				FCCAA8EB258E39F800F187AB /* Reducer.swift */,
 				FCCAA8E1258E39C300F187AB /* Store.swift */,
 				FCCAA8D7258E39B500F187AB /* Effect.swift */,
+				FCCAA8FD258E3A4600F187AB /* URLSession + Effect.swift */,
 				FCD0EED3255007F8005FB3A4 /* Info.plist */,
 			);
 			path = Core;
@@ -892,6 +895,7 @@
 				FCCAA8E2258E39C300F187AB /* Store.swift in Sources */,
 				FCCAA8D8258E39B500F187AB /* Effect.swift in Sources */,
 				FCCAA8EC258E39F800F187AB /* Reducer.swift in Sources */,
+				FCCAA8FE258E3A4600F187AB /* URLSession + Effect.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

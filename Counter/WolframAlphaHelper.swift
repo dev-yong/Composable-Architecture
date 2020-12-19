@@ -26,24 +26,18 @@ private struct WolframAlphaResult: Decodable {
 }
 
 private func wolframAlpha(query: String) -> Effect<WolframAlphaResult?> {
-    return Effect { callback in
-        var components = URLComponents(string: "https://api.wolframalpha.com/v2/query")!
-        components.queryItems = [
-          URLQueryItem(name: "input", value: query),
-          URLQueryItem(name: "format", value: "plaintext"),
-          URLQueryItem(name: "output", value: "JSON"),
-          URLQueryItem(name: "appid", value: "6H69Q3-828TKQJ4EP"),
-        ]
-
-        URLSession.shared.dataTask(with: components.url(relativeTo: nil)!) { data, response, error in
-          callback(
-            data
-              .flatMap { try? JSONDecoder().decode(WolframAlphaResult.self, from: $0) }
-          )
-        }
-        .resume()
-    }
+    var components = URLComponents(string: "https://api.wolframalpha.com/v2/query")!
+    components.queryItems = [
+        URLQueryItem(name: "input", value: query),
+        URLQueryItem(name: "format", value: "plaintext"),
+        URLQueryItem(name: "output", value: "JSON"),
+        URLQueryItem(name: "appid", value: "6H69Q3-828TKQJ4EP"),
+    ]
+    
+    return URLSession.shared.dataTask(request: components.url(relativeTo: nil)!)
+        .decode(as: WolframAlphaResult.self, using: JSONDecoder())
 }
+
 
 public func nthPrime(_ n: Int) -> Effect<Int?> {
     wolframAlpha(query: "prime \(n)")
@@ -60,13 +54,3 @@ public func nthPrime(_ n: Int) -> Effect<Int?> {
                 .flatMap(Int.init)
         }
 }
-
-//return [
-//  Effect { callback in
-//    nthPrime(n) { prime in
-//      DispatchQueue.main.async {
-//        callback(.nthPrimeResponse(prime))
-//      }
-//    }
-//  }
-//]
