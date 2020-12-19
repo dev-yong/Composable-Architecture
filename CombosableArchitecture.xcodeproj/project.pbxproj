@@ -17,6 +17,9 @@
 		FCB0119A2517A777000F7195 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FCB011992517A777000F7195 /* Preview Assets.xcassets */; };
 		FCB011B52517AB20000F7195 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCB011B42517AB20000F7195 /* ContentView.swift */; };
 		FCB011B82517ABD3000F7195 /* AppState.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCB011B72517ABD3000F7195 /* AppState.swift */; };
+		FCCAA8D8258E39B500F187AB /* Effect.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCCAA8D7258E39B500F187AB /* Effect.swift */; };
+		FCCAA8E2258E39C300F187AB /* Store.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCCAA8E1258E39C300F187AB /* Store.swift */; };
+		FCCAA8EC258E39F800F187AB /* Reducer.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCCAA8EB258E39F800F187AB /* Reducer.swift */; };
 		FCD0EE66255007E0005FB3A4 /* Counter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FCD0EE5D255007E0005FB3A4 /* Counter.framework */; };
 		FCD0EE6D255007E0005FB3A4 /* CounterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCD0EE6C255007E0005FB3A4 /* CounterTests.swift */; };
 		FCD0EE6F255007E0005FB3A4 /* Counter.h in Headers */ = {isa = PBXBuildFile; fileRef = FCD0EE5F255007E0005FB3A4 /* Counter.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -37,7 +40,6 @@
 		FCD0EEE2255007F8005FB3A4 /* Core.h in Headers */ = {isa = PBXBuildFile; fileRef = FCD0EED2255007F8005FB3A4 /* Core.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		FCD0EEE5255007F8005FB3A4 /* Core.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FCD0EED0255007F8005FB3A4 /* Core.framework */; };
 		FCD0EEE6255007F8005FB3A4 /* Core.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = FCD0EED0255007F8005FB3A4 /* Core.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		FCD0EEF62550080E005FB3A4 /* Core.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCD0EEF52550080E005FB3A4 /* Core.swift */; };
 		FCF40A802532E0BE00727DC4 /* Reducers.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCF40A7F2532E0BE00727DC4 /* Reducers.swift */; };
 		FCFFDA182558223C0094B4FB /* Counter.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCFFDA172558223C0094B4FB /* Counter.swift */; };
 		FCFFDA22255822430094B4FB /* PrimeModal.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCFFDA21255822430094B4FB /* PrimeModal.swift */; };
@@ -189,6 +191,9 @@
 		FCB011BD25185BAE000F7195 /* IsPrimeModalView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IsPrimeModalView.swift; sourceTree = "<group>"; };
 		FCB011C025185DCC000F7195 /* WolframAlphaHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WolframAlphaHelper.swift; sourceTree = "<group>"; };
 		FCB011C4251860AA000F7195 /* FavoritePrimesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritePrimesView.swift; sourceTree = "<group>"; };
+		FCCAA8D7258E39B500F187AB /* Effect.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Effect.swift; sourceTree = "<group>"; };
+		FCCAA8E1258E39C300F187AB /* Store.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Store.swift; sourceTree = "<group>"; };
+		FCCAA8EB258E39F800F187AB /* Reducer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Reducer.swift; sourceTree = "<group>"; };
 		FCD0EE5D255007E0005FB3A4 /* Counter.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Counter.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		FCD0EE5F255007E0005FB3A4 /* Counter.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Counter.h; sourceTree = "<group>"; };
 		FCD0EE60255007E0005FB3A4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -213,7 +218,6 @@
 		FCD0EED8255007F8005FB3A4 /* CoreTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CoreTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		FCD0EEDF255007F8005FB3A4 /* CoreTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreTests.swift; sourceTree = "<group>"; };
 		FCD0EEE1255007F8005FB3A4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		FCD0EEF52550080E005FB3A4 /* Core.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Core.swift; sourceTree = "<group>"; };
 		FCF40A7F2532E0BE00727DC4 /* Reducers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Reducers.swift; sourceTree = "<group>"; };
 		FCFFDA172558223C0094B4FB /* Counter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Counter.swift; sourceTree = "<group>"; };
 		FCFFDA21255822430094B4FB /* PrimeModal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrimeModal.swift; sourceTree = "<group>"; };
@@ -439,7 +443,9 @@
 			isa = PBXGroup;
 			children = (
 				FCD0EED2255007F8005FB3A4 /* Core.h */,
-				FCD0EEF52550080E005FB3A4 /* Core.swift */,
+				FCCAA8EB258E39F800F187AB /* Reducer.swift */,
+				FCCAA8E1258E39C300F187AB /* Store.swift */,
+				FCCAA8D7258E39B500F187AB /* Effect.swift */,
 				FCD0EED3255007F8005FB3A4 /* Info.plist */,
 			);
 			path = Core;
@@ -883,7 +889,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				FCD0EEF62550080E005FB3A4 /* Core.swift in Sources */,
+				FCCAA8E2258E39C300F187AB /* Store.swift in Sources */,
+				FCCAA8D8258E39B500F187AB /* Effect.swift in Sources */,
+				FCCAA8EC258E39F800F187AB /* Reducer.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
