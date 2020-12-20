@@ -23,8 +23,7 @@ public struct Effect<A> {
     
     public func receive(on queue: DispatchQueue) -> Effect {
         return Effect { callback in
-            self.run { a in queue.async { callback(a) }
-            }
+            self.run { a in queue.async { callback(a) } }
         }
     }
     
