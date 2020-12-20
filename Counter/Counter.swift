@@ -27,15 +27,20 @@ public func counterReducer(state: inout CounterState, action: CounterAction) -> 
     switch action {
     case .decrTapped:
         state.count -= 1
-        return []
+        return [
+            Effect<CounterAction>.cancel(id: "nthPrimeID")
+        ]
     case .incrTapped:
         state.count += 1
-        return []
+        return [
+            Effect<CounterAction>.cancel(id: "nthPrimeID")
+        ]
     case .nthPrimeButtonTapped:
         state.isNthPrimeButtonDisabled = true
         let count = state.count
         return [
             nthPrime(count)
+                .cancellable(id: "nthPrimeID")
                 .map { .nthPrimeResponse($0) }
                 .receive(on: .main)
         ]

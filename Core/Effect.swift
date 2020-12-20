@@ -7,6 +7,8 @@
 
 import Foundation
 
+private var cancellableBag = [String: Bool]()
+
 public struct Effect<A> {
     
     public let run: (@escaping (A) -> Void) -> Void
@@ -33,6 +35,22 @@ public struct Effect<A> {
         return Effect { callback in
             self.run { a in queue.async { callback(a) } }
         }
+    }
+    
+    public func cancellable(id: String) -> Effect {
+        return Effect { callback in
+            cancellableBag[id] = false
+            self.run {
+                guard !(cancellableBag[id] ?? false) else { return }
+                callback($0)
+            }
+        }
+    }
+    
+    public static func cancel(id: String) -> Effect {
+      return Effect { _ in
+          cancellableBag[id] = true
+      }
     }
     
 }
