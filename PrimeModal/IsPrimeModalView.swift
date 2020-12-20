@@ -54,24 +54,24 @@ public struct IsPrimeModalView: View {
     
     private func isPrimeEffect(_ p: Int) -> Effect<Bool> {
         return Effect<Bool> { closure in
-            DispatchQueue.global().async {
-                if p <= 1 {
-                    closure(false)
-                    return
-                }
-                if p <= 3 {
-                    closure(true)
-                    return
-                }
-                for i in 2...Int(sqrtf(Float(p))) {
-                  if p % i == 0 {
-                    closure(false)
-                    return
-                  }
-                }
-                closure(true)
+            if p <= 1 {
+                closure(false)
+                return
             }
-        }.receive(on: .main)
+            if p <= 3 {
+                closure(true)
+                return
+            }
+            for i in 2...Int(sqrtf(Float(p))) {
+                if p % i == 0 {
+                    closure(false)
+                    return
+                }
+            }
+            closure(true)
+        }
+        .run(on: .global())
+        .receive(on: .main)
     }
 }
 
