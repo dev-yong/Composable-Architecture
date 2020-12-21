@@ -7,7 +7,8 @@
 
 import Foundation
 
-private var cancellableBag = [String: Bool]()
+private var cancellableBag = [AnyHashable: DispatchWorkItem]()
+private var cancellablesLock = os_unfair_lock_s()
 
 public struct Effect<A> {
     
@@ -37,19 +38,29 @@ public struct Effect<A> {
         }
     }
     
-    public func cancellable(id: String) -> Effect {
+    public func cancellable(id: AnyHashable) -> Effect {
         return Effect { callback in
-            cancellableBag[id] = false
-            self.run {
-                guard !(cancellableBag[id] ?? false) else { return }
-                callback($0)
+            let workItem = DispatchWorkItem {
+                self.run {
+                    os_unfair_lock_lock(&cancellablesLock)
+                    if !(cancellableBag[id]?.isCancelled ?? true) {
+                        callback($0)
+                    }
+                    os_unfair_lock_unlock(&cancellablesLock)
+                }
             }
+            os_unfair_lock_lock(&cancellablesLock)
+            cancellableBag[id] = workItem
+            os_unfair_lock_unlock(&cancellablesLock)
+            workItem.perform()
         }
     }
     
-    public static func cancel(id: String) -> Effect {
+    public static func cancel(id: AnyHashable) -> Effect {
       return Effect { _ in
-          cancellableBag[id] = true
+        os_unfair_lock_lock(&cancellablesLock)
+        defer { os_unfair_lock_unlock(&cancellablesLock) }
+        cancellableBag[id]?.cancel()
       }
     }
     

@@ -23,24 +23,8 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "E9739ECA-F5C5-467B-9C7E-6146EB64494A"
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Core/Effect.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "42"
-            endingLineNumber = "42"
-            landmarkName = "cancellable(id:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "DD358C24-296A-47F1-B825-5D5525182BE9"
-            shouldBeEnabled = "Yes"
+            uuid = "8EC330ED-44FC-422C-8BB4-BACAEC0399A8"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Core/Effect.swift"
@@ -50,21 +34,53 @@
             endingLineNumber = "44"
             landmarkName = "cancellable(id:)"
             landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "8EC330ED-44FC-422C-8BB4-BACAEC0399A8 - dc43203a0fa885a5"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 () -&gt; () in closure #1 ((A) -&gt; ()) -&gt; () in Core.Effect.cancellable(id: Swift.AnyHashable) -&gt; Core.Effect&lt;A&gt;"
+                  moduleName = "Core"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/igwang-yong/Development/CombosableArchitecture/Core/Effect.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "44"
+                  endingLineNumber = "44"
+                  offsetFromSymbolStart = "60">
+               </Location>
+               <Location
+                  uuid = "8EC330ED-44FC-422C-8BB4-BACAEC0399A8 - 96738b75c5f195ec"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 (A) -&gt; () in closure #1 () -&gt; () in closure #1 ((A) -&gt; ()) -&gt; () in Core.Effect.cancellable(id: Swift.AnyHashable) -&gt; Core.Effect&lt;A&gt;"
+                  moduleName = "Core"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/igwang-yong/Development/CombosableArchitecture/Core/Effect.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "45"
+                  endingLineNumber = "45"
+                  offsetFromSymbolStart = "189">
+               </Location>
+            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "B8B7E733-54AE-4252-BA7B-88F0FC2AEBB2"
-            shouldBeEnabled = "Yes"
+            uuid = "710C1D93-5BFC-4B9F-B34F-EF2BB2A768CD"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Core/Effect.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "52"
-            endingLineNumber = "52"
-            landmarkName = "cancel(id:)"
+            startingLineNumber = "45"
+            endingLineNumber = "45"
+            landmarkName = "cancellable(id:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
