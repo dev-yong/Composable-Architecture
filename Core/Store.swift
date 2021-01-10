@@ -12,7 +12,8 @@ public final class Store<Value, Action>: ObservableObject {
     public let reducer: Reducer<Value, Action>
     @Published
     public private(set) var value: Value
-    private var cancellableBag = Set<AnyCancellable>()
+    private var viewCancellableBag = Set<AnyCancellable>()
+    private var effectCancellbaleBag = Set<AnyCancellable>()
     
     public init(
         initialValue: Value,
@@ -25,7 +26,10 @@ public final class Store<Value, Action>: ObservableObject {
     
     public func send(_ action: Action) {
         let effects = self.reducer(&self.value, action)
-        effects.forEach { $0.run(self.send) }
+        effects.forEach {
+            $0.sink(receiveValue: self.send)
+                .store(in: &effectCancellbaleBag)
+        }
     }
     
     public func view<LocalValue, LocalAction>(
@@ -41,7 +45,7 @@ public final class Store<Value, Action>: ObservableObject {
                 return []
             }
         )
-        self.cancellableBag.insert(
+        self.viewCancellableBag.insert(
             self.$value.sink { [weak localStore] (newValue) in
                 localStore?.value = toLocalValue(newValue)
             }
@@ -73,7 +77,7 @@ public final class Store<Value, Action>: ObservableObject {
                 return []
             }
         )
-        self.cancellableBag.insert(
+        self.viewCancellableBag.insert(
             self.$value.sink { [weak localStore] (newValue) in
                 localStore?.value = f(newValue)
             }
