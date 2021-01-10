@@ -5,27 +5,20 @@
 //  Created by 이광용 on 2020/12/19.
 //
 
-import Foundation
+import Combine
 
-public struct Effect<A> {
+public struct Effect<Output>: Publisher {
     
-    public let run: (@escaping (A) -> Void) -> Void
+    public typealias Failure = Never
     
-    public init(run: @escaping (@escaping (A) -> Void) -> Void) {
-        self.run = run
-    }
-    
-    public func map<B>(_ transform: @escaping (A) -> B) -> Effect<B> {
-        return Effect<B> { callback in
-            self.run { callback(transform($0)) }
-        }
-    }
-    
-    public func receive(on queue: DispatchQueue) -> Effect {
-        return Effect { callback in
-            self.run { a in queue.async { callback(a) }
-            }
-        }
+    let publisher: AnyPublisher<Output, Failure>
+
+    public func receive<S>(
+        subscriber: S
+    ) where S : Subscriber, Failure == S.Failure, Output == S.Input {
+      self.publisher.receive(
+        subscriber: subscriber
+      )
     }
     
 }
