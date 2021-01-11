@@ -17,6 +17,7 @@
 		FCB0119A2517A777000F7195 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FCB011992517A777000F7195 /* Preview Assets.xcassets */; };
 		FCB011B52517AB20000F7195 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCB011B42517AB20000F7195 /* ContentView.swift */; };
 		FCB011B82517ABD3000F7195 /* AppState.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCB011B72517ABD3000F7195 /* AppState.swift */; };
+		FCC1EE9C25ABD7130077FFFF /* Publisheres+Effect.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCC1EE9B25ABD7130077FFFF /* Publisheres+Effect.swift */; };
 		FCCAA8D8258E39B500F187AB /* Effect.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCCAA8D7258E39B500F187AB /* Effect.swift */; };
 		FCCAA8E2258E39C300F187AB /* Store.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCCAA8E1258E39C300F187AB /* Store.swift */; };
 		FCCAA8EC258E39F800F187AB /* Reducer.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCCAA8EB258E39F800F187AB /* Reducer.swift */; };
@@ -192,6 +193,7 @@
 		FCB011BD25185BAE000F7195 /* IsPrimeModalView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IsPrimeModalView.swift; sourceTree = "<group>"; };
 		FCB011C025185DCC000F7195 /* WolframAlphaHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WolframAlphaHelper.swift; sourceTree = "<group>"; };
 		FCB011C4251860AA000F7195 /* FavoritePrimesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritePrimesView.swift; sourceTree = "<group>"; };
+		FCC1EE9B25ABD7130077FFFF /* Publisheres+Effect.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Publisheres+Effect.swift"; sourceTree = "<group>"; };
 		FCCAA8D7258E39B500F187AB /* Effect.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Effect.swift; sourceTree = "<group>"; };
 		FCCAA8E1258E39C300F187AB /* Store.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Store.swift; sourceTree = "<group>"; };
 		FCCAA8EB258E39F800F187AB /* Reducer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Reducer.swift; sourceTree = "<group>"; };
@@ -449,6 +451,7 @@
 				FCCAA8E1258E39C300F187AB /* Store.swift */,
 				FCCAA8D7258E39B500F187AB /* Effect.swift */,
 				FCCAA8FD258E3A4600F187AB /* URLSession + Effect.swift */,
+				FCC1EE9B25ABD7130077FFFF /* Publisheres+Effect.swift */,
 				FCD0EED3255007F8005FB3A4 /* Info.plist */,
 			);
 			path = Core;
@@ -892,6 +895,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FCC1EE9C25ABD7130077FFFF /* Publisheres+Effect.swift in Sources */,
 				FCCAA8E2258E39C300F187AB /* Store.swift in Sources */,
 				FCCAA8D8258E39B500F187AB /* Effect.swift in Sources */,
 				FCCAA8EC258E39F800F187AB /* Reducer.swift in Sources */,

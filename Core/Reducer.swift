@@ -28,19 +28,13 @@ public func pullback<LocalValue, GlobalValue, LocalAction, GlobalAction>(
     return { globalValue, globalAction in
         guard let localAction = globalAction[keyPath: action] else { return [] }
         let localEffects = reducer(&globalValue[keyPath: value], localAction)
-        // Local Effects를  Global Effects로 변환한다.
         return localEffects.map { localEffect in
-            // GlobalEffect
-            Effect { callback in
-                // Local Effect로 부터 나온 LocalAction을
-                localEffect.sink { localAction in
-                    var globalAction = globalAction
-                    // Global Action으로 변환한다.
-                    globalAction[keyPath: action] = localAction
-                    // callback을 사용하여 global effect를 가져온다.
-                    callback(globalAction)
-                }
+            localEffect.map { localAction -> GlobalAction in
+                var globalAction = globalAction
+                globalAction[keyPath: action] = localAction
+                return globalAction
             }
+            .eraseToEffect()
         }
     }
 }
