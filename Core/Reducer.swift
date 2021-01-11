@@ -19,16 +19,6 @@ public func combine<Value, Action>(
     }
 }
 
-public func pullback<LocalValue, GlobalValue, Action>(
-    _ reducer: @escaping Reducer<LocalValue, Action>,
-    value: WritableKeyPath<GlobalValue, LocalValue>
-) -> Reducer<GlobalValue, Action> {
-    
-    return { globalValue, action in
-        reducer(&globalValue[keyPath: value], action)
-    }
-}
-
 public func pullback<LocalValue, GlobalValue, LocalAction, GlobalAction>(
     _ reducer: @escaping Reducer<LocalValue, LocalAction>,
     value: WritableKeyPath<GlobalValue, LocalValue>,
@@ -42,11 +32,8 @@ public func pullback<LocalValue, GlobalValue, LocalAction, GlobalAction>(
         return localEffects.map { localEffect in
             // GlobalEffect
             Effect { callback in
-//                guard let localAction = localEffect() else {
-//                    return nil
-//                }
                 // Local Effect로 부터 나온 LocalAction을
-                localEffect.run { localAction in
+                localEffect.sink { localAction in
                     var globalAction = globalAction
                     // Global Action으로 변환한다.
                     globalAction[keyPath: action] = localAction
