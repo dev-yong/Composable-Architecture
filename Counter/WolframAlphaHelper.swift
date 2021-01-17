@@ -7,6 +7,7 @@
 
 import Foundation
 import Core
+import Shared
 
 private struct WolframAlphaResult: Decodable {
   let queryresult: QueryResult

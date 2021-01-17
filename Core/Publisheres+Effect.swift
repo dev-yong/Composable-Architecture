@@ -9,8 +9,8 @@ import Combine
 
 extension Publisher where Failure == Never {
     
-  public func eraseToEffect() -> Effect<Output> {
-     Effect(publisher: self.eraseToAnyPublisher())
-  }
+    public func eraseToEffect() -> Effect<Output> {
+        Effect(publisher: self.eraseToAnyPublisher())
+    }
     
 }

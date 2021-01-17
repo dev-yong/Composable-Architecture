@@ -47,14 +47,13 @@ public func logging<Value, Action>(
         let effects = reducer(&value, action)
         let newValue = value
         return [
-            Deferred { () -> Empty<Action, Never> in 
+            .fireAndForget {
                 print("Action: \(action)")
                 print("value:")
                 dump(newValue)
                 print("---")
-                return Empty(completeImmediately: true)
             }
-            .eraseToEffect()
         ] + effects
     }
 }
+
