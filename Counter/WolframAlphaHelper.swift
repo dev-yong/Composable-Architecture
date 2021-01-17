@@ -7,7 +7,6 @@
 
 import Foundation
 import Core
-import Shared
 
 private struct WolframAlphaResult: Decodable {
   let queryresult: QueryResult
@@ -35,8 +34,12 @@ private func wolframAlpha(query: String) -> Effect<WolframAlphaResult?> {
         URLQueryItem(name: "appid", value: "6H69Q3-828TKQJ4EP"),
     ]
     
-    return URLSession.shared.dataTask(request: components.url(relativeTo: nil)!)
-        .decode(as: WolframAlphaResult.self, using: JSONDecoder())
+    return URLSession.shared
+        .dataTaskPublisher(for: components.url(relativeTo: nil)!)
+        .map { $0.0 }
+        .decode(type: WolframAlphaResult?.self, decoder: JSONDecoder())
+        .replaceError(with: nil)
+        .eraseToEffect()
 }
 
 
@@ -54,4 +57,5 @@ public func nthPrime(_ n: Int) -> Effect<Int?> {
                 }
                 .flatMap(Int.init)
         }
+        .eraseToEffect()
 }

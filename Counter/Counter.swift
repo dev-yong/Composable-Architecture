@@ -37,7 +37,8 @@ public func counterReducer(state: inout CounterState, action: CounterAction) -> 
         return [
             nthPrime(count)
                 .map { .nthPrimeResponse($0) }
-                .receive(on: .main)
+                .receive(on: DispatchQueue.main)
+                .eraseToEffect()
         ]
     case .alertDismissButtonTapped:
         state.alertNthPrime = nil
