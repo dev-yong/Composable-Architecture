@@ -26,4 +26,16 @@ extension Effect {
         }.eraseToEffect()
     }
     
+    public static func async(
+        work: @escaping (@escaping (Output) -> Void) -> Void
+    ) -> Effect {
+        return Deferred {
+            Future<Output, Never> { promise in
+                work { output in
+                    promise(.success(output))
+                }
+            }
+        }.eraseToEffect()
+    }
+    
 }
