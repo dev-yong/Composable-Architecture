@@ -5,7 +5,7 @@
 //  Created by 이광용 on 2020/12/19.
 //
 
-import Foundation
+import Combine
 
 public typealias Reducer<Value, Action> = (inout Value, Action) -> [Effect<Action>]
 
@@ -47,12 +47,14 @@ public func logging<Value, Action>(
         let effects = reducer(&value, action)
         let newValue = value
         return [
-            Effect { _ in
+            Deferred { () -> Empty<Action, Never> in 
                 print("Action: \(action)")
                 print("value:")
                 dump(newValue)
                 print("---")
+                return Empty(completeImmediately: true)
             }
+            .eraseToEffect()
         ] + effects
     }
 }
