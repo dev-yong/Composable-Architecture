@@ -66,3 +66,8 @@
 
 - Asynchronous effect signagure를 감싸는 struct를 만들다.
 - Asynchronous와 연관된 작업들을 Effect로 만들고, 분리하도록 하자.
+
+### [The Combine Framework And Effects](/Note/SideEffects/TheCombineFrameworkAndEffects.md)
+
+- Effect에 Combine의 publisher를 적용하도록하자.
+- Fire-and-forget, sync, async Effect의 변경된 인터페이스에 대한 대응을 하도록 하자.
