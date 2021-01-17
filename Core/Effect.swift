@@ -11,7 +11,13 @@ public struct Effect<Output>: Publisher {
     
     public typealias Failure = Never
     
-    let publisher: AnyPublisher<Output, Failure>
+    public let publisher: AnyPublisher<Output, Failure>
+    
+    public init (
+        publisher: AnyPublisher<Output, Failure>
+    ) {
+        self.publisher = publisher
+    }
 
     public func receive<S>(
         subscriber: S

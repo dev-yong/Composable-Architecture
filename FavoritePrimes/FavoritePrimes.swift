@@ -37,7 +37,7 @@ public func favoritePrimesReducer(
 }
 
 private func saveEffect(favoritePrimes: [Int]) -> Effect<FavoritePrimesAction> {
-    return Effect { _ in
+    return Effect.fireAndForget {
         let data = try! JSONEncoder().encode(favoritePrimes)
         let documentsPath = NSSearchPathForDirectoriesInDomains(
             .documentDirectory, .userDomainMask, true
@@ -50,7 +50,7 @@ private func saveEffect(favoritePrimes: [Int]) -> Effect<FavoritePrimesAction> {
 }
 
 private func loadEffect() -> Effect<FavoritePrimesAction> {
-    return Effect { closure in
+    return Effect<FavoritePrimesAction?>.sync {
         let documentsPath = NSSearchPathForDirectoriesInDomains(
             .documentDirectory, .userDomainMask, true
         )[0]
@@ -60,7 +60,9 @@ private func loadEffect() -> Effect<FavoritePrimesAction> {
         guard
             let data = try? Data(contentsOf: favoritePrimesUrl),
             let favoritePrimes = try? JSONDecoder().decode([Int].self, from: data)
-        else { return }
-        closure(.loadedFavoritePrimes(favoritePrimes))
+        else { return nil }
+        return .loadedFavoritePrimes(favoritePrimes)
     }
+    .compactMap { $0 }
+    .eraseToEffect()
 }

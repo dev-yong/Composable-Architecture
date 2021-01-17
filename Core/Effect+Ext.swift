@@ -18,4 +18,12 @@ extension Effect {
         }.eraseToEffect()
     }
     
+    public static func sync(
+        work: @escaping () -> Output
+    ) ->  Effect {
+        return Deferred { () -> Just<Output> in
+            Just(work())
+        }.eraseToEffect()
+    }
+    
 }
