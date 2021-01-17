@@ -14,3 +14,15 @@ extension Publisher where Failure == Never {
     }
     
 }
+
+
+extension Publisher {
+    
+    public func hush() -> Effect<Output> {
+        self.map(Optional.some)
+            .replaceError(with: nil)
+            .compactMap { $0 }
+            .eraseToEffect()
+    }
+    
+}
