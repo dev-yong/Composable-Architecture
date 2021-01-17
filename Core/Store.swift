@@ -22,18 +22,24 @@ public final class Store<Value, Action>: ObservableObject {
         self.reducer = reducer
     }
     
-    private var effectCancellbaleBag = Set<AnyCancellable>()
+    private var effectCancellableBag = Set<AnyCancellable>()
     public func send(_ action: Action) {
         let effects = self.reducer(&self.value, action)
         effects.forEach {
-            var effectCancellable: AnyCancellable!
+            var effectCancellable: AnyCancellable?
+            var didComplete = false
             effectCancellable = $0.sink(
                 receiveCompletion: { [weak self] _ in
-                    self?.effectCancellbaleBag.remove(effectCancellable)
+                    didComplete = true
+                    guard let effectCancellable = effectCancellable else { return }
+                    self?.effectCancellableBag.remove(effectCancellable)
                 },
                 receiveValue: self.send
             )
-            self.effectCancellbaleBag.insert(effectCancellable)
+            if !didComplete,
+               let effectCancellable = effectCancellable {
+                self.effectCancellableBag.insert(effectCancellable)
+            }
         }
     }
     
