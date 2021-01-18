@@ -13,7 +13,10 @@ class PrimeModalTests: XCTestCase {
     func testExample() throws {
         var state = (count: 2, favoritePrimes: [3, 5])
         primeModalReducer(state: &state, action: .saveFavoritePrimeTapped)
-        XCTAssertEqual(state, (2, [3, 5, 2]))
+        
+        let (count, favoritePrimes) = state
+        XCTAssertEqual(count, 2)
+        XCTAssertEqual(favoritePrimes, [3, 5, 2])
     }
     
 }
