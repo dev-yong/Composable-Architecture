@@ -7,32 +7,75 @@
 		<key>CombosableArchitecture.xcscheme_^#shared#^_</key>
 		<dict>
 			<key>orderHint</key>
-			<integer>1</integer>
+			<integer>0</integer>
 		</dict>
 		<key>Core.xcscheme_^#shared#^_</key>
 		<dict>
 			<key>orderHint</key>
-			<integer>0</integer>
+			<integer>1</integer>
 		</dict>
 		<key>Counter.xcscheme_^#shared#^_</key>
 		<dict>
 			<key>orderHint</key>
-			<integer>3</integer>
+			<integer>2</integer>
 		</dict>
 		<key>FavoritePrimes.xcscheme_^#shared#^_</key>
 		<dict>
 			<key>orderHint</key>
-			<integer>2</integer>
+			<integer>4</integer>
 		</dict>
 		<key>PrimeModal.xcscheme_^#shared#^_</key>
 		<dict>
 			<key>orderHint</key>
-			<integer>4</integer>
+			<integer>3</integer>
 		</dict>
 		<key>Shared.xcscheme_^#shared#^_</key>
 		<dict>
 			<key>orderHint</key>
 			<integer>5</integer>
+		</dict>
+	</dict>
+	<key>SuppressBuildableAutocreation</key>
+	<dict>
+		<key>FCB0118E2517A776000F7195</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>FCD0EE5C255007E0005FB3A4</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>FCD0EE64255007E0005FB3A4</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>FCD0EE81255007E6005FB3A4</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>FCD0EE89255007E6005FB3A4</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>FCD0EEA7255007EB005FB3A4</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>FCD0EEAF255007EC005FB3A4</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>FCD0EED7255007F8005FB3A4</key>
+		<dict>
+			<key>primary</key>
+			<true/>
 		</dict>
 	</dict>
 </dict>

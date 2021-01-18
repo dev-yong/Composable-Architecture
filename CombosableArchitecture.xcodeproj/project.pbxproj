@@ -781,7 +781,6 @@
 					};
 					FCD0EE64255007E0005FB3A4 = {
 						CreatedOnToolsVersion = 12.1;
-						TestTargetID = FCB0118E2517A776000F7195;
 					};
 					FCD0EE81255007E6005FB3A4 = {
 						CreatedOnToolsVersion = 12.1;
@@ -789,7 +788,6 @@
 					};
 					FCD0EE89255007E6005FB3A4 = {
 						CreatedOnToolsVersion = 12.1;
-						TestTargetID = FCB0118E2517A776000F7195;
 					};
 					FCD0EEA7255007EB005FB3A4 = {
 						CreatedOnToolsVersion = 12.1;
@@ -797,7 +795,6 @@
 					};
 					FCD0EEAF255007EC005FB3A4 = {
 						CreatedOnToolsVersion = 12.1;
-						TestTargetID = FCB0118E2517A776000F7195;
 					};
 					FCD0EECF255007F8005FB3A4 = {
 						CreatedOnToolsVersion = 12.1;
@@ -1327,7 +1324,6 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/CombosableArchitecture.app/CombosableArchitecture";
 			};
 			name = Debug;
 		};
@@ -1348,7 +1344,6 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/CombosableArchitecture.app/CombosableArchitecture";
 			};
 			name = Release;
 		};
@@ -1428,7 +1423,6 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/CombosableArchitecture.app/CombosableArchitecture";
 			};
 			name = Debug;
 		};
@@ -1449,7 +1443,6 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/CombosableArchitecture.app/CombosableArchitecture";
 			};
 			name = Release;
 		};
@@ -1529,7 +1522,6 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/CombosableArchitecture.app/CombosableArchitecture";
 			};
 			name = Debug;
 		};
@@ -1550,7 +1542,6 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/CombosableArchitecture.app/CombosableArchitecture";
 			};
 			name = Release;
 		};
