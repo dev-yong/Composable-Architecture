@@ -7,6 +7,7 @@
 
 import Foundation
 import Core
+import Combine
 
 public enum FavoritePrimesAction {
     case deleteFavoritePrimes(IndexSet)
@@ -81,6 +82,13 @@ public func favoritePrimesReducer(
                 .fireAndForget()
         ]
     case .loadButtonTapped:
-        return [loadEffect()]
+        return [
+            Current.fileClient.load("favorite-primes.json")
+                .compactMap { $0 }
+                .decode(type: [Int].self, decoder: JSONDecoder())
+                .catch { _ in Empty(completeImmediately: true) }
+                .map(FavoritePrimesAction.loadedFavoritePrimes)
+                .eraseToEffect()
+        ]
     }
 }
