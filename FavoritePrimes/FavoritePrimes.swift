@@ -15,6 +15,15 @@ public enum FavoritePrimesAction {
     case loadButtonTapped
 }
 
+struct FavoritePrimesEnvironment {
+
+}
+
+struct FileClient {
+    var load: () -> [Int]?
+//  var save:
+}
+
 public func favoritePrimesReducer(
     state: inout [Int],
     action: FavoritePrimesAction

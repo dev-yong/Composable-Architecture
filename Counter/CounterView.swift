@@ -9,26 +9,6 @@ import SwiftUI
 import Core
 import PrimeModal
 
-struct Environment {
-    
-    var date: () -> Date
-    
-}
-
-extension Environment {
-    
-    static let live = Environment(
-        date: Date.init
-    )
-    
-    static let mock = Environment(
-        date: { Date(timeIntervalSince1970: 1234567890) }
-    )
-    
-}
-
-var current = Environment.live
-
 public struct PrimeAlert: Equatable, Identifiable {
     let prime: Int
     
