@@ -57,8 +57,6 @@ extension FileClient {
 
 }
 
-private func absurd<A>(_ never: Never) -> A {}
-
 public func favoritePrimesReducer(
     state: inout [Int],
     action: FavoritePrimesAction
@@ -80,8 +78,7 @@ public func favoritePrimesReducer(
                     "favorite-primes.json",
                     try! JSONEncoder().encode(state)
                 )
-                .map(absurd)
-                .eraseToEffect()
+                .fireAndForget()
         ]
     case .loadButtonTapped:
         return [loadEffect()]
