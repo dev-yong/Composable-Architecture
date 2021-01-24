@@ -71,3 +71,7 @@
 
 - Effect에 Combine의 publisher를 적용하도록하자.
 - Fire-and-forget, sync, async Effect의 변경된 인터페이스에 대한 대응을 하도록 하자.
+
+## Testing
+
+### [Reducer](/Note/Testing/Reducer.md)
