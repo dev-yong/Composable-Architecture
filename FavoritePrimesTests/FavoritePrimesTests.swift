@@ -51,6 +51,12 @@ class FavoritePrimesTests: XCTestCase {
     }
     
     func testLoadFavoritePrimesFlow() {
+        Current.fileClient.load = { _ in
+            .sync {
+                try! JSONEncoder().encode([2, 31])
+            }
+        }
+
         var state = [2, 3, 5, 7]
         
         var effects = favoritePrimesReducer(
@@ -60,6 +66,10 @@ class FavoritePrimesTests: XCTestCase {
 
          XCTAssertEqual(state, [2, 3, 5, 7])
          XCTAssertEqual(effects.count, 1)
+        
+        _ = effects[0].sink { action in
+          XCTAssertEqual(action, .loadedFavoritePrimes([2, 31]))
+        }
 
          effects = favoritePrimesReducer(
             state: &state,

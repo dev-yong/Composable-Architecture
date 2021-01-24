@@ -9,7 +9,7 @@ import Foundation
 import Core
 import Combine
 
-public enum FavoritePrimesAction {
+public enum FavoritePrimesAction: Equatable {
     case deleteFavoritePrimes(IndexSet)
     case loadedFavoritePrimes([Int])
     case saveButtonTapped
@@ -68,7 +68,6 @@ extension FileClient {
         }
     }
 }
-
 
 public func favoritePrimesReducer(
     state: inout [Int],
