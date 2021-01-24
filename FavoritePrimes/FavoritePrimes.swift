@@ -20,7 +20,8 @@ struct FavoritePrimesEnvironment {
 }
 
 struct FileClient {
-    var load: () -> [Int]?
+    var load: (_ fileName: String) -> Effect<Data?>
+    
 //  var save:
 }
 
