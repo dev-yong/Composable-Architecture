@@ -67,17 +67,19 @@ class FavoritePrimesTests: XCTestCase {
          XCTAssertEqual(state, [2, 3, 5, 7])
          XCTAssertEqual(effects.count, 1)
         
+        var nextAction: FavoritePrimesAction!
         _ = effects[0].sink { action in
           XCTAssertEqual(action, .loadedFavoritePrimes([2, 31]))
+          nextAction = action
         }
 
-         effects = favoritePrimesReducer(
+        effects = favoritePrimesReducer(
             state: &state,
-            action: .loadedFavoritePrimes([2, 31])
-         )
+            action: nextAction
+        )
 
-         XCTAssertEqual(state, [2, 31])
-         XCTAssert(effects.isEmpty)
+        XCTAssertEqual(state, [2, 31])
+        XCTAssert(effects.isEmpty)
     }
     
 }
