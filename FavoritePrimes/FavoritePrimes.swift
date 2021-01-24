@@ -21,7 +21,19 @@ struct FavoritePrimesEnvironment {
 }
 
 extension FavoritePrimesEnvironment {
+    
     static let live = FavoritePrimesEnvironment(fileClient: .live)
+    #if DEBUG
+    static let mock = FavoritePrimesEnvironment(
+        fileClient: FileClient(
+            load: { _ in Effect<Data?>.sync {
+                try! JSONEncoder().encode([2, 31])
+            } },
+            save: { _, _ in .fireAndForget {} }
+        )
+    )
+    #endif
+    
 }
 
 var Current = FavoritePrimesEnvironment.live
@@ -55,8 +67,8 @@ extension FileClient {
             try! data.write(to: favoritePrimesUrl)
         }
     }
-
 }
+
 
 public func favoritePrimesReducer(
     state: inout [Int],
