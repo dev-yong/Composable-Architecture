@@ -10,7 +10,13 @@ import XCTest
 
 class FavoritePrimesTests: XCTestCase {
 
+    override func setUp() {
+        super.setUp()
+        Current = .mock
+    }
+    
     func testDeleteFavoritePrimes() {
+        
         var state = [2, 3, 5, 7]
 
         let effects = favoritePrimesReducer(
@@ -23,6 +29,13 @@ class FavoritePrimesTests: XCTestCase {
     }
     
     func testSaveButtonTapped() {
+        var didSave = false
+        Current.fileClient.save = { _, data in
+            .fireAndForget {
+                didSave = true
+            }
+        }
+        
         var state = [2, 3, 5, 7]
         
         let effects = favoritePrimesReducer(
@@ -32,6 +45,9 @@ class FavoritePrimesTests: XCTestCase {
         
         XCTAssertEqual(state, [2, 3, 5, 7])
         XCTAssertEqual(effects.count, 1)
+        
+        _ = effects[0].sink { _ in XCTFail() }
+        XCTAssert(didSave)
     }
     
     func testLoadFavoritePrimesFlow() {
