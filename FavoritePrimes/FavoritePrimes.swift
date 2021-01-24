@@ -19,9 +19,9 @@ struct FavoritePrimesEnvironment {
 
 }
 
-struct FileClient<A> {
+struct FileClient {
     var load: (_ fileName: String) -> Effect<Data?>
-    var save: (_ fileName: String, _ data: Data) -> Effect<A>
+    var save: (_ fileName: String, _ data: Data) -> Effect<Void>
 }
 
 public func favoritePrimesReducer(
