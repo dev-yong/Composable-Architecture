@@ -75,3 +75,6 @@
 ## Testing
 
 ### [Reducer](/Note/Testing/Reducer.md)
+
+### [Effects](/Note/Testing/Effects.md)
+
