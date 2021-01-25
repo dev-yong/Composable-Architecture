@@ -42,7 +42,6 @@ private func wolframAlpha(query: String) -> Effect<WolframAlphaResult?> {
         .eraseToEffect()
 }
 
-
 public func nthPrime(_ n: Int) -> Effect<Int?> {
     wolframAlpha(query: "prime \(n)")
         .map { result in

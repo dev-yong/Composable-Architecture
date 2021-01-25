@@ -8,7 +8,7 @@
 import Foundation
 import Core
 
-public enum CounterAction {
+public enum CounterAction: Equatable {
     
     case decrTapped
     case incrTapped
@@ -34,7 +34,7 @@ extension CounterEnvironment {
     #endif
 }
 
-let Current = CounterEnvironment.live
+var Current = CounterEnvironment.live
 
 public func counterReducer(state: inout CounterState, action: CounterAction) -> [Effect<CounterAction>] {
     switch action {

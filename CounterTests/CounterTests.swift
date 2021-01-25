@@ -10,6 +10,11 @@ import XCTest
 
 class CounterTests: XCTestCase {
     
+    override func setUp() {
+        super.setUp()
+        Current = .mock
+    }
+    
     func testIncrButtonTapped() {
         var state = CounterViewState(
             alertNthPrime: nil,
@@ -53,6 +58,9 @@ class CounterTests: XCTestCase {
     }
     
     func testNthPrimeButtonHappyFlow() {
+        
+        Current.nthPrime = { _ in .sync { 17 } }
+        
         var state = CounterViewState(
             alertNthPrime: nil,
             count: 2,
@@ -72,6 +80,12 @@ class CounterTests: XCTestCase {
             )
         )
         XCTAssertEqual(effects.count, 1)
+        
+        _ = effects[0].sink(
+          receiveCompletion: { _ in },
+          receiveValue: { action in
+            XCTAssertEqual(action, .counter(.nthPrimeResponse(17)))
+        })
         
         effects = counterViewReducer(&state, .counter(.nthPrimeResponse(3)))
         
