@@ -83,13 +83,13 @@ class CounterTests: XCTestCase {
         
         var nextAction: CounterViewAction!
         let receivedCompletion = self.expectation(description: "receiveCompletion")
-        _ = effects[0].sink(
+        let cancellation = effects[0].sink(
             receiveCompletion: { _ in receivedCompletion.fulfill() },
             receiveValue: { action in
                 nextAction = action
                 XCTAssertEqual(action, .counter(.nthPrimeResponse(17)))
             })
-        self.wait(for: [receivedCompletion], timeout: 0.01)
+        self.wait(for: [receivedCompletion], timeout: 0.1)
         
         effects = counterViewReducer(&state, nextAction)
         
@@ -143,7 +143,7 @@ class CounterTests: XCTestCase {
         
         var nextAction: CounterViewAction!
         let receivedCompletion = self.expectation(description: "receivedCompletion")
-        _ = effects[0].sink(
+        let cancellation = effects[0].sink(
             receiveCompletion: { _ in
                 receivedCompletion.fulfill()
             },
