@@ -89,7 +89,7 @@ class CounterTests: XCTestCase {
                 nextAction = action
                 XCTAssertEqual(action, .counter(.nthPrimeResponse(17)))
             })
-        self.wait(for: [receivedCompletion], timeout: 0.1)
+        self.wait(for: [receivedCompletion], timeout: 0.01)
         
         effects = counterViewReducer(&state, nextAction)
         
