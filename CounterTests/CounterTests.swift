@@ -83,7 +83,7 @@ class CounterTests: XCTestCase {
         
         var nextAction: CounterViewAction!
         let receivedCompletion = self.expectation(description: "receiveCompletion")
-        let cancellable = effects[0].sink(
+        _ = effects[0].sink(
             receiveCompletion: { _ in receivedCompletion.fulfill() },
             receiveValue: { action in
                 nextAction = action
@@ -119,6 +119,8 @@ class CounterTests: XCTestCase {
     }
     
     func testNthPrimeButtonUnhappyFlow() {
+        Current.nthPrime = { _ in .sync { nil } }
+        
         var state = CounterViewState(
             alertNthPrime: nil,
             count: 2,
@@ -139,8 +141,21 @@ class CounterTests: XCTestCase {
         )
         XCTAssertEqual(effects.count, 1)
         
-        effects = counterViewReducer(&state, .counter(.nthPrimeResponse(nil)))
+        var nextAction: CounterViewAction!
+        let receivedCompletion = self.expectation(description: "receivedCompletion")
+        _ = effects[0].sink(
+            receiveCompletion: { _ in
+                receivedCompletion.fulfill()
+            },
+            receiveValue: { action in
+                XCTAssertEqual(action, .counter(.nthPrimeResponse(nil)))
+                nextAction = action
+            }
+        )
+        self.wait(for: [receivedCompletion], timeout: 0.1)
         
+        effects = counterViewReducer(&state, nextAction)
+
         XCTAssertEqual(
             state,
             CounterViewState(
@@ -150,7 +165,7 @@ class CounterTests: XCTestCase {
                 isNthPrimeButtonDisabled: false
             )
         )
-        XCTAssert(effects.isEmpty)
+        XCTAssertTrue(effects.isEmpty)
     }
     
     func testPrimeModal() {
