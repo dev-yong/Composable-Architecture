@@ -7,27 +7,32 @@
 
 import Combine
 
-public typealias Reducer<Value, Action> = (inout Value, Action) -> [Effect<Action>]
+public typealias Reducer<Value, Action, Environment> = (inout Value, Action, Environment) -> [Effect<Action>]
 
-public func combine<Value, Action>(
-    _ reducers: Reducer<Value, Action>...
-) -> Reducer<Value, Action> {
+public func combine<Value, Action, Environment>(
+    _ reducers: Reducer<Value, Action, Environment>...
+) -> Reducer<Value, Action, Environment> {
     
-    return { value, action in
-        let effects = reducers.flatMap { $0(&value, action) }
+    return { value, action, environment in
+        let effects = reducers.flatMap { $0(&value, action, environment) }
         return effects
     }
 }
 
-public func pullback<LocalValue, GlobalValue, LocalAction, GlobalAction>(
-    _ reducer: @escaping Reducer<LocalValue, LocalAction>,
+public func pullback<LocalValue, GlobalValue, LocalAction, GlobalAction, LocalEnvironment, GlobalEnvironment>(
+    _ reducer: @escaping Reducer<LocalValue, LocalAction, LocalEnvironment>,
     value: WritableKeyPath<GlobalValue, LocalValue>,
-    action: WritableKeyPath<GlobalAction, LocalAction?>
-) -> Reducer<GlobalValue, GlobalAction> {
+    action: WritableKeyPath<GlobalAction, LocalAction?>,
+    environment: WritableKeyPath<GlobalEnvironment, LocalEnvironment>
+) -> Reducer<GlobalValue, GlobalAction, GlobalEnvironment> {
     
-    return { globalValue, globalAction in
+    return { globalValue, globalAction, globalEnvironment in
         guard let localAction = globalAction[keyPath: action] else { return [] }
-        let localEffects = reducer(&globalValue[keyPath: value], localAction)
+        let localEffects = reducer(
+            &globalValue[keyPath: value],
+            localAction,
+            globalEnvironment[keyPath: environment]
+        )
         return localEffects.map { localEffect in
             localEffect.map { localAction -> GlobalAction in
                 var globalAction = globalAction
@@ -39,12 +44,12 @@ public func pullback<LocalValue, GlobalValue, LocalAction, GlobalAction>(
     }
 }
 
-public func logging<Value, Action>(
-    _ reducer: @escaping Reducer<Value, Action>
-) -> Reducer<Value, Action> {
+public func logging<Value, Action, Environment>(
+    _ reducer: @escaping Reducer<Value, Action, Environment>
+) -> Reducer<Value, Action, Environment> {
     
-    return { value, action in
-        let effects = reducer(&value, action)
+    return { value, action, environment in
+        let effects = reducer(&value, action, environment)
         let newValue = value
         return [
             .fireAndForget {
