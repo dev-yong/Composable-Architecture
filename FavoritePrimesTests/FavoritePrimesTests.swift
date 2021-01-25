@@ -29,10 +29,10 @@ class FavoritePrimesTests: XCTestCase {
     }
     
     func testSaveButtonTapped() {
-        var didSave = false
+        var savedData: Data?
         Current.fileClient.save = { _, data in
             .fireAndForget {
-                didSave = true
+                savedData = data
             }
         }
         
@@ -47,7 +47,12 @@ class FavoritePrimesTests: XCTestCase {
         XCTAssertEqual(effects.count, 1)
         
         _ = effects[0].sink { _ in XCTFail() }
-        XCTAssert(didSave)
+        
+        XCTAssertNotNil(savedData)
+        XCTAssertEqual(
+            try JSONDecoder().decode([Int].self, from: savedData!),
+            state
+        )
     }
     
     func testLoadFavoritePrimesFlow() {
