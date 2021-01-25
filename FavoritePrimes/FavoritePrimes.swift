@@ -67,6 +67,19 @@ extension FileClient {
             try! data.write(to: favoritePrimesUrl)
         }
     }
+    
+    static let userDefaults = FileClient(
+        load: { (fileName) -> Effect<Data?> in
+            return .sync {
+                UserDefaults.standard.data(forKey: "\(fileName)")
+            }
+        },
+        save: { (fileName, data) in
+            return .fireAndForget {
+                UserDefaults.standard.set(data, forKey: "\(fileName)")
+            }
+        }
+    )
 }
 
 public func favoritePrimesReducer(
