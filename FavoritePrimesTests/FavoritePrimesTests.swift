@@ -68,11 +68,15 @@ class FavoritePrimesTests: XCTestCase {
          XCTAssertEqual(effects.count, 1)
         
         var nextAction: FavoritePrimesAction!
-        _ = effects[0].sink { action in
-          XCTAssertEqual(action, .loadedFavoritePrimes([2, 31]))
-          nextAction = action
-        }
-
+        let receivedCompletion = self.expectation(description: "receivedCompletion")
+        _ = effects[0].sink(
+          receiveCompletion: { _ in receivedCompletion.fulfill() },
+          receiveValue: { action in
+            nextAction = action
+            XCTAssertEqual(action, .loadedFavoritePrimes([2, 31]))
+        })
+        self.wait(for: [receivedCompletion], timeout: 0)
+        
         effects = favoritePrimesReducer(
             state: &state,
             action: nextAction

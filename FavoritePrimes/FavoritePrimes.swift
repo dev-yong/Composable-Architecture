@@ -99,6 +99,7 @@ public func favoritePrimesReducer(
                 .decode(type: [Int].self, decoder: JSONDecoder())
                 .catch { _ in Empty(completeImmediately: true) }
                 .map(FavoritePrimesAction.loadedFavoritePrimes)
+                //.merge(with: Empty(completeImmediately: false))
                 .eraseToEffect()
         ]
     }
