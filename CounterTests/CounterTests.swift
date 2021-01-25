@@ -81,18 +81,22 @@ class CounterTests: XCTestCase {
         )
         XCTAssertEqual(effects.count, 1)
         
-        _ = effects[0].sink(
-          receiveCompletion: { _ in },
-          receiveValue: { action in
-            XCTAssertEqual(action, .counter(.nthPrimeResponse(17)))
-        })
+        var nextAction: CounterViewAction!
+        let receivedCompletion = self.expectation(description: "receiveCompletion")
+        let cancellable = effects[0].sink(
+            receiveCompletion: { _ in receivedCompletion.fulfill() },
+            receiveValue: { action in
+                nextAction = action
+                XCTAssertEqual(action, .counter(.nthPrimeResponse(17)))
+            })
+        self.wait(for: [receivedCompletion], timeout: 0.1)
         
-        effects = counterViewReducer(&state, .counter(.nthPrimeResponse(3)))
+        effects = counterViewReducer(&state, nextAction)
         
         XCTAssertEqual(
             state,
             CounterViewState(
-                alertNthPrime: PrimeAlert(prime: 3),
+                alertNthPrime: PrimeAlert(prime: 17),
                 count: 2,
                 favoritePrimes: [3, 5],
                 isNthPrimeButtonDisabled: false
