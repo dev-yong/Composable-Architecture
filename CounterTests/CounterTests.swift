@@ -22,17 +22,14 @@ class CounterTests: XCTestCase {
             favoritePrimes: [3, 5],
             isNthPrimeButtonDisabled: false
         )
+        
+        var expected = state
         let effects = counterViewReducer(&state, .counter(.incrTapped))
         
+        expected.count = 3
         XCTAssertEqual(
             state,
-            CounterViewState(
-                alertNthPrime: nil,
-                count: 3,
-                favoritePrimes: [3, 5],
-                isNthPrimeButtonDisabled: false
-            ),
-            "Expected count to increment to 3"
+            expected
         )
         XCTAssertTrue(effects.isEmpty)
     }
