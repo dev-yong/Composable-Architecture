@@ -34,38 +34,6 @@
             endingLineNumber = "32"
             landmarkName = "testSaveButtonTapped()"
             landmarkType = "7">
-            <Locations>
-               <Location
-                  uuid = "B5E82779-FEC7-40B5-AAB0-93308CA77F2C - 80b202e0e52a6878"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "FavoritePrimesTests.FavoritePrimesTests.testSaveButtonTapped() -&gt; ()"
-                  moduleName = "FavoritePrimesTests"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/igwang-yong/Development/CombosableArchitecture/FavoritePrimesTests/FavoritePrimesTests.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "32"
-                  endingLineNumber = "32"
-                  offsetFromSymbolStart = "188">
-               </Location>
-               <Location
-                  uuid = "B5E82779-FEC7-40B5-AAB0-93308CA77F2C - 4de3ff16fa12f0a4"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "closure #1 (Swift.String, Foundation.Data) -&gt; Core.Effect&lt;Swift.Never&gt; in FavoritePrimesTests.FavoritePrimesTests.testSaveButtonTapped() -&gt; ()"
-                  moduleName = "FavoritePrimesTests"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/igwang-yong/Development/CombosableArchitecture/FavoritePrimesTests/FavoritePrimesTests.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "32"
-                  endingLineNumber = "32"
-                  offsetFromSymbolStart = "31">
-               </Location>
-            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -97,6 +65,22 @@
             startingLineNumber = "50"
             endingLineNumber = "50"
             landmarkName = "testSaveButtonTapped()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "C2998326-C4BD-449B-B13A-33C6784EE5A3"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "CounterTests/CounterTests.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "18"
+            endingLineNumber = "18"
+            landmarkName = "testIncrButtonTapped()"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

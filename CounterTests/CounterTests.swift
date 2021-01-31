@@ -17,10 +17,7 @@ class CounterTests: XCTestCase {
     
     func testIncrButtonTapped() {
         var state = CounterViewState(
-            alertNthPrime: nil,
-            count: 2,
-            favoritePrimes: [3, 5],
-            isNthPrimeButtonDisabled: false
+            count: 2
         )
         
         var expected = state
