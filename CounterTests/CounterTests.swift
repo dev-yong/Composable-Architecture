@@ -31,7 +31,8 @@ class CounterTests: XCTestCase {
                 count: 3,
                 favoritePrimes: [3, 5],
                 isNthPrimeButtonDisabled: false
-            )
+            ),
+            "Expected count to increment to 3"
         )
         XCTAssertTrue(effects.isEmpty)
     }
