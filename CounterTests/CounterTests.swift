@@ -24,10 +24,7 @@ class CounterTests: XCTestCase {
         let effects = counterViewReducer(&state, .counter(.incrTapped))
         
         expected.count = 3
-        XCTAssertEqual(
-            state,
-            expected
-        )
+        XCTAssertEqual(state, expected)
         XCTAssertTrue(effects.isEmpty)
     }
     
@@ -58,22 +55,14 @@ class CounterTests: XCTestCase {
         
         var state = CounterViewState(
             alertNthPrime: nil,
-            count: 2,
-            favoritePrimes: [3, 5],
             isNthPrimeButtonDisabled: false
         )
-        
+        var expected = state
         var effects = counterViewReducer(&state, .counter(.nthPrimeButtonTapped))
         
-        XCTAssertEqual(
-            state,
-            CounterViewState(
-                alertNthPrime: nil,
-                count: 2,
-                favoritePrimes: [3, 5],
-                isNthPrimeButtonDisabled: true
-            )
-        )
+        expected.isNthPrimeButtonDisabled = true
+        
+        XCTAssertEqual(state, expected)
         XCTAssertEqual(effects.count, 1)
         
         var nextAction: CounterViewAction!
@@ -87,29 +76,16 @@ class CounterTests: XCTestCase {
         self.wait(for: [receivedCompletion], timeout: 0.1)
         
         effects = counterViewReducer(&state, nextAction)
+        expected.alertNthPrime = PrimeAlert(prime: 17)
+        expected.isNthPrimeButtonDisabled = false
         
-        XCTAssertEqual(
-            state,
-            CounterViewState(
-                alertNthPrime: PrimeAlert(prime: 17),
-                count: 2,
-                favoritePrimes: [3, 5],
-                isNthPrimeButtonDisabled: false
-            )
-        )
+        XCTAssertEqual(state, expected)
         XCTAssertTrue(effects.isEmpty)
         
         effects = counterViewReducer(&state, .counter(.alertDismissButtonTapped))
+        expected.alertNthPrime = nil
         
-        XCTAssertEqual(
-            state,
-            CounterViewState(
-                alertNthPrime: nil,
-                count: 2,
-                favoritePrimes: [3, 5],
-                isNthPrimeButtonDisabled: false
-            )
-        )
+        XCTAssertEqual(state, expected)
         XCTAssertTrue(effects.isEmpty)
     }
     
