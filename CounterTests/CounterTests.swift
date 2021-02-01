@@ -6,9 +6,24 @@
 //
 
 import XCTest
+import Core
 @testable import Counter
 
 class CounterTests: XCTestCase {
+    
+    func assert<Value, Action>(
+      initialValue: Value,
+      reducer: Reducer<Value, Action>,
+      steps: [(action: Action, update: (inout Value) -> Void)]
+    ) where Value: Equatable {
+        var state = initialValue
+        steps.forEach {
+            var expected = state
+            _ = reducer(&state, $0.action)
+            $0.update(&expected)
+            XCTAssertEqual(state, expected)
+        }
+    }
     
     override func setUp() {
         super.setUp()
@@ -16,18 +31,15 @@ class CounterTests: XCTestCase {
     }
     
     func testIncrButtonTapped() {
-        var state = CounterViewState(
-            count: 2
+        assert(
+          initialValue: CounterViewState(count: 2),
+          reducer: counterViewReducer,
+          steps: [
+            (.counter(.incrTapped), { state in state.count = 3 })
+          ]
         )
-        
-        var expected = state
-        let effects = counterViewReducer(&state, .counter(.incrTapped))
-        
-        expected.count = 3
-        XCTAssertEqual(state, expected)
-        XCTAssertTrue(effects.isEmpty)
     }
-    
+   
     func testDecrButtonTapped() {
         var state = CounterViewState(
             alertNthPrime: nil,
