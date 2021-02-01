@@ -14,9 +14,7 @@ class CounterTests: XCTestCase {
     func assert<Value, Action>(
         initialValue: Value,
         reducer: Reducer<Value, Action>,
-        steps: [(action: Action, update: (inout Value) -> Void)],
-        file: StaticString = #file,
-        line: UInt = #line
+        steps: [(action: Action, update: (inout Value) -> Void, file: StaticString, line: UInt)]
     ) where Value: Equatable {
         var state = initialValue
         steps.forEach {
@@ -37,9 +35,9 @@ class CounterTests: XCTestCase {
           initialValue: CounterViewState(count: 2),
           reducer: counterViewReducer,
             steps: [
-                (.counter(.incrTapped), { $0.count = 3 }),
-                (.counter(.incrTapped), { $0.count = 4 }),
-                (.counter(.decrTapped), { $0.count = 5 })
+                (.counter(.incrTapped), { $0.count = 3 }, #file, #line),
+                (.counter(.incrTapped), { $0.count = 4 }, #file, #line),
+                (.counter(.decrTapped), { $0.count = 5 }, #file, #line)
             ]
         )
     }
