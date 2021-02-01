@@ -7,6 +7,7 @@
 
 import XCTest
 import Core
+import Combine
 @testable import Counter
 
 enum StepType {
@@ -40,11 +41,45 @@ func assert<Value, Action>(
     initialValue: Value,
     reducer: Reducer<Value, Action>,
     steps: Step<Value, Action>...
-) where Value: Equatable {
+) where Value: Equatable, Action: Equatable {
     var state = initialValue
+    var effects: [Effect<Action>] = []
+    var cancellables: [AnyCancellable] = []
+
     steps.forEach { step in
         var expected = state
-        _ = reducer(&state, step.action)
+        switch step.type {
+        case .send:
+            // Reducer에서 반한된 effect를 트래킹하기 위하여
+            // 반환되는 effect들을 지닐 수 있는 `effects`를 반복문 외부에 도입하도록 한다.
+            effects.append(contentsOf: reducer(&state, step.action))
+        case .receive:
+            // `send`에 의한 action을 `receive`하였기에,
+            // `receive`에서 `effects`의 첫 번째 effect를 pop하도록 한다.
+            let effect = effects.removeFirst()
+            // Expectation을 도입하여 effect가 완료된 후의 action을 추출할 수 있다.
+            var action: Action!
+            let receivedCompletion = XCTestExpectation(description: "receivedCompletion")
+            // 다음으로 `sink`로 effect를 실행하고 완료 시 expectation을 충족하고 수신 시 다음 action을 할당한다.
+            cancellables.append(
+              effect.sink(
+                receiveCompletion: { _ in
+                  receivedCompletion.fulfill()
+              },
+                receiveValue: { action = $0 }
+              )
+            )
+            if XCTWaiter.wait(for: [receivedCompletion], timeout: 0.01) != .completed {
+              XCTFail(
+                "Timed out waiting for the effect to complete",
+                file: step.file,
+                line: step.line
+              )
+            }
+            XCTAssertEqual(action, step.action, file: step.file, line: step.line)
+            // 반환되는 effect를 작업중인 배열에 추가하도록 한다.
+            effects.append(contentsOf: reducer(&state, action))
+        }
         step.update(&expected)
         XCTAssertEqual(state, expected, file: step.file, line: step.line)
     }
@@ -103,8 +138,8 @@ class CounterTests: XCTestCase {
                 Step(.send, .counter(.nthPrimeButtonTapped)) {
                     $0.isNthPrimeButtonDisabled = true
                 },
-            Step(.receive, .counter(.nthPrimeResponse(17))) {
-                $0.alertNthPrime = PrimeAlert(prime: 17)
+            Step(.receive, .counter(.nthPrimeResponse(15))) {
+                $0.alertNthPrime = PrimeAlert(prime: 15)
                 $0.isNthPrimeButtonDisabled = false
             },
             Step(.send, .counter(.alertDismissButtonTapped)) {
