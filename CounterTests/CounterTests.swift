@@ -9,18 +9,26 @@ import XCTest
 import Core
 @testable import Counter
 
+enum StepType {
+  case send
+  case receive
+}
+
 struct Step<Value, Action> {
+    let type: StepType
     let action: Action
     let update: (inout Value) -> Void
     let file: StaticString
     let line: UInt
     
     init(
+        _ type: StepType,
         _ action: Action,
         _ update: @escaping (inout Value) -> Void,
         file: StaticString = #file,
         line: UInt = #line
     ) {
+        self.type = type
         self.action = action
         self.update = update
         self.file = file
@@ -54,9 +62,9 @@ class CounterTests: XCTestCase {
         assert(
           initialValue: CounterViewState(count: 2),
             reducer: counterViewReducer,
-            steps: Step(.counter(.incrTapped), { $0.count = 2 }),
-            Step(.counter(.incrTapped), { $0.count = 4 }),
-            Step(.counter(.decrTapped), { $0.count = 5 })
+            steps: Step(.send, .counter(.incrTapped)) { $0.count = 2 },
+            Step(.send, .counter(.incrTapped)) { $0.count = 4 },
+            Step(.send, .counter(.decrTapped)) { $0.count = 5 }
         )
     }
    
@@ -85,40 +93,24 @@ class CounterTests: XCTestCase {
         
         Current.nthPrime = { _ in .sync { 17 } }
         
-        var state = CounterViewState(
-            alertNthPrime: nil,
-            isNthPrimeButtonDisabled: false
+        assert(
+            initialValue: CounterViewState(
+                alertNthPrime: nil,
+                isNthPrimeButtonDisabled: false
+            ),
+            reducer: counterViewReducer,
+            steps:
+                Step(.send, .counter(.nthPrimeButtonTapped)) {
+                    $0.isNthPrimeButtonDisabled = true
+                },
+            Step(.receive, .counter(.nthPrimeResponse(17))) {
+                $0.alertNthPrime = PrimeAlert(prime: 17)
+                $0.isNthPrimeButtonDisabled = false
+            },
+            Step(.send, .counter(.alertDismissButtonTapped)) {
+                $0.alertNthPrime = nil
+            }
         )
-        var expected = state
-        var effects = counterViewReducer(&state, .counter(.nthPrimeButtonTapped))
-        
-        expected.isNthPrimeButtonDisabled = true
-        
-        XCTAssertEqual(state, expected)
-        XCTAssertEqual(effects.count, 1)
-        
-        var nextAction: CounterViewAction!
-        let receivedCompletion = self.expectation(description: "receiveCompletion")
-        let cancellation = effects[0].sink(
-            receiveCompletion: { _ in receivedCompletion.fulfill() },
-            receiveValue: { action in
-                nextAction = action
-                XCTAssertEqual(action, .counter(.nthPrimeResponse(17)))
-            })
-        self.wait(for: [receivedCompletion], timeout: 0.1)
-        
-        effects = counterViewReducer(&state, nextAction)
-        expected.alertNthPrime = PrimeAlert(prime: 17)
-        expected.isNthPrimeButtonDisabled = false
-        
-        XCTAssertEqual(state, expected)
-        XCTAssertTrue(effects.isEmpty)
-        
-        effects = counterViewReducer(&state, .counter(.alertDismissButtonTapped))
-        expected.alertNthPrime = nil
-        
-        XCTAssertEqual(state, expected)
-        XCTAssertTrue(effects.isEmpty)
     }
     
     func testNthPrimeButtonUnhappyFlow() {
