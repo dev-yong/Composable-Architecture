@@ -12,16 +12,18 @@ import Core
 class CounterTests: XCTestCase {
     
     func assert<Value, Action>(
-      initialValue: Value,
-      reducer: Reducer<Value, Action>,
-      steps: [(action: Action, update: (inout Value) -> Void)]
+        initialValue: Value,
+        reducer: Reducer<Value, Action>,
+        steps: [(action: Action, update: (inout Value) -> Void)],
+        file: StaticString = #file,
+        line: UInt = #line
     ) where Value: Equatable {
         var state = initialValue
         steps.forEach {
             var expected = state
             _ = reducer(&state, $0.action)
             $0.update(&expected)
-            XCTAssertEqual(state, expected)
+            XCTAssertEqual(state, expected, file: file, line: line)
         }
     }
     
@@ -34,9 +36,11 @@ class CounterTests: XCTestCase {
         assert(
           initialValue: CounterViewState(count: 2),
           reducer: counterViewReducer,
-          steps: [
-            (.counter(.incrTapped), { state in state.count = 3 })
-          ]
+            steps: [
+                (.counter(.incrTapped), { $0.count = 3 }),
+                (.counter(.incrTapped), { $0.count = 4 }),
+                (.counter(.decrTapped), { $0.count = 5 })
+            ]
         )
     }
    
