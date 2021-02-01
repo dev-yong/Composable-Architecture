@@ -9,21 +9,41 @@ import XCTest
 import Core
 @testable import Counter
 
-class CounterTests: XCTestCase {
+struct Step<Value, Action> {
+    let action: Action
+    let update: (inout Value) -> Void
+    let file: StaticString
+    let line: UInt
     
-    func assert<Value, Action>(
-        initialValue: Value,
-        reducer: Reducer<Value, Action>,
-        steps: [(action: Action, update: (inout Value) -> Void, file: StaticString, line: UInt)]
-    ) where Value: Equatable {
-        var state = initialValue
-        steps.forEach {
-            var expected = state
-            _ = reducer(&state, $0.action)
-            $0.update(&expected)
-            XCTAssertEqual(state, expected, file: file, line: line)
-        }
+    init(
+        _ action: Action,
+        _ update: @escaping (inout Value) -> Void,
+        file: StaticString = #file,
+        line: UInt = #line
+    ) {
+        self.action = action
+        self.update = update
+        self.file = file
+        self.line = line
     }
+}
+
+func assert<Value, Action>(
+    initialValue: Value,
+    reducer: Reducer<Value, Action>,
+    steps: Step<Value, Action>...
+) where Value: Equatable {
+    var state = initialValue
+    steps.forEach { step in
+        var expected = state
+        _ = reducer(&state, step.action)
+        step.update(&expected)
+        XCTAssertEqual(state, expected, file: step.file, line: step.line)
+    }
+}
+
+
+class CounterTests: XCTestCase {
     
     override func setUp() {
         super.setUp()
@@ -33,12 +53,10 @@ class CounterTests: XCTestCase {
     func testIncrButtonTapped() {
         assert(
           initialValue: CounterViewState(count: 2),
-          reducer: counterViewReducer,
-            steps: [
-                (.counter(.incrTapped), { $0.count = 3 }, #file, #line),
-                (.counter(.incrTapped), { $0.count = 4 }, #file, #line),
-                (.counter(.decrTapped), { $0.count = 5 }, #file, #line)
-            ]
+            reducer: counterViewReducer,
+            steps: Step(.counter(.incrTapped), { $0.count = 2 }),
+            Step(.counter(.incrTapped), { $0.count = 4 }),
+            Step(.counter(.decrTapped), { $0.count = 5 })
         )
     }
    
