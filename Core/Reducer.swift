@@ -7,7 +7,7 @@
 
 import Combine
 
-public typealias Reducer<Value, Action> = (inout Value, Action) -> [Effect<Action>]
+public typealias Reducer<Value, Action, Environment> = (inout Value, Action, Environment) -> [Effect<Action>]
 
 public func combine<Value, Action>(
     _ reducers: Reducer<Value, Action>...

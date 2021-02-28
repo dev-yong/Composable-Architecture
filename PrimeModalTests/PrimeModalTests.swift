@@ -11,5 +11,10 @@ import XCTest
 @testable import PrimeModal
 
 class PrimeModalTests: XCTestCase {
-
+    
+    func testIntegration() {
+      Counter.Current = .mock
+      FavoritePrimes.Current = .mock
+    }
+    
 }
