@@ -41,12 +41,12 @@ public func pullback<LocalValue, GlobalValue, LocalAction, GlobalAction, LocalEn
     }
 }
 
-public func logging<Value, Action>(
-    _ reducer: @escaping Reducer<Value, Action>
-) -> Reducer<Value, Action> {
+public func logging<Value, Action, Environment>(
+    _ reducer: @escaping Reducer<Value, Action, Environment>
+) -> Reducer<Value, Action, Environment> {
     
-    return { value, action in
-        let effects = reducer(&value, action)
+    return { value, action, environment in
+        let effects = reducer(&value, action, environment)
         let newValue = value
         return [
             .fireAndForget {
