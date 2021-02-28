@@ -19,15 +19,15 @@ public func combine<Value, Action, Environment>(
     }
 }
 
-public func pullback<LocalValue, GlobalValue, LocalAction, GlobalAction>(
-    _ reducer: @escaping Reducer<LocalValue, LocalAction>,
+public func pullback<LocalValue, GlobalValue, LocalAction, GlobalAction, Environment>(
+    _ reducer: @escaping Reducer<LocalValue, LocalAction, Environment>,
     value: WritableKeyPath<GlobalValue, LocalValue>,
     action: WritableKeyPath<GlobalAction, LocalAction?>
-) -> Reducer<GlobalValue, GlobalAction> {
+) -> Reducer<GlobalValue, GlobalAction, Environment> {
     
-    return { globalValue, globalAction in
+    return { globalValue, globalAction, environment in
         guard let localAction = globalAction[keyPath: action] else { return [] }
-        let localEffects = reducer(&globalValue[keyPath: value], localAction)
+        let localEffects = reducer(&globalValue[keyPath: value], localAction, environment)
         return localEffects.map { localEffect in
             localEffect.map { localAction -> GlobalAction in
                 var globalAction = globalAction
