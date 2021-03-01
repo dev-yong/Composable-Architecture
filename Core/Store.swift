@@ -7,24 +7,27 @@
 
 import Combine
 
-public final class Store<Value, Action>: ObservableObject {
+public final class Store<Value, Action, Environment>: ObservableObject {
     
-    public let reducer: Reducer<Value, Action>
+    public let reducer: Reducer<Value, Action, Environment>
+    private let environment: Environment
     @Published
     public private(set) var value: Value
     
     public init(
         initialValue: Value,
-        reducer: @escaping Reducer<Value, Action>
+        reducer: @escaping Reducer<Value, Action, Environment>,
+        environment: Environment
     ) {
         
         self.value = initialValue
         self.reducer = reducer
+        self.environment = environment
     }
     
     private var effectCancellableBag = Set<AnyCancellable>()
     public func send(_ action: Action) {
-        let effects = self.reducer(&self.value, action)
+        let effects = self.reducer(&self.value, action, self.environment)
         effects.forEach {
             var effectCancellable: AnyCancellable?
             var didComplete = false
