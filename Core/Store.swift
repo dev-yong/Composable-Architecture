@@ -51,7 +51,7 @@ public final class Store<Value, Action>: ObservableObject {
     private var viewCancellableBag = Set<AnyCancellable>()
     public func view<LocalValue, LocalAction>(
         value toLocalValue: @escaping (Value) -> LocalValue,
-        action toGlobalAction: @escaping (LocalAction) -> Action,
+        action toGlobalAction: @escaping (LocalAction) -> Action
     ) -> Store<LocalValue, LocalAction> {
         
         let localStore = Store<LocalValue, LocalAction>(

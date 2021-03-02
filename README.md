@@ -79,4 +79,7 @@
 ### [Effects](/Note/Testing/Effects.md)
 
 ### [Ergonomics](/Note/Testing/Ergonomics.md)
+## Depednecy
+
+### [Dependency Injection Made Composable](/Note/Dependency/Dependency_Injection_Made Composable.md)
 
