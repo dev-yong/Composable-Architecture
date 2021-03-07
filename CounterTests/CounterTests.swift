@@ -50,6 +50,14 @@ func assert<Value, Action>(
         var expected = state
         switch step.type {
         case .send:
+            // 전송된 action에 대해 reducer를 실행하기 전에 대기중인 효과가 없는지 확인하도록 한다.
+            if effects.isEmpty {
+                XCTFail(
+                  "Action sent before handling \(effects.count) pending effect(s)",
+                  file: step.file,
+                  line: step.line
+                )
+            }
             // Reducer에서 반한된 effect를 트래킹하기 위하여
             // 반환되는 effect들을 지닐 수 있는 `effects`를 반복문 외부에 도입하도록 한다.
             effects.append(contentsOf: reducer(&state, step.action))
@@ -138,10 +146,10 @@ class CounterTests: XCTestCase {
                 Step(.send, .counter(.nthPrimeButtonTapped)) {
                     $0.isNthPrimeButtonDisabled = true
                 },
-            Step(.receive, .counter(.nthPrimeResponse(15))) {
-                $0.alertNthPrime = PrimeAlert(prime: 15)
-                $0.isNthPrimeButtonDisabled = false
-            },
+//            Step(.receive, .counter(.nthPrimeResponse(15))) {
+//                $0.alertNthPrime = PrimeAlert(prime: 15)
+//                $0.isNthPrimeButtonDisabled = false
+//            },
             Step(.send, .counter(.alertDismissButtonTapped)) {
                 $0.alertNthPrime = nil
             }
