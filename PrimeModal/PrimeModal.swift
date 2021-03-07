@@ -15,7 +15,11 @@ public enum PrimeModalAction: Equatable {
 
 public typealias PrimeModalState = (count: Int, favoritePrimes: [Int])
 
-public func primeModalReducer(state: inout PrimeModalState, action: PrimeModalAction) -> [Effect<PrimeModalAction>] {
+public func primeModalReducer(
+    state: inout PrimeModalState,
+    action: PrimeModalAction,
+    environment: Void
+) -> [Effect<PrimeModalAction>] {
     switch action {
     case .removeFavoritePrimeTapped:
         state.favoritePrimes.removeAll(where: { $0 == state.count })
@@ -25,4 +29,5 @@ public func primeModalReducer(state: inout PrimeModalState, action: PrimeModalAc
         return []
     }
 }
+
 
