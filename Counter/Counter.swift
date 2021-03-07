@@ -28,9 +28,9 @@ public struct CounterEnvironment {
 }
 extension CounterEnvironment {
     
-    static let live = CounterEnvironment(nthPrime: Counter.nthPrime)
+    public static let live = CounterEnvironment(nthPrime: Counter.nthPrime)
     #if DEBUG
-    static let mock = CounterEnvironment(nthPrime: { _ in .sync { 17 } })
+    public static let mock = CounterEnvironment(nthPrime: { _ in .sync { 17 } })
     #endif
 }
 

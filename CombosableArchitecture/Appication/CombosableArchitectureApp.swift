@@ -15,7 +15,8 @@ struct CombosableArchitectureApp: App {
             ContentView(
                 store: Store(
                     initialValue: AppState(),
-                    reducer: logging(activityFeed(appReducer))
+                    reducer: logging(activityFeed(appReducer)),
+                    environment: .live
                 )
             )
         }

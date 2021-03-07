@@ -12,10 +12,10 @@ import PrimeModal
 import FavoritePrimes
 
 func activityFeed(
-  _ reducer: @escaping Reducer<AppState, AppAction>
-) -> Reducer<AppState, AppAction> {
+  _ reducer: @escaping Reducer<AppState, AppAction, AppEnvironment>
+) -> Reducer<AppState, AppAction, AppEnvironment> {
 
-    return { state, action in
+    return { state, action, environment in
         
         switch action {
         
@@ -36,12 +36,34 @@ func activityFeed(
                 )
             }
         }
-        return reducer(&state, action)
+        return reducer(&state, action, environment)
     }
 }
 
-let appReducer = combine(
-  pullback(counterViewReducer, value: \AppState.counterView, action: \AppAction.counterView),
-  pullback(favoritePrimesReducer, value: \.favoritePrimes, action: \.favoritePrimes)
-)
+struct AppEnvironment {
+    var counter: CounterEnvironment
+    var favoritePrimes: FavoritePrimesEnvironment
+}
 
+extension AppEnvironment {
+    
+    static var live = AppEnvironment(counter: .live, favoritePrimes: .live)
+    #if DEBUG
+    static var mock = AppEnvironment(counter: .mock, favoritePrimes: .mock)
+    #endif
+}
+
+let appReducer: Reducer<AppState, AppAction, AppEnvironment> = combine(
+  pullback(
+    counterViewReducer,
+    value: \AppState.counterView,
+    action: \AppAction.counterView,
+    environemnt: { $0.counter }
+  ),
+  pullback(
+    favoritePrimesReducer,
+    value: \.favoritePrimes,
+    action: \.favoritePrimes,
+    environemnt: { $0.favoritePrimes }
+  )
+)

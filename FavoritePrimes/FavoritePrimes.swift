@@ -22,9 +22,9 @@ public struct FavoritePrimesEnvironment {
 
 extension FavoritePrimesEnvironment {
     
-    static let live = FavoritePrimesEnvironment(fileClient: .live)
+    public static let live = FavoritePrimesEnvironment(fileClient: .live)
     #if DEBUG
-    static let mock = FavoritePrimesEnvironment(
+    public static let mock = FavoritePrimesEnvironment(
         fileClient: FileClient(
             load: { _ in Effect<Data?>.sync {
                 try! JSONEncoder().encode([2, 31])
