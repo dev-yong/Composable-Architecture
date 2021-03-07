@@ -40,7 +40,9 @@ struct Step<Value, Action> {
 func assert<Value, Action>(
     initialValue: Value,
     reducer: Reducer<Value, Action>,
-    steps: Step<Value, Action>...
+    steps: Step<Value, Action>...,
+    file: StaticString = #file,
+    line: UInt = #line
 ) where Value: Equatable, Action: Equatable {
     var state = initialValue
     var effects: [Effect<Action>] = []
@@ -90,6 +92,14 @@ func assert<Value, Action>(
         }
         step.update(&expected)
         XCTAssertEqual(state, expected, file: step.file, line: step.line)
+    }
+    
+    if !effects.isEmpty {
+      XCTFail(
+        "Assertion failed to handle \(effects.count) pending effect(s)",
+        file: file,
+        line: line
+      )
     }
 }
 
@@ -145,14 +155,14 @@ class CounterTests: XCTestCase {
             steps:
                 Step(.send, .counter(.nthPrimeButtonTapped)) {
                     $0.isNthPrimeButtonDisabled = true
-                },
+                }
 //            Step(.receive, .counter(.nthPrimeResponse(15))) {
 //                $0.alertNthPrime = PrimeAlert(prime: 15)
 //                $0.isNthPrimeButtonDisabled = false
 //            },
-            Step(.send, .counter(.alertDismissButtonTapped)) {
-                $0.alertNthPrime = nil
-            }
+//            Step(.send, .counter(.alertDismissButtonTapped)) {
+//                $0.alertNthPrime = nil
+//            }
         )
     }
     
