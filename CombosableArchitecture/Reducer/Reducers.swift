@@ -40,30 +40,22 @@ func activityFeed(
     }
 }
 
-struct AppEnvironment {
-    var counter: CounterEnvironment
-    var favoritePrimes: FavoritePrimesEnvironment
-}
-
-extension AppEnvironment {
-    
-    static var live = AppEnvironment(counter: .live, favoritePrimes: .live)
-    #if DEBUG
-    static var mock = AppEnvironment(counter: .mock, favoritePrimes: .mock)
-    #endif
-}
+typealias AppEnvironment = (
+    nthPrime: (Int) -> Effect<Int?>,
+    fileClient: FileClient
+)
 
 let appReducer: Reducer<AppState, AppAction, AppEnvironment> = combine(
   pullback(
     counterViewReducer,
     value: \AppState.counterView,
     action: \AppAction.counterView,
-    environemnt: { $0.counter }
+    environemnt: { $0.nthPrime }
   ),
   pullback(
     favoritePrimesReducer,
     value: \.favoritePrimes,
     action: \.favoritePrimes,
-    environemnt: { $0.favoritePrimes }
+    environemnt: { $0.fileClient }
   )
 )

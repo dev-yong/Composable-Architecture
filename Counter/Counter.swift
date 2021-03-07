@@ -23,16 +23,7 @@ public typealias CounterState = (
     isNthPrimeButtonDisabled: Bool
 )
 
-public struct CounterEnvironment {
-    var nthPrime: (Int) -> Effect<Int?>
-}
-extension CounterEnvironment {
-    
-    public static let live = CounterEnvironment(nthPrime: Counter.nthPrime)
-    #if DEBUG
-    public static let mock = CounterEnvironment(nthPrime: { _ in .sync { 17 } })
-    #endif
-}
+public typealias CounterEnvironment = (Int) -> Effect<Int?>
 
 public func counterReducer(
     state: inout CounterState,
@@ -50,7 +41,7 @@ public func counterReducer(
         state.isNthPrimeButtonDisabled = true
         let count = state.count
         return [
-            environment.nthPrime(count)
+            environment(count)
                 .map { .nthPrimeResponse($0) }
                 .receive(on: DispatchQueue.main)
                 .eraseToEffect()

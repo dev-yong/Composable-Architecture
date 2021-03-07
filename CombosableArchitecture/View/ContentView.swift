@@ -48,7 +48,7 @@ struct ContentView_66_Previews: PreviewProvider {
             store: Store(
                 initialValue: AppState(),
                 reducer: appReducer,
-                environment: .mock
+                environment: ({ _ in .sync{ 17 } }, .mock)
             )
         )
     }

@@ -179,7 +179,7 @@ struct CounterView_Previews: PreviewProvider {
                     favoritePrimes: []
                 ),
                 reducer: counterViewReducer,
-                environment: CounterEnvironment.mock
+                environment: { _ in .sync { 17 } }
             )
         )
     }

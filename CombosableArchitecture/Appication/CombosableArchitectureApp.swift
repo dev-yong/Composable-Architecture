@@ -7,6 +7,8 @@
 
 import SwiftUI
 import Core
+import Counter
+import FavoritePrimes
 
 @main
 struct CombosableArchitectureApp: App {
@@ -16,7 +18,7 @@ struct CombosableArchitectureApp: App {
                 store: Store(
                     initialValue: AppState(),
                     reducer: logging(activityFeed(appReducer)),
-                    environment: .live
+                    environment: (Counter.nthPrime, FileClient.live)
                 )
             )
         }
