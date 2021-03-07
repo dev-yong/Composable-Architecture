@@ -16,7 +16,7 @@ public enum FavoritePrimesAction: Equatable {
     case loadButtonTapped
 }
 
-struct FavoritePrimesEnvironment {
+public struct FavoritePrimesEnvironment {
     var fileClient: FileClient
 }
 
@@ -35,8 +35,6 @@ extension FavoritePrimesEnvironment {
     #endif
     
 }
-
-var Current = FavoritePrimesEnvironment.live
 
 struct FileClient {
     var load: (_ fileName: String) -> Effect<Data?>
@@ -71,7 +69,8 @@ extension FileClient {
 
 public func favoritePrimesReducer(
     state: inout [Int],
-    action: FavoritePrimesAction
+    action: FavoritePrimesAction,
+    environment: FavoritePrimesEnvironment
 ) -> [Effect<FavoritePrimesAction>] {
     switch action {
     case let .deleteFavoritePrimes(indexSet):
@@ -85,7 +84,7 @@ public func favoritePrimesReducer(
     case .saveButtonTapped:
         let state = state
         return [
-            Current.fileClient
+            environment.fileClient
                 .save(
                     "favorite-primes.json",
                     try! JSONEncoder().encode(state)
@@ -94,7 +93,7 @@ public func favoritePrimesReducer(
         ]
     case .loadButtonTapped:
         return [
-            Current.fileClient.load("favorite-primes.json")
+            environment.fileClient.load("favorite-primes.json")
                 .compactMap { $0 }
                 .decode(type: [Int].self, decoder: JSONDecoder())
                 .catch { _ in Empty(completeImmediately: true) }
