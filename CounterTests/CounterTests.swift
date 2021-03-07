@@ -53,7 +53,7 @@ func assert<Value, Action>(
         switch step.type {
         case .send:
             // 전송된 action에 대해 reducer를 실행하기 전에 대기중인 효과가 없는지 확인하도록 한다.
-            if effects.isEmpty {
+            if !effects.isEmpty {
                 XCTFail(
                   "Action sent before handling \(effects.count) pending effect(s)",
                   file: step.file,
@@ -64,6 +64,15 @@ func assert<Value, Action>(
             // 반환되는 effect들을 지닐 수 있는 `effects`를 반복문 외부에 도입하도록 한다.
             effects.append(contentsOf: reducer(&state, step.action))
         case .receive:
+            //
+            guard !effects.isEmpty else {
+                XCTFail(
+                    "No pending effects to receive from",
+                    file: step.file,
+                    line: step.line
+                )
+                break
+            }
             // `send`에 의한 action을 `receive`하였기에,
             // `receive`에서 `effects`의 첫 번째 effect를 pop하도록 한다.
             let effect = effects.removeFirst()
@@ -94,6 +103,7 @@ func assert<Value, Action>(
         XCTAssertEqual(state, expected, file: step.file, line: step.line)
     }
     
+    // 테스트되지 않은 effect가 존재하는지 확인한다.
     if !effects.isEmpty {
       XCTFail(
         "Assertion failed to handle \(effects.count) pending effect(s)",
@@ -152,17 +162,16 @@ class CounterTests: XCTestCase {
                 isNthPrimeButtonDisabled: false
             ),
             reducer: counterViewReducer,
-            steps:
-                Step(.send, .counter(.nthPrimeButtonTapped)) {
-                    $0.isNthPrimeButtonDisabled = true
-                }
-//            Step(.receive, .counter(.nthPrimeResponse(15))) {
-//                $0.alertNthPrime = PrimeAlert(prime: 15)
-//                $0.isNthPrimeButtonDisabled = false
-//            },
-//            Step(.send, .counter(.alertDismissButtonTapped)) {
-//                $0.alertNthPrime = nil
-//            }
+            steps: Step(.send, .counter(.nthPrimeButtonTapped)) {
+                $0.isNthPrimeButtonDisabled = true
+            },
+            Step(.receive, .counter(.nthPrimeResponse(17))) {
+                $0.alertNthPrime = PrimeAlert(prime: 17)
+                $0.isNthPrimeButtonDisabled = false
+            },
+            Step(.send, .counter(.alertDismissButtonTapped)) {
+                $0.alertNthPrime = nil
+            }
         )
     }
     
