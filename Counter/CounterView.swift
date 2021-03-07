@@ -79,9 +79,19 @@ public enum CounterViewAction: Equatable {
         }
     }
 }
-public let counterViewReducer = combine(
-    pullback(counterReducer, value: \CounterViewState.counter, action: \CounterViewAction.counter),
-    pullback(primeModalReducer, value: \.primeModal, action: \.primeModal)
+public let counterViewReducer: Reducer<CounterViewState, CounterViewAction, CounterEnvironment> = combine(
+    pullback(
+        counterReducer,
+        value: \CounterViewState.counter,
+        action: \CounterViewAction.counter,
+        environemnt: { $0 }
+    ),
+    pullback(
+        primeModalReducer,
+        value: \.primeModal,
+        action: \.primeModal,
+        environemnt: { _ in Void() }
+    )
 )
 
 
@@ -168,7 +178,8 @@ struct CounterView_Previews: PreviewProvider {
                     count: 0,
                     favoritePrimes: []
                 ),
-                reducer: counterViewReducer
+                reducer: counterViewReducer,
+                environment: CounterEnvironment.mock
             )
         )
     }

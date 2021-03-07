@@ -23,7 +23,7 @@ public typealias CounterState = (
     isNthPrimeButtonDisabled: Bool
 )
 
-struct CounterEnvironment {
+public struct CounterEnvironment {
     var nthPrime: (Int) -> Effect<Int?>
 }
 extension CounterEnvironment {
@@ -34,9 +34,11 @@ extension CounterEnvironment {
     #endif
 }
 
-var Current = CounterEnvironment.live
-
-public func counterReducer(state: inout CounterState, action: CounterAction) -> [Effect<CounterAction>] {
+public func counterReducer(
+    state: inout CounterState,
+    action: CounterAction,
+    environment: CounterEnvironment
+) -> [Effect<CounterAction>] {
     switch action {
     case .decrTapped:
         state.count -= 1
@@ -48,7 +50,7 @@ public func counterReducer(state: inout CounterState, action: CounterAction) -> 
         state.isNthPrimeButtonDisabled = true
         let count = state.count
         return [
-            Current.nthPrime(count)
+            environment.nthPrime(count)
                 .map { .nthPrimeResponse($0) }
                 .receive(on: DispatchQueue.main)
                 .eraseToEffect()
