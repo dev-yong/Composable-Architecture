@@ -16,34 +16,11 @@ public enum FavoritePrimesAction: Equatable {
     case loadButtonTapped
 }
 
-public struct FavoritePrimesEnvironment {
-    var fileClient: FileClient
-}
+public typealias FavoritePrimesEnvironment = FileClient
 
 extension FavoritePrimesEnvironment {
     
-    public static let live = FavoritePrimesEnvironment(fileClient: .live)
-    #if DEBUG
-    public static let mock = FavoritePrimesEnvironment(
-        fileClient: FileClient(
-            load: { _ in Effect<Data?>.sync {
-                try! JSONEncoder().encode([2, 31])
-            } },
-            save: { _, _ in .fireAndForget {} }
-        )
-    )
-    #endif
-    
-}
-
-struct FileClient {
-    var load: (_ fileName: String) -> Effect<Data?>
-    var save: (_ fileName: String, _ data: Data) -> Effect<Never>
-}
-
-extension FileClient {
-    
-    static let live = FileClient { (fileName) -> Effect<Data?> in
+    public static let live = FileClient { (fileName) -> Effect<Data?> in
         return .sync { () -> Data? in
             let documentsPath = NSSearchPathForDirectoriesInDomains(
                 .documentDirectory, .userDomainMask, true
@@ -65,6 +42,20 @@ extension FileClient {
             try! data.write(to: favoritePrimesUrl)
         }
     }
+    #if DEBUG
+    public static let mock = FileClient(
+        load: { _ in Effect<Data?>.sync {
+            try! JSONEncoder().encode([2, 31])
+        } },
+        save: { _, _ in .fireAndForget {} }
+    )
+    #endif
+    
+}
+
+public struct FileClient {
+    var load: (_ fileName: String) -> Effect<Data?>
+    var save: (_ fileName: String, _ data: Data) -> Effect<Never>
 }
 
 public func favoritePrimesReducer(
@@ -84,7 +75,7 @@ public func favoritePrimesReducer(
     case .saveButtonTapped:
         let state = state
         return [
-            environment.fileClient
+            environment
                 .save(
                     "favorite-primes.json",
                     try! JSONEncoder().encode(state)
@@ -93,7 +84,7 @@ public func favoritePrimesReducer(
         ]
     case .loadButtonTapped:
         return [
-            environment.fileClient.load("favorite-primes.json")
+            environment.load("favorite-primes.json")
                 .compactMap { $0 }
                 .decode(type: [Int].self, decoder: JSONDecoder())
                 .catch { _ in Empty(completeImmediately: true) }
