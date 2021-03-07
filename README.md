@@ -83,3 +83,4 @@
 
 ### [Dependency Injection Made Composable](/Note/Dependency/Dependency_Injection_Made Composable.md)
 
+### [Dependency Injection Made Modular](/Note/Dependency/Dependency_Injection_Made_Modular.md)
