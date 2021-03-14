@@ -39,7 +39,7 @@ public final class Store<Value, Action>: ObservableObject {
                     guard let effectCancellable = effectCancellable else { return }
                     self?.effectCancellableBag.remove(effectCancellable)
                 },
-                receiveValue: self.send
+                receiveValue: { [weak self] in self?.send($0) }
             )
             if !didComplete,
                let effectCancellable = effectCancellable {
