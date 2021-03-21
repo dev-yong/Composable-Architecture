@@ -11,7 +11,8 @@ import Counter
 import FavoritePrimes
 
 struct ContentView: View {
-    @ObservedObject var store: Store<AppState, AppAction>
+    let store: Store<AppState, AppAction>
+    // ObservedObject var viewStore: ViewStore<???>
 
     var body: some View {
         NavigationView {
