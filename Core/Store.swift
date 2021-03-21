@@ -7,12 +7,12 @@
 
 import Combine
 
-public final class Store<Value, Action>: ObservableObject {
+public final class Store<Value, Action> {
     
     public let reducer: Reducer<Value, Action, Any>
     private let environment: Any
     @Published
-    public private(set) var value: Value
+    private var value: Value
     
     public init<Environment>(
         initialValue: Value,
