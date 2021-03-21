@@ -84,3 +84,8 @@
 ### [Dependency Injection Made Composable](/Note/Dependency/Dependency_Injection_Made_Composable.md)
 
 ### [Dependency Injection Made Modular](/Note/Dependency/Dependency_Injection_Made_Modular.md)
+
+## Adaptive State Management
+
+### [Performance](/Note/Adaptive_State_Management/Performance.md)
+
