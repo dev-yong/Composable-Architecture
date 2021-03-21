@@ -48,8 +48,8 @@ public final class Store<Value, Action> {
         }
     }
     
-    private var viewCancellableBag = Set<AnyCancellable>()
-    public func view<LocalValue, LocalAction>(
+    private var scopeCancellableBag = Set<AnyCancellable>()
+    public func scope<LocalValue, LocalAction>(
         value toLocalValue: @escaping (Value) -> LocalValue,
         action toGlobalAction: @escaping (LocalAction) -> Action
     ) -> Store<LocalValue, LocalAction> {
@@ -63,7 +63,7 @@ public final class Store<Value, Action> {
             },
             environment: self.environment
         )
-        localStore.viewCancellableBag.insert(
+        localStore.scopeCancellableBag.insert(
             self.$value
                 .map(toLocalValue)
 //                .removeDuplicates()
@@ -85,4 +85,10 @@ public final class ViewStore<Value>: ObservableObject {
     ) {
         self.value = initialValue
     }
+}
+
+extension Store {
+  var view: ViewStore<Value> {
+    ???
+  }
 }

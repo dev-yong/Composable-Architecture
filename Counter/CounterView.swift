@@ -135,7 +135,7 @@ public struct CounterView: View {
         .navigationBarTitle("Counter demo")
         .sheet(isPresented: self.$isPrimeModalShown) {
             IsPrimeModalView(
-                store: self.store.view(
+                store: self.store.scope(
                     value: { PrimeModalState(count: $0.count, favoritePrimes: $0.favoritePrimes) },
                     action: { .primeModal($0) }
                 )
