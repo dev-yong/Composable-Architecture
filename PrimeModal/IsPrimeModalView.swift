@@ -10,20 +10,33 @@ import Core
 
 public struct IsPrimeModalView: View {
     
+    struct State: Equatable {
+        let count: Int
+        let isFavorite: Bool
+        
+        init(primeModalState state: PrimeModalState) {
+          self.count = state.count
+          self.isFavorite = state.favoritePrimes.contains(state.count)
+        }
+    }
+    
     let store: Store<PrimeModalState, PrimeModalAction>
-    @ObservedObject var viewStore: ViewStore<PrimeModalState>
+    @ObservedObject var viewStore: ViewStore<State>
     
     public init(store: Store<PrimeModalState, PrimeModalAction>) {
         
         self.store = store
-        self.viewStore = store.view(removeDuplicates: ==)
+        self.viewStore = store.scope(
+            value: { State(primeModalState: $0) },
+            action: { $0 }
+        ).view
     }
     
     public var body: some View {
         VStack {
             if self.isPrime(self.viewStore.value.count) {
                 Text("\(self.viewStore.value.count) is prime 🎉")
-                if self.viewStore.value.favoritePrimes.contains(self.viewStore.value.count) {
+                if self.viewStore.value.isFavorite {
                     Button(action: {
                         
                         self.store.send(.removeFavoritePrimeTapped)
