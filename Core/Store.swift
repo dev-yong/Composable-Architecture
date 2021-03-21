@@ -73,3 +73,16 @@ public final class Store<Value, Action> {
     }
     
 }
+
+
+public final class ViewStore<Value>: ObservableObject {
+    
+    @Published
+    public fileprivate(set) var value: Value
+    
+    init(
+        initialValue: Value
+    ) {
+        self.value = initialValue
+    }
+}
