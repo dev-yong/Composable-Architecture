@@ -79,7 +79,8 @@ public final class ViewStore<Value>: ObservableObject {
     
     @Published
     public fileprivate(set) var value: Value
-    
+    fileprivate var cancellable: Cancellable?
+
     init(
         initialValue: Value
     ) {
@@ -88,7 +89,13 @@ public final class ViewStore<Value>: ObservableObject {
 }
 
 extension Store {
-  var view: ViewStore<Value> {
-    ???
-  }
+    
+    var view: ViewStore<Value> {
+        let viewStore = ViewStore(initialValue: self.value)
+        viewStore.cancellable = self.$value.sink { (value) in
+            viewStore.value = value
+        }
+        return viewStore
+    }
+    
 }
