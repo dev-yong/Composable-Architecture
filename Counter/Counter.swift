@@ -15,12 +15,15 @@ public enum CounterAction: Equatable {
     case nthPrimeButtonTapped
     case nthPrimeResponse(Int?)
     case alertDismissButtonTapped
+    case isPrimeButtonTapped
+    case primeModalDismissed
 }
 
 public typealias CounterState = (
     alertNthPrime: PrimeAlert?,
     count: Int,
-    isNthPrimeButtonDisabled: Bool
+    isNthPrimeButtonDisabled: Bool,
+    isPrimeModalShown: Bool
 )
 
 public typealias CounterEnvironment = (Int) -> Effect<Int?>
@@ -53,6 +56,12 @@ public func counterReducer(
         state.alertNthPrime = prime.map(PrimeAlert.init(prime:))
         state.isNthPrimeButtonDisabled = false
         return []
+    case .isPrimeButtonTapped:
+        state.isPrimeModalShown = true
+        return []
+    case .primeModalDismissed:
+      state.isPrimeModalShown = false
+      return []
     }
 }
 

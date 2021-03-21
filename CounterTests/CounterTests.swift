@@ -119,7 +119,7 @@ class CounterTests: XCTestCase {
     
     func testIncrDecrButtonTapped() {
         assert(
-          initialValue: CounterViewState(count: 2),
+          initialValue: CounterFeatureState(count: 2),
             reducer: counterViewReducer,
             environment: { _ in .sync { 17 } },
             steps: Step(.send, .counter(.incrTapped)) { $0.count = 3 },
@@ -131,7 +131,7 @@ class CounterTests: XCTestCase {
     func testNthPrimeButtonHappyFlow() {
         
         assert(
-            initialValue: CounterViewState(
+            initialValue: CounterFeatureState(
                 alertNthPrime: nil,
                 isNthPrimeButtonDisabled: false
             ),

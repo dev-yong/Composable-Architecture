@@ -12,10 +12,10 @@ import FavoritePrimes
 
 enum AppAction {
     
-    case counterView(CounterViewAction)
+    case counterView(CounterFeatureAction)
     case favoritePrimes(FavoritePrimesAction)
     
-    var counterView: CounterViewAction? {
+    var counterView: CounterFeatureAction? {
         get {
             guard case let .counterView(value) = self else { return nil }
             return value

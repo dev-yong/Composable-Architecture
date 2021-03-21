@@ -15,30 +15,33 @@ public struct PrimeAlert: Equatable, Identifiable {
     public var id: Int { self.prime }
 }
 
-public struct CounterViewState: Equatable {
+public struct CounterFeatureState: Equatable {
     public var alertNthPrime: PrimeAlert?
     public var count: Int
     public var favoritePrimes: [Int]
     public var isNthPrimeButtonDisabled: Bool
+    public var isPrimeModalShown: Bool
     
     public init(
         alertNthPrime: PrimeAlert? = nil,
         count: Int = 0,
         favoritePrimes: [Int] = [],
-        isNthPrimeButtonDisabled: Bool = false
+        isNthPrimeButtonDisabled: Bool = false,
+        isPrimeModalShown: Bool = false
     ) {
         self.alertNthPrime = alertNthPrime
         self.count = count
         self.favoritePrimes = favoritePrimes
         self.isNthPrimeButtonDisabled = isNthPrimeButtonDisabled
+        self.isPrimeModalShown = isPrimeModalShown
     }
     
     var counter: CounterState {
         get {
-            (self.alertNthPrime, self.count, self.isNthPrimeButtonDisabled)
+            (self.alertNthPrime, self.count, self.isNthPrimeButtonDisabled, self.isPrimeModalShown)
         }
         set {
-            (self.alertNthPrime, self.count, self.isNthPrimeButtonDisabled) = newValue
+            (self.alertNthPrime, self.count, self.isNthPrimeButtonDisabled, self.isPrimeModalShown) = newValue
         }
     }
     
@@ -52,7 +55,7 @@ public struct CounterViewState: Equatable {
     }
 }
 
-public enum CounterViewAction: Equatable {
+public enum CounterFeatureAction: Equatable {
     
     case counter(CounterAction)
     case primeModal(PrimeModalAction)
@@ -79,11 +82,11 @@ public enum CounterViewAction: Equatable {
         }
     }
 }
-public let counterViewReducer: Reducer<CounterViewState, CounterViewAction, CounterEnvironment> = combine(
+public let counterViewReducer: Reducer<CounterFeatureState, CounterFeatureAction, CounterEnvironment> = combine(
     pullback(
         counterReducer,
-        value: \CounterViewState.counter,
-        action: \CounterViewAction.counter,
+        value: \CounterFeatureState.counter,
+        action: \CounterFeatureAction.counter,
         environemnt: { $0 }
     ),
     pullback(
@@ -94,19 +97,36 @@ public let counterViewReducer: Reducer<CounterViewState, CounterViewAction, Coun
     )
 )
 
-
 public struct CounterView: View {
     
-    // MARK: AppState
-    @ObservedObject var store: Store<CounterViewState, CounterViewAction>
-    
-    public init(store: Store<CounterViewState, CounterViewAction>) {
+    struct State: Equatable {
+        let alertNthPrime: PrimeAlert?
+        let count: Int
+        let isNthPrimeButtonDisabled: Bool
+        let isPrimeModalShown: Bool
         
-        self.store = store
+        init(
+            counterFeatureState: CounterFeatureState
+        ) {
+            self.alertNthPrime = counterFeatureState.alertNthPrime
+            self.count = counterFeatureState.count
+            self.isNthPrimeButtonDisabled = counterFeatureState.isNthPrimeButtonDisabled
+            self.isPrimeModalShown = counterFeatureState.isPrimeModalShown
+        }
     }
     
-    // MARK: Local State
-    @State var isPrimeModalShown = false
+    // MARK: AppState
+    let store: Store<CounterFeatureState, CounterFeatureAction>
+    @ObservedObject var viewStore: ViewStore<State>
+    
+    public init(store: Store<CounterFeatureState, CounterFeatureAction>) {
+        
+        self.store = store
+        self.viewStore = store.scope(
+            value: { CounterView.State(counterFeatureState: $0) },
+            action: { $0 }
+        ).view
+    }
     
     // MARK: Body
     public var body: some View {
@@ -117,23 +137,26 @@ public struct CounterView: View {
                 }) {
                     Text("-")
                 }
-                Text("\(self.store.value.count)")
+                Text("\(self.viewStore.value.count)")
                 Button(action: {
                     self.store.send(.counter(.incrTapped))
                 }) {
                     Text("+")
                 }
             }
-            Button(action: { self.isPrimeModalShown = true }) {
+            Button(action: { self.store.send(.counter(.isPrimeButtonTapped)) }) {
                 Text("Is this prime?")
             }
-            Button(action: self.nthPrimeButtonAction) {
-                Text("What is the \(ordinal(self.store.value.count)) prime?")
-            }.disabled(self.store.value.isNthPrimeButtonDisabled)
+            Button(action: { self.store.send(.counter(.nthPrimeButtonTapped)) }) {
+                Text("What is the \(ordinal(self.viewStore.value.count)) prime?")
+            }.disabled(self.viewStore.value.isNthPrimeButtonDisabled)
         }
         .font(.title)
         .navigationBarTitle("Counter demo")
-        .sheet(isPresented: self.$isPrimeModalShown) {
+        .sheet(
+          isPresented: .constant(self.viewStore.value.isPrimeModalShown),
+          onDismiss: { self.store.send(.counter(.primeModalDismissed)) }
+        ) {
             IsPrimeModalView(
                 store: self.store.scope(
                     value: { PrimeModalState(count: $0.count, favoritePrimes: $0.favoritePrimes) },
@@ -142,11 +165,11 @@ public struct CounterView: View {
             )
         }
         .alert(
-            item: .constant(self.store.value.alertNthPrime)
+            item: .constant(self.viewStore.value.alertNthPrime)
         ) { alert in
             Alert(
                 title: Text(
-                    "The \(ordinal(self.store.value.count)) prime is \(alert.prime)"
+                    "The \(ordinal(self.viewStore.value.count)) prime is \(alert.prime)"
                 ),
                 dismissButton: .default(
                     Text("OK"),
@@ -173,8 +196,8 @@ public struct CounterView: View {
 struct CounterView_Previews: PreviewProvider {
     static var previews: some View {
         CounterView(
-            store: Store<CounterViewState, CounterViewAction>(
-                initialValue: CounterViewState(
+            store: Store<CounterFeatureState, CounterFeatureAction>(
+                initialValue: CounterFeatureState(
                     count: 0,
                     favoritePrimes: []
                 ),

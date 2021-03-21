@@ -17,6 +17,7 @@ struct AppState {
     var activityFeed: [Activity] = []
     var alertNthPrime: PrimeAlert? = nil
     var isNthPrimeButtonDisabled: Bool = false
+    var isPrimeModalShown: Bool = false
     
     struct User {
         
@@ -40,22 +41,24 @@ extension AppState {
     
     var counter: CounterState {
         get {
-            (alertNthPrime, count, isNthPrimeButtonDisabled)
+            (alertNthPrime, count, isNthPrimeButtonDisabled, isPrimeModalShown)
         }
         set{
             self.alertNthPrime = newValue.alertNthPrime
             self.count = newValue.count
             self.isNthPrimeButtonDisabled = newValue.isNthPrimeButtonDisabled
+            self.isPrimeModalShown = newValue.isPrimeModalShown
         }
     }
     
-    var counterView: CounterViewState {
+    var counterView: CounterFeatureState {
         get {
-            CounterViewState(
+            CounterFeatureState(
                 alertNthPrime: self.alertNthPrime,
                 count: self.count,
                 favoritePrimes: self.favoritePrimes,
-                isNthPrimeButtonDisabled: self.isNthPrimeButtonDisabled
+                isNthPrimeButtonDisabled: self.isNthPrimeButtonDisabled,
+                isPrimeModalShown: self.isPrimeModalShown
             )
         }
         set {
