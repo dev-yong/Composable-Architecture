@@ -96,7 +96,7 @@ extension Store {
         let viewStore = ViewStore(initialValue: self.value)
         viewStore.cancellable = self.$value
             .removeDuplicates(by: predicate)
-            .sink { newValue in viewStore.value = newValue }
+            .sink { [weak viewStore] newValue in viewStore?.value = newValue }
         return viewStore
     }
 

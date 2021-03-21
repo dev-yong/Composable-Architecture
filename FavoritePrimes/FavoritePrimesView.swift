@@ -10,16 +10,18 @@ import Core
 
 public struct FavoritePrimesView: View {
     
-    @ObservedObject var store: Store<[Int], FavoritePrimesAction>
+    let store: Store<[Int], FavoritePrimesAction>
+    @ObservedObject var viewStore: ViewStore<[Int]>
     
     public init(store: Store<[Int], FavoritePrimesAction>) {
         
         self.store = store
+        self.viewStore = store.view(removeDuplicates: ==)
     }
     
     public var body: some View {
         List {
-            ForEach(self.store.value, id: \.self) { prime in
+            ForEach(self.viewStore.value, id: \.self) { prime in
                 Text("\(prime)")
             }
             .onDelete { indexSet in
