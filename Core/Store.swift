@@ -88,11 +88,13 @@ public final class ViewStore<Value>: ObservableObject {
     }
 }
 
-extension Store {
+extension Store where Value: Equatable {
     
     var view: ViewStore<Value> {
         let viewStore = ViewStore(initialValue: self.value)
-        viewStore.cancellable = self.$value.sink { (value) in
+        viewStore.cancellable = self.$value
+            .removeDuplicates()
+            .sink { (value) in
             viewStore.value = value
         }
         return viewStore
