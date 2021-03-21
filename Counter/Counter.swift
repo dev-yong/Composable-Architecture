@@ -22,7 +22,7 @@ public enum CounterAction: Equatable {
 public typealias CounterState = (
     alertNthPrime: PrimeAlert?,
     count: Int,
-    isNthPrimeButtonDisabled: Bool,
+    isNthPrimeRequestInFlight: Bool,
     isPrimeModalShown: Bool
 )
 
@@ -41,7 +41,7 @@ public func counterReducer(
         state.count += 1
         return []
     case .nthPrimeButtonTapped:
-        state.isNthPrimeButtonDisabled = true
+        state.isNthPrimeRequestInFlight = true
         let count = state.count
         return [
             environment(count)
@@ -54,7 +54,7 @@ public func counterReducer(
         return []
     case .nthPrimeResponse(let prime):
         state.alertNthPrime = prime.map(PrimeAlert.init(prime:))
-        state.isNthPrimeButtonDisabled = false
+        state.isNthPrimeRequestInFlight = false
         return []
     case .isPrimeButtonTapped:
         state.isPrimeModalShown = true

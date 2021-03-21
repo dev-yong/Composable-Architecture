@@ -16,7 +16,7 @@ struct AppState {
     var loggedInUser: User?
     var activityFeed: [Activity] = []
     var alertNthPrime: PrimeAlert? = nil
-    var isNthPrimeButtonDisabled: Bool = false
+    var isNthPrimeRequestInFlight: Bool = false
     var isPrimeModalShown: Bool = false
     
     struct User {
@@ -41,12 +41,12 @@ extension AppState {
     
     var counter: CounterState {
         get {
-            (alertNthPrime, count, isNthPrimeButtonDisabled, isPrimeModalShown)
+            (alertNthPrime, count, isNthPrimeRequestInFlight, isPrimeModalShown)
         }
         set{
             self.alertNthPrime = newValue.alertNthPrime
             self.count = newValue.count
-            self.isNthPrimeButtonDisabled = newValue.isNthPrimeButtonDisabled
+            self.isNthPrimeRequestInFlight = newValue.isNthPrimeRequestInFlight
             self.isPrimeModalShown = newValue.isPrimeModalShown
         }
     }
@@ -57,7 +57,7 @@ extension AppState {
                 alertNthPrime: self.alertNthPrime,
                 count: self.count,
                 favoritePrimes: self.favoritePrimes,
-                isNthPrimeButtonDisabled: self.isNthPrimeButtonDisabled,
+                isNthPrimeRequestInFlight: self.isNthPrimeRequestInFlight,
                 isPrimeModalShown: self.isPrimeModalShown
             )
         }
@@ -65,7 +65,7 @@ extension AppState {
             self.alertNthPrime = newValue.alertNthPrime
             self.count = newValue.count
             self.favoritePrimes = newValue.favoritePrimes
-            self.isNthPrimeButtonDisabled = newValue.isNthPrimeButtonDisabled
+            self.isNthPrimeRequestInFlight = newValue.isNthPrimeRequestInFlight
         }
     }
     var primeModal: PrimeModalState {

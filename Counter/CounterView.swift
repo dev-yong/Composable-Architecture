@@ -19,29 +19,29 @@ public struct CounterFeatureState: Equatable {
     public var alertNthPrime: PrimeAlert?
     public var count: Int
     public var favoritePrimes: [Int]
-    public var isNthPrimeButtonDisabled: Bool
+    public var isNthPrimeRequestInFlight: Bool
     public var isPrimeModalShown: Bool
     
     public init(
         alertNthPrime: PrimeAlert? = nil,
         count: Int = 0,
         favoritePrimes: [Int] = [],
-        isNthPrimeButtonDisabled: Bool = false,
+        isNthPrimeRequestInFlight: Bool = false,
         isPrimeModalShown: Bool = false
     ) {
         self.alertNthPrime = alertNthPrime
         self.count = count
         self.favoritePrimes = favoritePrimes
-        self.isNthPrimeButtonDisabled = isNthPrimeButtonDisabled
+        self.isNthPrimeRequestInFlight = isNthPrimeRequestInFlight
         self.isPrimeModalShown = isPrimeModalShown
     }
     
     var counter: CounterState {
         get {
-            (self.alertNthPrime, self.count, self.isNthPrimeButtonDisabled, self.isPrimeModalShown)
+            (self.alertNthPrime, self.count, self.isNthPrimeRequestInFlight, self.isPrimeModalShown)
         }
         set {
-            (self.alertNthPrime, self.count, self.isNthPrimeButtonDisabled, self.isPrimeModalShown) = newValue
+            (self.alertNthPrime, self.count, self.isNthPrimeRequestInFlight, self.isPrimeModalShown) = newValue
         }
     }
     
@@ -110,7 +110,7 @@ public struct CounterView: View {
         ) {
             self.alertNthPrime = counterFeatureState.alertNthPrime
             self.count = counterFeatureState.count
-            self.isNthPrimeButtonDisabled = counterFeatureState.isNthPrimeButtonDisabled
+            self.isNthPrimeButtonDisabled = counterFeatureState.isNthPrimeRequestInFlight
             self.isPrimeModalShown = counterFeatureState.isPrimeModalShown
         }
     }
