@@ -88,16 +88,24 @@ public final class ViewStore<Value>: ObservableObject {
     }
 }
 
-extension Store where Value: Equatable {
-    
-    var view: ViewStore<Value> {
+extension Store {
+
+    public func view(
+        removeDuplicates predicate: @escaping (Value, Value) -> Bool
+    ) -> ViewStore<Value> {
         let viewStore = ViewStore(initialValue: self.value)
         viewStore.cancellable = self.$value
-            .removeDuplicates()
-            .sink { (value) in
-            viewStore.value = value
-        }
+            .removeDuplicates(by: predicate)
+            .sink { newValue in viewStore.value = newValue }
         return viewStore
+    }
+
+}
+
+extension Store where Value: Equatable {
+    
+    public var view: ViewStore<Value> {
+        self.view(removeDuplicates: ==)
     }
     
 }
